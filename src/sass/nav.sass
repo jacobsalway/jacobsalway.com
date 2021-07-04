@@ -1,0 +1,40 @@
+header
+    width: 100%
+    background: #eee
+    z-index: 100
+
+nav
+    max-width: 800px
+    margin: 0 auto
+    display: flex
+    justify-content: space-between
+    align-items: center
+    padding: 1rem 1rem
+    @media (max-width: 600px)
+        font-size: 0.9rem
+        padding: 1rem 0.75rem
+
+nav .nav-right
+    display: flex
+    flex-direction: row
+
+nav .nav-right a
+    margin: 0 1.5rem 0 0
+    display: flex
+    flex-direction: row
+    align-items: center
+    @media (max-width: 400px)
+        margin-right: 1rem
+
+nav a:hover
+    color: #0ea800
+
+nav .nav-right a:last-child
+    margin: 0
+
+nav .nav-right a svg
+    margin-right: 5px
+    font-size: 1.25em
+    vertical-align: middle
+    @media (max-width: 500px)
+        display: none
