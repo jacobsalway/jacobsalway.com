@@ -1,30 +1,38 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
+import FadeIn from 'react-fade-in';
 
-interface IHeroTextProps {
+interface IHeroText {
     name: string;
     intro: string;
     subtext: string[];
 }
 
-const HeroText: FC<IHeroTextProps> = ({ name, intro, subtext }) => {
+interface HeroTextProps extends IHeroText {
+    animatedCallback: () => void;
+}
+
+const HeroText: FC<HeroTextProps> = ({ name, intro, subtext, animatedCallback }) => {
     return (
         <div className='hero-text'>
-            <h3>Hi, my name is</h3>
-            <h1>{name}</h1>
-            <h2>{intro}</h2>
-            <div className='hero-text-subtext'>
-                {subtext.map(x => <p dangerouslySetInnerHTML={{__html: x}}></p>)}
-            </div>
+            <FadeIn delay={150} onComplete={() => animatedCallback()}>
+                <h3>Hi, my name is</h3>
+                <h1>{name}</h1>
+                <h2>{intro}</h2>
+                <div className='hero-text-subtext'>
+                    {subtext.map(x => <p dangerouslySetInnerHTML={{__html: x}}></p>)}
+                </div>
+            </FadeIn>
         </div>
     );
 }
 
 interface ITerminalProps {
     output: string[];
+    animate: boolean;
 }
 
-const Terminal: FC<ITerminalProps> = ({ output }) => {
-    return (
+const Terminal: FC<ITerminalProps> = ({ output, animate }) => {
+    const terminal = (
         <div className='terminal'>
             <div className='terminal-header'>
                 <div className='header-button red'></div>
@@ -35,21 +43,28 @@ const Terminal: FC<ITerminalProps> = ({ output }) => {
                 {output.map(x => <div>{x}</div>)}
             </div>
         </div>
+    );
 
+    return (
+        <div className='terminal-container'>
+            {animate ? <FadeIn delay={150}>{terminal}</FadeIn> : <div style={{visibility: 'hidden'}}>{terminal}</div>}
+        </div>
     );
 }
 
 interface IHeroProps {
-    heroText: IHeroTextProps;
+    heroText: IHeroText;
     terminal: string[];
 }
 
 const Hero: FC<IHeroProps> = ({ heroText, terminal }) => {
+    const [heroAnimated, setHeroAnimated] = useState(false);
+
     return (
         <div className='hero'>
             <div className='hero-content'>
-                <HeroText {...heroText} />
-                <Terminal output={terminal}/>
+                <HeroText {...heroText} animatedCallback={() => setHeroAnimated(true)}/>
+                <Terminal output={terminal} animate={heroAnimated}/>
             </div>
         </div>
     )

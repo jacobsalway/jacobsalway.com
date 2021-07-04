@@ -1,16 +1,23 @@
+import React, { Suspense } from 'react';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import './App.css';
-import Blog from './components/Blog';
+import { BlogLoader } from './components/Blog';
 import Hero from './components/Hero';
 import Nav from './components/Nav';
 import Page from './components/Page';
+import { hero, terminal } from './content';
 import './sass/blog.sass';
 import './sass/hero.sass';
 import './sass/nav.sass';
-import { hero, terminal } from './content';
 
+const Blog = React.lazy(() => {
+    return Promise.all([
+        import('./components/Blog'),
+        new Promise(resolve => setTimeout(resolve, 1000))
+    ]).then(([moduleExports]) => moduleExports)
+});
 
-function App() {
+const App = () => {
     return (
         <div className='app'>
             <Router>
@@ -21,7 +28,11 @@ function App() {
                             <Hero heroText={hero.heroText} terminal={terminal}/>
                         </Page>
                         <Page path='/blog' title='Blog'>
-                            <Blog />
+                            <div className='blog-content'>
+                                <Suspense fallback={<BlogLoader />}>
+                                    <Blog />
+                                </Suspense>
+                            </div>
                         </Page>
                     </Switch>
                 </div>

@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import ContentLoader from 'react-content-loader';
 
 interface PostProps {
     title: string;
@@ -36,16 +37,28 @@ const Post: FC<PostProps> = ({ title, id, time, content }) => {
     );
 };
 
+export const BlogLoader = () => {
+    return (
+        <ContentLoader viewBox="0 0 800 220">
+            <rect x="0" y="0" rx="1" ry="1" width="800" height="43" />
+            <rect x="0" y="50" rx="1" ry="1" width="150" height="30" />
+            <rect x="0" y="100" rx="1" ry="1" width="800" height="21" />
+            <rect x="0" y="130" rx="1" ry="1" width="800" height="21" />
+            <rect x="0" y="160" rx="1" ry="1" width="600" height="21" />
+        </ContentLoader>
+    )
+}
+
 interface BlogProps {
     posts?: PostProps[];
 }
 
 const Blog: FC<BlogProps> = ({ posts }) => {
     if (posts == null || (posts instanceof Array && posts.length === 0)) {
-        return <div className="blog-content">No blog content yet.</div>;
+        return <span>No blog content yet.</span>;
     } else {
         return (
-            <div className="blog-content">
+            <div>
                 {posts.map(getPreview).map(Post)}
             </div>
         )
