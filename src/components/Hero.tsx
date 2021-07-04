@@ -47,7 +47,9 @@ const Terminal: FC<ITerminalProps> = ({ output, animate }) => {
 
     return (
         <div className='terminal-container'>
-            {animate ? <FadeIn delay={150}>{terminal}</FadeIn> : <div style={{visibility: 'hidden'}}>{terminal}</div>}
+            {animate ? <FadeIn delay={150} className='fade-in' childClassName='fade-in'>
+                {terminal}
+            </FadeIn> : <div style={{visibility: 'hidden'}}>{terminal}</div>}
         </div>
     );
 }
