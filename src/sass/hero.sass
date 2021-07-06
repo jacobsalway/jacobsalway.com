@@ -48,49 +48,10 @@
 
 .hero-text-subtext a
     color: #0ea800
-    position: relative
-
-.hero-text-subtext a:hover
-    text-decoration: none
-
-.hero-text-subtext a::after
-    content: ""
-    display: block
-    width: 100%
-    height: 2px
-    position: absolute
-    bottom: 0
-    left: 0
-    background-color: rgba(14, 168, 0, 0.7)
-    transition: all 0.2s ease
-
-.hero-text-subtext a:hover::after
-    bottom: -2px
 
 .container
     max-width: 700px
     margin: 0 auto
-
-.about h2
-    font-size: 28px
-    display: flex
-    align-items: center
-
-.about h2::before
-    counter-increment: section 1
-    content: "0" counter(section) "."
-
-.about h2::after
-    content: ""
-    display: block
-    width: 450px
-    height: 1px
-    margin-left: 20px
-    background-color: grey
-
-.about-text
-    font-size: 18px
-    padding-bottom: 500px
 
 .terminal-container
     flex: 0 0 550px
