@@ -1,0 +1,87 @@
+header
+    width: 100%
+    background: #eee
+    z-index: 10
+
+nav
+    max-width: 800px
+    margin: 0 auto
+    display: flex
+    justify-content: space-between
+    align-items: center
+    padding: 1rem 1rem
+    position: relative
+
+    a:hover
+        color: #0ea800
+
+.nav-link svg
+    margin-right: 0.3rem
+    font-size: 1.25rem
+    vertical-align: middle
+
+.nav-right
+    display: flex
+    flex-direction: row
+
+    a
+        margin: 0 1.5rem 0 0
+        display: flex
+        flex-direction: row
+        align-items: center
+        &:last-child
+            margin: 0
+
+.nav-right-links
+    display: flex
+    flex-direction: row
+    @media (max-width: 500px)
+        display: none
+
+.mobile-nav-toggle
+    z-index: 100
+    border: 0
+    padding: 0
+    display: none
+    font-size: 1em
+    background: transparent
+    @media (max-width: 500px)
+        display: block
+
+.mobile-nav-close
+    position: absolute
+    top: 0
+    left: 0
+    height: 100vh
+    width: 300px
+    display: none
+    &.show
+        display: block
+
+.mobile-nav
+    position: fixed
+    top: 0
+    right: 0
+    width: min(75vw, 400px)
+    height: 100vh
+    z-index: 10
+    background: white
+    transform: translateX(calc(min(75vw, 400px) + 40px))
+    transition: transform 0.2s
+    box-shadow: 0px 0px 24px 9px rgba(0,0,0,0.34)
+    &.show
+        transform: translateX(0)
+    @media (min-width: 500px)
+        display: none
+
+.mobile-nav-links
+    display: flex
+    flex-direction: column
+    padding: 50px 30px
+    font-size: 1.2rem
+
+    a
+        margin-top: 15px
+        display: flex
+        flex-direction: row
+        align-items: center

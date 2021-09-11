@@ -1,15 +1,13 @@
-import React, { useEffect, FC } from 'react';
+import React, { useEffect } from 'react';
 import { Route, RouteProps } from 'react-router-dom';
+import { PageProps } from '../types';
 
-interface IPageProps extends RouteProps {
-    title?: string;
-}
-
-const Page: FC<IPageProps> = (props) => {
+const Page: React.FC<PageProps & RouteProps> = (props) => {
     useEffect(() => {
         document.title = 'Jacob Salway' + (props.title ? ` | ${props.title}` : '');
     });
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { title, ...rest } = props;
     return <Route {...rest} />;
 }

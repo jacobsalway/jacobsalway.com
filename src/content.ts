@@ -6,4 +6,6 @@ export const hero = {
     }
 }
 
-export const terminal = ['jacob@computer:~$ python3 script.py']
+export const terminal = {
+    'output': ['jacob@computer:~$ python3 script.py']
+}
