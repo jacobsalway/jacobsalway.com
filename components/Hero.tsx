@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { HeroProps, HeroTextProps, TerminalProps } from '../types';
-import FadeIn, { FadeState } from './FadeIn';
-import '../sass/Hero.sass';
+import FadeIn, { FadeState} from './FadeIn'
+import styles from '../styles/Hero.module.sass'
 
 type AnimateProps = {
     animate: FadeState;
@@ -10,12 +10,12 @@ type AnimateProps = {
 
 const HeroText: React.FC<HeroTextProps & AnimateProps> = ({ name, intro, subtext, animate, onComplete }) => {
     return (
-        <div className='hero-text'>
+        <div className={styles.heroText}>
             <FadeIn animate={animate} delay={150} onComplete={onComplete}>
                 <h3>Hi, my name is</h3>
                 <h1>{name}</h1>
                 <h2>{intro}</h2>
-                <div className='hero-text-subtext'>
+                <div className={styles.heroTextSubtext}>
                     {subtext.map((p, i) => <p key={i} dangerouslySetInnerHTML={{__html: p}}></p>)}
                 </div>
             </FadeIn>
@@ -25,15 +25,15 @@ const HeroText: React.FC<HeroTextProps & AnimateProps> = ({ name, intro, subtext
 
 const Terminal: React.FC<TerminalProps & AnimateProps> = ({ output, animate, onComplete }) => {
     return (
-        <div className='terminal-container'>
+        <div className={styles.terminalContainer}>
             <FadeIn animate={animate} onComplete={onComplete}>
-                <div className='terminal'>
-                    <div className='terminal-header'>
-                        <div className='header-button red'></div>
-                        <div className='header-button yellow'></div>
-                        <div className='header-button green'></div>
+                <div className={styles.terminal}>
+                    <div className={styles.terminalHeader}>
+                        <div className={`${styles.headerButton} ${styles.red}`}></div>
+                        <div className={`${styles.headerButton} ${styles.yellow}`}></div>
+                        <div className={`${styles.headerButton} ${styles.green}`}></div>
                     </div>
-                    <div className='terminal-window'>
+                    <div className={styles.terminalWindow}>
                         {output.map((cmd, i) => <div key={i}>{cmd}</div>)}
                     </div>
                 </div>
@@ -49,8 +49,8 @@ const Hero: React.FC<HeroProps & AnimateProps> = ({ heroText, terminal: { output
     const terminalAnimate = animate ? (heroTextAnimated ? FadeState.ANIMATE : FadeState.HIDE) : FadeState.NONE;
 
     return (
-        <div className='hero'>
-            <div className='hero-content'>
+        <div className={styles.hero}>
+            <div className={styles.heroContent}>
                 <HeroText animate={heroAnimate} onComplete={() => setHeroTextAnimated(true)} {...heroText} />
                 <Terminal animate={terminalAnimate} onComplete={() => onComplete()} output={output} />
             </div>

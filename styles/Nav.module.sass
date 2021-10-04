@@ -1,9 +1,9 @@
-header
+.header
     width: 100%
     background: #eee
     z-index: 10
 
-nav
+.nav
     max-width: 800px
     margin: 0 auto
     display: flex
@@ -15,12 +15,12 @@ nav
     a:hover
         color: #0ea800
 
-.nav-link svg
+.navLink svg
     margin-right: 0.3rem
     font-size: 1.25rem
     vertical-align: middle
 
-.nav-right
+.navRight
     display: flex
     flex-direction: row
 
@@ -32,23 +32,24 @@ nav
         &:last-child
             margin: 0
 
-.nav-right-links
+.navRightLinks
     display: flex
     flex-direction: row
     @media (max-width: 500px)
         display: none
 
-.mobile-nav-toggle
+.mobileNavToggle
     z-index: 100
     border: 0
     padding: 0
     display: none
     font-size: 1em
+    color: black
     background: transparent
     @media (max-width: 500px)
         display: block
 
-.mobile-nav-close
+.mobileNavClose
     position: absolute
     top: 0
     left: 0
@@ -58,7 +59,7 @@ nav
     &.show
         display: block
 
-.mobile-nav
+.mobileNav
     position: fixed
     top: 0
     right: 0
@@ -74,7 +75,7 @@ nav
     @media (min-width: 500px)
         display: none
 
-.mobile-nav-links
+.mobileNavLinks
     display: flex
     flex-direction: column
     padding: 50px 30px

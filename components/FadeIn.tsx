@@ -28,13 +28,7 @@ const FadeIn: React.FC<FadeInProps> = (props) => {
             const timeout = setTimeout(() => setNumAnimated(numAnimated + 1), delay);
             return () => clearTimeout(timeout);
         }
-    }, [
-        animate,
-        React.Children.count(props.children),
-        delay,
-        numAnimated,
-        transitionDuration,
-    ]);
+    });
 
     if (animate === FadeState.HIDE)
         return <div style={{visibility: 'hidden'}}>{props.children}</div>;
