@@ -10,7 +10,7 @@ const PostPreview: React.FC<PostProps> = ({ title, id, time, content }) => {
     return (
         <div className={styles.postPreview} key={id}>
             <h1><Link href={`/blog/${id}`}>{title}</Link></h1>
-            <div className={styles.postMeta}><span>Posted on {formatDate(time)} - {readTime} mins</span></div>
+            <div className={styles.postMeta}><span>Posted on {formatDate(new Date(time))} - {readTime} mins</span></div>
             <div className={styles.postContent}><p>{content[0]}</p></div>
             <div className={styles.postReadMore}><Link href={`/blog/${id}`}>Read more...</Link></div>
         </div>

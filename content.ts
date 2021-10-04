@@ -14,7 +14,7 @@ export const posts = [
     {
         title: 'First blog post!',
         id: 'first-blog-post',
-        time: new Date('2020-10-04'),
+        time: '2020-10-04',
         content: [
             'Welcome! This is the first blog post on my website. In case you didn\'t read the homepage, I\'m a recent computer science and data science graduate from the University of Sydney and a data analyst/engineer at work. At work I do a combination of data analytics, engineering and visualisation, along with a bit of data science work if I get the chance.',
             'I plan to post about to post about anything I come across during my work or side projects that I think would be useful to other data professionals. I hope you\'ll find what I post helpful.'

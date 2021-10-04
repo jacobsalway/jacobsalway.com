@@ -11,7 +11,7 @@ const Post: React.FC<PostProps> = ({ title, id, time, content }) => {
             <div className={styles.postGoBack}><Link href='/blog'>Back to blog</Link></div>
             <div className={styles.postMeta}>
                 <div className={styles.postMetaUpper}>
-                    <span>{formatDate(time)}</span>
+                    <span>{formatDate(new Date(time))}</span>
                 </div>
                 <h1>{title}</h1>
                 <div className={styles.postMetaLower}>

@@ -23,7 +23,7 @@ export type PageProps = {
 export type PostProps = {
     title: string;
     id: string;
-    time: Date;
+    time: string;
     content: string[];
 }
 

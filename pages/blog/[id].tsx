@@ -4,8 +4,9 @@ import Post from '../../components/Blog/Post'
 import Layout from '../../components/Layout'
 import styles from '../../styles/Blog.module.sass'
 import { posts } from '../../content'
+import { BlogProps } from '../../types'
 
-const Blog: NextPage = () => {
+const Blog: NextPage<BlogProps> = ({ posts }) => {
     const router = useRouter()
     const { id } = router.query
 
@@ -18,6 +19,17 @@ const Blog: NextPage = () => {
             </div>
         </Layout>
     )
+}
+
+export async function getStaticProps() {
+    return { props: { posts: posts } }
+}
+
+export async function getStaticPaths() {
+    return {
+        paths: [{ params: { id: 'first-blog-post' } }],
+        fallback: false
+    }
 }
 
 export default Blog

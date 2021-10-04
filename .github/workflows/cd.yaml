@@ -36,7 +36,7 @@ jobs:
       - name: Deploy to S3
         run: |
           cd out
-          aws s3 sync . s3://${{ secrets.S3_BUCKET }}
+          aws s3 sync --delete . s3://${{ secrets.S3_BUCKET }}
 
       - name: Invalidate Cloudfront
         run: |
