@@ -27,7 +27,7 @@ export async function getStaticProps() {
 
 export async function getStaticPaths() {
     return {
-        paths: [{ params: { id: 'first-blog-post' } }],
+        paths: [{ params: { id: 'first-blog-post' } }, { params: { id: 'test-blog-post' } }],
         fallback: false
     }
 }

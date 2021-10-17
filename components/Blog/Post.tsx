@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { PostProps } from '../../types';
 import pfp from '../../img/Jacob.jpg';
 import styles from '../../styles/Blog.module.sass'
-import { formatDate } from './utils'
+import { formatDate, mapPostContent } from './utils'
 
 const Post: React.FC<PostProps> = ({ title, id, time, content }) => {
     return (
@@ -20,7 +20,7 @@ const Post: React.FC<PostProps> = ({ title, id, time, content }) => {
                 </div>
             </div>
             <div className={styles.postContent}>
-                {content.map((p, i) => <p key={i}>{p}</p>)}
+                {content.map(mapPostContent)}
             </div>
         </div>
     )
