@@ -13,7 +13,7 @@ const NavLinks = () => {
     </>;
 }
 
-const Nav = () => {
+const Nav: React.FC = () => {
     const [navOpen, setNavOpen] = useState(false);
 
     return (

@@ -16,7 +16,7 @@ export const mapPostContent = (postContent: ContentType) => {
 
     switch(type) {
         case 'code':
-            return <p>{content}</p>
+            return <pre>{content}</pre>
         default:
             return <p>{content}</p>
     }

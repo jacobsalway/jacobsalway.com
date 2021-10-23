@@ -1,10 +1,11 @@
-import type { NextPage } from 'next'
-import Layout from '../../components/Layout'
+import type { GetStaticProps, NextPage } from 'next'
 import PostList from '../../components/Blog/PostList'
+import Layout from '../../components/Layout'
+import { getAllPosts } from '../../lib/posts'
 import styles from '../../styles/Blog.module.sass'
-import { posts } from '../../content'
+import { BlogProps } from '../../types'
 
-const Blog: NextPage = () => {
+const Blog: NextPage<BlogProps> = ({ posts }) => {
     return (
         <Layout title='Blog'>
             <div className={styles.blogContent}>
@@ -12,6 +13,15 @@ const Blog: NextPage = () => {
             </div>
         </Layout>
     )
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+    const posts = await getAllPosts()
+    return {
+        props: {
+            posts
+        }
+    }
 }
 
 export default Blog

@@ -19,3 +19,7 @@ a:hover {
 h1, h2, h3 {
   margin: 0;
 }
+
+* {
+  box-sizing: border-box;
+}
