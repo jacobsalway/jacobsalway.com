@@ -3,10 +3,8 @@
     margin: 0 auto
     padding: 3rem 1rem 0 1rem
 
-    h1, h2
-        margin: 0
+    h1, h2, h3
         font-weight: 600
-        line-height: 1.3
 
 .postPreviewList
     max-width: 640px
@@ -25,11 +23,11 @@
         border-bottom: 1px solid rgb(190, 190, 190)
         color: rgb(120, 120, 120)
 
-        .postMetaDivider
-            margin: 0 2px
+    .postMetaDivider
+        margin: 0 2px
 
-    .postContent
-        line-height: 1.5
+.postContent
+    line-height: 1.5
 
 .post
     & > *
@@ -40,27 +38,22 @@
     .postMeta
         margin: 50px auto
 
-    .postMetaUpper, .postMetaLower
-        font-size: 16px
-
-    .postMetaUpper
-        color: rgb(120, 120, 120)
-        padding-bottom: 5px
-        font-family: monospace
+    h1
+        margin-bottom: 0.75rem
+        font-size: 45px
 
     .postMetaLower
         padding-top: 5px
         display: flex
-        flex-direction: row
         align-items: center
 
-        .circle
-            border-radius: 50%
-            width: 35px
-            height: 35px
-            margin-right: 10px
+    .authorImage
+        border-radius: 50%
+        width: 35px
+        height: 35px
+        margin-right: 10px
 
-    .postMetaAuthor
+    .postMetaDetail
         color: rgb(120, 120, 120)
 
     .postContent
@@ -71,8 +64,14 @@
             margin: 0 auto 2em
             max-width: 640px
 
-        h1, h2
-            margin-bottom: 0.5em
+        h1, h2, h3
+            margin-bottom: 0.3rem
+
+        h2
+            font-size: 30px
+
+        h3
+            font-size: 22px
 
         pre
             background: #1e1e1e
@@ -80,21 +79,5 @@
             border-radius: 5px
             padding: 20px calc((730px - 640px) / 2)
 
-    h1
-        font-size: 45px
-        margin: 0 0 0.75rem 0
-
-        a
-            text-decoration: none
-            color: black
-
 .postReadMore, .postGoBack
     font-weight: bold
-
-.postGoBack
-    svg
-        padding-right: 0.35em
-
-.postReadMore
-    svg
-        padding-left: 0.3em

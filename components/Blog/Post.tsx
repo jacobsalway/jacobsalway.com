@@ -13,8 +13,8 @@ const Post: React.FC<PostProps> = ({ title, date, content }) => {
             <div className={styles.postMeta}>
                 <h1>{title}</h1>
                 <div className={styles.postMetaLower}>
-                    <div className={styles.circle} style={{ backgroundImage: `url(${pfp.src})`, backgroundSize: 'cover' }}/>
-                    <span className={styles.postMetaAuthor}>Jacob Salway on {formatDate(new Date(date))}</span>
+                    <div className={styles.authorImage} style={{ backgroundImage: `url(${pfp.src})`, backgroundSize: 'cover' }}/>
+                    <span className={styles.postMetaDetail}>Jacob Salway on {formatDate(new Date(date))}</span>
                 </div>
             </div>
             <ReactMarkdown
