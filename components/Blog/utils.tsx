@@ -1,4 +1,6 @@
-import { ContentType } from '../../types';
+import { CodeComponent } from 'react-markdown/lib/ast-to-react'
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+import { vscDarkPlus } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 
 export const formatDate = (date: Date): string => {
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
@@ -6,18 +8,23 @@ export const formatDate = (date: Date): string => {
     const month = months[date.getMonth()]
     const year = date.getFullYear().toString();
 
-    return `${month} ${day}, ${year}`;
+    return ` ${day} ${month}, ${year}`;
 }
 
-export const mapPostContent = (postContent: ContentType) => {
-    if (typeof postContent === 'string') return <p>{postContent}</p>;
-
-    const { type, content } = postContent;
-
-    switch(type) {
-        case 'code':
-            return <pre>{content}</pre>
-        default:
-            return <p>{content}</p>
-    }
+export const codeFormatter: CodeComponent = ({node, inline, className, children, ...props}) => {
+    const match = /language-(\w+)/.exec(className || '')
+    return !inline && match ? (
+        <SyntaxHighlighter
+            style={vscDarkPlus}
+            language={match[1]}
+            showLineNumbers={true}
+            lineNumberStyle={{ textAlign: 'left', paddingRight: '2em' }}
+            customStyle={{ padding: 0, background: null}}>
+            {children.toString().trim()}
+        </SyntaxHighlighter>
+    ) : (
+        <code className={className} {...props}>
+            {children}
+        </code>
+    )
 }
