@@ -1,10 +1,11 @@
-import Link from 'next/link';
-import React from 'react';
-import ReactMarkdown from 'react-markdown';
-import pfp from '../../img/Jacob.jpg';
-import styles from '../../styles/Blog.module.sass';
-import { PostProps } from '../../types';
-import { formatDate, codeFormatter } from './utils';
+import Link from 'next/link'
+import React from 'react'
+import ReactMarkdown from 'react-markdown'
+import pfp from '../../img/Jacob.jpg'
+import styles from '../../styles/Blog.module.sass'
+import { PostProps } from '../../types'
+import CodeFormatter from './CodeFormatter'
+import { formatDate } from './utils'
 
 const Post: React.FC<PostProps> = ({ title, date, content }) => {
     return (
@@ -20,7 +21,7 @@ const Post: React.FC<PostProps> = ({ title, date, content }) => {
             <ReactMarkdown
                 className={styles.postContent}
                 children={content}
-                components={{ code: codeFormatter }}
+                components={{ code: CodeFormatter }}
             />
         </div>
     )

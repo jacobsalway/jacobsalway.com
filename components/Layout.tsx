@@ -1,6 +1,6 @@
+import Head from 'next/head'
 import React from 'react'
 import Nav from './Nav'
-import Head from 'next/head'
 
 export type LayoutProps = {
     children: React.ReactNode,
@@ -13,9 +13,11 @@ const Layout: React.FC<LayoutProps> = ({ children, title }) => {
             <Head>
                 <title>{title ? `${title} | Jacob Salway` : 'Jacob Salway'}</title>
             </Head>
-            <Nav />
-            <div className='content'>
-                {children}
+            <div className='flex flex-col h-screen'>
+                <Nav />
+                <div className='flex-grow'>
+                    {children}
+                </div>
             </div>
         </div>
     )
