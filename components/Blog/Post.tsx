@@ -9,17 +9,17 @@ import { formatDate } from './utils'
 
 const Post: React.FC<PostProps> = ({ title, date, content }) => {
     return (
-        <div className={styles.post}>
-            <div className={styles.postGoBack}><Link href='/blog'>Back to blog</Link></div>
-            <div className={styles.postMeta}>
-                <h1>{title}</h1>
-                <div className={styles.postMetaLower}>
-                    <div className={styles.authorImage} style={{ backgroundImage: `url(${pfp.src})`, backgroundSize: 'cover' }}/>
-                    <span className={styles.postMetaDetail}>Jacob Salway on {formatDate(new Date(date))}</span>
+        <div className={`${styles.post} mx-auto`}>
+            <div className='font-bold'><Link href='/blog'>Back to blog</Link></div>
+            <div className='my-12 mx-auto'>
+                <h1 className='text-4xl font-medium mb-3'>{title}</h1>
+                <div className='pt-2 flex items-center'>
+                    <div className='w-12 h-12 mr-3 rounded-full' style={{ backgroundImage: `url(${pfp.src})`, backgroundSize: 'cover' }}/>
+                    <span className='text-gray-500'>Jacob Salway on {formatDate(new Date(date))}</span>
                 </div>
             </div>
             <ReactMarkdown
-                className={styles.postContent}
+                className={`leading-normal ${styles.postContent}`}
                 children={content}
                 components={{ code: CodeFormatter }}
             />

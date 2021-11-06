@@ -2,13 +2,12 @@ import type { GetStaticProps, NextPage } from 'next'
 import PostList from '../../components/Blog/PostList'
 import Layout from '../../components/Layout'
 import { getAllPosts } from '../../lib/posts'
-import styles from '../../styles/Blog.module.sass'
 import { BlogProps } from '../../types'
 
 const Blog: NextPage<BlogProps> = ({ posts }) => {
     return (
         <Layout title='Blog'>
-            <div className={styles.blogContent}>
+            <div className='max-w-screen-md mx-auto pb-4 pt-12'>
                 <PostList posts={posts} />
             </div>
         </Layout>

@@ -1,7 +1,7 @@
 import React from 'react'
+import styles from '../../styles/Hero.module.sass'
 import { HeroTextProps } from '../../types'
 import FadeIn, { AnimateProps } from '../FadeIn'
-import styles from '../../styles/Hero.module.sass'
 
 const HeroText: React.FC<HeroTextProps & AnimateProps> = ({ name, intro, subtext, animate, onComplete }) => {
     return (

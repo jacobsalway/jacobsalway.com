@@ -1,83 +1,28 @@
-.blogContent
-    max-width: 800px
-    margin: 0 auto
-    padding: 3rem 1rem 0 1rem
-
-    h1, h2, h3
-        font-weight: 600
-
-.postPreviewList
-    max-width: 640px
-    margin: 0 auto
-
-.postPreview
-    padding-bottom: 3rem
-
-    h1
-        font-size: 30px
-        margin-bottom: 10px
-
-    .postMeta
-        padding-bottom: 20px
-        margin-bottom: 20px
-        border-bottom: 1px solid rgb(190, 190, 190)
-        color: rgb(120, 120, 120)
-
-    .postMetaDivider
-        margin: 0 2px
-
-.postContent
-    line-height: 1.5
+.postContainer
+    max-width: calc(theme('screens.md') + 110px)
 
 .post
     & > *
-        max-width: 640px
-        margin-left: auto
-        margin-right: auto
+        @apply mx-auto max-w-screen-md
 
-    .postMeta
-        margin: 50px auto
+.postContent
+    max-width: calc(theme('screens.md') + 110px)
 
-    h1
-        margin-bottom: 0.75rem
-        font-size: 45px
+    & > *
+        margin: 0 auto 2em
+        max-width: theme('screens.md')
 
-    .postMetaLower
-        padding-top: 5px
-        display: flex
-        align-items: center
+    h1, h2, h3
+        @apply mb-1
 
-    .authorImage
-        border-radius: 50%
-        width: 35px
-        height: 35px
-        margin-right: 10px
+    h2
+        @apply text-3xl
 
-    .postMetaDetail
-        color: rgb(120, 120, 120)
+    h3
+        @apply text-2xl
 
-    .postContent
-        max-width: 800px
-        line-height: 1.5
-
-        & > *
-            margin: 0 auto 2em
-            max-width: 640px
-
-        h1, h2, h3
-            margin-bottom: 0.3rem
-
-        h2
-            font-size: 30px
-
-        h3
-            font-size: 22px
-
-        pre
-            background: #1e1e1e
-            max-width: 730px
-            border-radius: 5px
-            padding: 20px calc((730px - 640px) / 2)
-
-.postReadMore, .postGoBack
-    font-weight: bold
+    pre
+        background: #1e1e1e
+        border-radius: 5px
+        max-width: calc(theme('screens.md') + 110px)
+        padding: 20px calc(110px / 2)

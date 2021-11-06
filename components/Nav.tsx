@@ -18,7 +18,7 @@ const Nav: React.FC = () => {
 
     return (
         <header className='w-full bg-gray-200 z-30'>
-            <nav className={`${styles.nav} max-w-screen-md mx-auto flex items-center justify-between px-4 py-3`}>
+            <nav className={`${styles.nav} max-w-screen-md mx-auto flex items-center justify-between py-3`}>
                 <div onClick={() => setNavOpen(false)}>
                     <Link href='/'>jacobsalway.com</Link>
                 </div>

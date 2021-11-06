@@ -14,7 +14,7 @@ const Blog: NextPage<BlogProps> = ({ posts }) => {
 
     return (
         <Layout title={post?.title}>
-            <div className={styles.blogContent}>
+            <div className={`${styles.postContainer} mx-auto pb-4 pt-12`}>
                 {post == null ? 'Post not found.' : <Post {...post} /> }
             </div>
         </Layout>

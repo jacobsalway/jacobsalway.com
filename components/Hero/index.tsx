@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { HeroProps } from '../../types';
 import { AnimateProps, FadeState } from '../FadeIn';
-import styles from '../../styles/Hero.module.sass';
 import HeroText from './HeroText';
 import Terminal from './Terminal';
 
