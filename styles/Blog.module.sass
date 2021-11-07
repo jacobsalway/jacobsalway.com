@@ -1,12 +1,12 @@
 .postContainer
-    max-width: calc(theme('screens.md') + 110px)
+    max-width: calc(theme('screens.md') + 70px)
 
 .post
     & > *
         @apply mx-auto max-w-screen-md
 
 .postContent
-    max-width: calc(theme('screens.md') + 110px)
+    max-width: calc(theme('screens.md') + 70px)
 
     & > *
         margin: 0 auto 2em
@@ -22,7 +22,22 @@
         @apply text-2xl
 
     pre
+        max-width: calc(theme('screens.md') + 70px)
+        padding: 20px calc(70px / 2)
         background: #1e1e1e
         border-radius: 5px
-        max-width: calc(theme('screens.md') + 110px)
-        padding: 20px calc(110px / 2)
+
+    .codeBlock
+        position: relative
+
+        .copyButton
+            font-size: 13px
+            position: absolute
+            top: -5px
+            right: -10px
+            color: white
+            padding: 5px 10px
+
+            &:hover
+                background: grey
+                cursor: pointer
