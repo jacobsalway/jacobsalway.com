@@ -1,6 +1,6 @@
 import { CodeComponent } from 'react-markdown/lib/ast-to-react'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { vscDarkPlus } from 'react-syntax-highlighter/dist/cjs/styles/prism'
+import { atomDark } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 import styles from '../../styles/Blog.module.sass'
 import CopyButton from './CopyButton'
 
@@ -11,11 +11,12 @@ const CodeFormatter: CodeComponent = ({node, inline, className, children, ...pro
     return !inline && match ? (
         <div className={styles.codeBlock}>
             <SyntaxHighlighter
-                style={vscDarkPlus}
+                style={atomDark}
                 language={match[1]}
                 showLineNumbers={true}
-                lineNumberStyle={{ textAlign: 'left', paddingRight: '2em' }}
-                customStyle={{ padding: 0, background: null }}>
+                lineNumberStyle={{ textAlign: 'left', minWidth: '2.5em' }}
+                lineNumberContainerStyle={{ color: 'white '}}
+                customStyle={{ padding: 0, margin: 0, background: null }}>
                 {code}
             </SyntaxHighlighter>
             <CopyButton className={styles.copyButton} valueToCopy={code}/>

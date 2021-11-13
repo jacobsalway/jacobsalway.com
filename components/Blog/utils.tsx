@@ -6,3 +6,7 @@ export const formatDate = (date: Date): string => {
 
     return ` ${day} ${month}, ${year}`;
 }
+
+export const readTime = (content: string): number => {
+    return Math.ceil(content.trim().split(/\s+/).length / 225)
+}

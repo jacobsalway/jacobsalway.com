@@ -1,12 +1,14 @@
+$code-overflow: 70px
+
 .postContainer
-    max-width: calc(theme('screens.md') + 70px)
+    max-width: calc(theme('screens.md') + #{$code-overflow})
 
 .post
     & > *
         @apply mx-auto max-w-screen-md
 
 .postContent
-    max-width: calc(theme('screens.md') + 70px)
+    max-width: calc(theme('screens.md') + #{$code-overflow})
 
     & > *
         margin: 0 auto 2em
@@ -22,22 +24,23 @@
         @apply text-2xl
 
     pre
-        max-width: calc(theme('screens.md') + 70px)
-        padding: 20px calc(70px / 2)
+        max-width: calc(theme('screens.md') + #{$code-overflow})
+        padding: 20px calc(#{$code-overflow} / 2)
         background: #1e1e1e
         border-radius: 5px
+        font-size: 13px
 
     .codeBlock
         position: relative
 
         .copyButton
-            font-size: 13px
             position: absolute
-            top: -5px
-            right: -10px
-            color: white
-            padding: 5px 10px
+            top: -8px
+            right: -12px
+            color: #6f7177
+            padding: 8px 12px
+            border-radius: 5px
 
             &:hover
-                background: grey
+                background: rgba(255, 255, 255, 0.07)
                 cursor: pointer

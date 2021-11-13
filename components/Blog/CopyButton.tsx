@@ -1,6 +1,8 @@
-import { faClone } from '@fortawesome/free-solid-svg-icons'
+import { faClone } from '@fortawesome/free-regular-svg-icons'
+import { faCheck } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
+import copy from 'copy-to-clipboard'
 
 export interface CopyButtonProps {
     className?: string
@@ -9,19 +11,24 @@ export interface CopyButtonProps {
 
 const CopyButton: React.FC<CopyButtonProps> = ({ className, valueToCopy }) => {
     const [pressed, setPressed] = useState(false)
+    const timerRef = useRef<NodeJS.Timeout | null>(null)
 
     const handleClick = () => {
+        copy(valueToCopy)
         setPressed(true)
-        setTimeout(() => {
+
+        // if clicked while timeout is active, clear timeout and restart timer
+        if (timerRef.current) clearTimeout(timerRef.current)
+        timerRef.current = setTimeout(() => {
             setPressed(false)
-        }, 3000)
+        }, 2000)
     }
 
     return (
         <div className={className}
              onClick={handleClick}>
-            {pressed ? 'Copied' : 'Copy'}
-            <FontAwesomeIcon icon={faClone} />
+            <span className='mr-1.5'>{pressed ? 'Copied' : 'Copy'}</span>
+            <FontAwesomeIcon icon={pressed ? faCheck : faClone} />
         </div>
     )
 }

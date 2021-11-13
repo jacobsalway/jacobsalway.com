@@ -10,11 +10,11 @@ const NavLinks = () => {
         <a className='flex flex-row items-center' href='https://github.com/jacobsalway' target='_blank' rel='noreferrer'><FontAwesomeIcon icon={faGithub} className='text-lg mr-1' /><span>Github</span></a>
         <a className='flex flex-row items-center mt-2 sm:mt-0' href='https://www.linkedin.com/in/jacobsalway/' target='_blank' rel='noreferrer'><FontAwesomeIcon icon={faLinkedin} className='text-lg mr-1' /><span>LinkedIn</span></a>
         <Link href='/blog'><a className='mt-2 sm:mt-0'>Blog</a></Link>
-    </>;
+    </>
 }
 
 const Nav: React.FC = () => {
-    const [navOpen, setNavOpen] = useState(false);
+    const [navOpen, setNavOpen] = useState(false)
 
     return (
         <header className='w-full bg-gray-200 z-30'>
