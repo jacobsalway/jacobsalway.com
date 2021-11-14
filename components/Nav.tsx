@@ -5,10 +5,14 @@ import Link from 'next/link'
 import { useState } from 'react'
 import styles from '../styles/Nav.module.sass'
 
+const oldLinks = <>
+    <a className='flex flex-row items-center' href='https://github.com/jacobsalway' target='_blank' rel='noreferrer'><FontAwesomeIcon icon={faGithub} className='text-lg mr-1' /><span>Github</span></a>
+    <a className='flex flex-row items-center mt-2 sm:mt-0' href='https://www.linkedin.com/in/jacobsalway/' target='_blank' rel='noreferrer'><FontAwesomeIcon icon={faLinkedin} className='text-lg mr-1' /><span>LinkedIn</span></a>
+</>
+
 const NavLinks = () => {
     return <>
-        <a className='flex flex-row items-center' href='https://github.com/jacobsalway' target='_blank' rel='noreferrer'><FontAwesomeIcon icon={faGithub} className='text-lg mr-1' /><span>Github</span></a>
-        <a className='flex flex-row items-center mt-2 sm:mt-0' href='https://www.linkedin.com/in/jacobsalway/' target='_blank' rel='noreferrer'><FontAwesomeIcon icon={faLinkedin} className='text-lg mr-1' /><span>LinkedIn</span></a>
+        <Link href='/projects'><a className='mt-2 sm:mt-0'>Projects</a></Link>
         <Link href='/blog'><a className='mt-2 sm:mt-0'>Blog</a></Link>
     </>
 }
@@ -17,13 +21,13 @@ const Nav: React.FC = () => {
     const [navOpen, setNavOpen] = useState(false)
 
     return (
-        <header className='w-full bg-gray-200 z-30'>
-            <nav className={`${styles.nav} max-w-screen-md mx-auto flex items-center justify-between py-3`}>
-                <div onClick={() => setNavOpen(false)}>
-                    <Link href='/'>jacobsalway.com</Link>
+        <header className='w-full text-sm font-semibold z-30'>
+            <nav className={`${styles.nav} max-w-screen-2xl mx-auto flex items-center justify-between p-10`}>
+                <div className='font-mono' onClick={() => setNavOpen(false)}>
+                    <Link href='/'>&lt;Jacob Salway /&gt;</Link>
                 </div>
                 <div className='flex'>
-                    <div className='hidden sm:flex align-items-center space-x-5' onClick={() => setNavOpen(false)}>
+                    <div className='hidden sm:flex align-items-center space-x-8' onClick={() => setNavOpen(false)}>
                         <NavLinks />
                     </div>
                     <button className='block sm:hidden text-black z-50' onClick={() => setNavOpen(!navOpen)}>

@@ -13,8 +13,8 @@ const Blog: NextPage<BlogProps> = ({ posts }) => {
     const post = posts?.find(p => p.id === id)
 
     return (
-        <Layout title={post?.title}>
-            <div className={`${styles.postContainer} mx-auto pb-4 pt-12`}>
+        <Layout title={post?.title} footer={true}>
+            <div className={`${styles.postContainer} mx-auto`}>
                 {post == null ? 'Post not found.' : <Post {...post} /> }
             </div>
         </Layout>

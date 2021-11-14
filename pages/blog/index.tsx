@@ -6,8 +6,8 @@ import { BlogProps } from '../../types'
 
 const Blog: NextPage<BlogProps> = ({ posts }) => {
     return (
-        <Layout title='Blog'>
-            <div className='max-w-screen-md mx-auto pb-4 pt-12'>
+        <Layout title='Blog' footer={true}>
+            <div className='max-w-screen-md mx-auto'>
                 <PostList posts={posts} />
             </div>
         </Layout>

@@ -1,23 +1,19 @@
-import React, { useState } from 'react';
-import { HeroProps } from '../../types';
-import { AnimateProps, FadeState } from '../FadeIn';
-import HeroText from './HeroText';
-import Terminal from './Terminal';
+import React, { useState } from 'react'
+import styles from '../../styles/Hero.module.sass'
+import { HeroProps } from '../../types'
+import { AnimateProps, FadeState } from '../FadeIn'
+import HeroText from './HeroText'
 
-const Hero: React.FC<HeroProps & AnimateProps> = ({ heroText, terminal: { output }, animate, onComplete}) => {
-    const [heroTextAnimated, setHeroTextAnimated] = useState(false);
-
-    const heroAnimate = animate ? FadeState.ANIMATE : FadeState.NONE;
-    const terminalAnimate = animate ? (heroTextAnimated ? FadeState.ANIMATE : FadeState.HIDE) : FadeState.NONE;
+const Hero: React.FC<HeroProps & AnimateProps> = ({ heroText, animate, onComplete}) => {
+    const heroAnimate = animate ? FadeState.ANIMATE : FadeState.NONE
 
     return (
-        <div className='max-w-screen-2xl p-4 sm:p-10 md:p-20 mx-auto h-full flex items-center justify-items-center'>
-            <div className='flex items-center justify-center xl:justify-between flex-grow'>
-                <HeroText animate={heroAnimate} onComplete={() => setHeroTextAnimated(true)} {...heroText} />
-                <Terminal animate={terminalAnimate} onComplete={() => onComplete()} output={output} />
+        <div className='max-w-screen-2xl p-4 sm:p-10 md:p-20 mx-auto h-full flex'>
+            <div className='flex xl:justify-center flex-grow'>
+                <HeroText animate={heroAnimate} onComplete={onComplete} {...heroText} />
             </div>
         </div>
     )
 }
 
-export default Hero;
+export default Hero

@@ -18,7 +18,7 @@ export type HeroProps = {
 export type PostProps = {
     title: string;
     id: string;
-    date: string;
+    date: Date;
     content: string;
 }
 
