@@ -1,22 +1,25 @@
+import Head from 'next/head'
 import React from 'react'
 import Nav from './Nav'
-import Head from 'next/head'
+import Footer from './Footer'
 
-type LayoutProps = {
+export type LayoutProps = {
     children: React.ReactNode,
-    title?: string
+    title?: string,
+    footer?: boolean
 }
 
-const Layout: React.FC<LayoutProps> = ({ children, title }) => {
+const Layout: React.FC<LayoutProps> = ({ children, title, footer }) => {
     return (
-        <div className='app'>
+        <div className='app flex flex-col min-h-screen px-5 py-5 sm:p-10'>
             <Head>
-                <title>{title ? `Jacob Salway - ${title}` : 'Jacob Salway'}</title>
+                <title>{title ? `${title} | Jacob Salway` : 'Jacob Salway'}</title>
             </Head>
             <Nav />
-            <div className='content'>
+            <div className='flex-grow mt-20'>
                 {children}
             </div>
+            {footer && <Footer />}
         </div>
     )
 }

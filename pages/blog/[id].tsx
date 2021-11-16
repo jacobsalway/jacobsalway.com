@@ -1,9 +1,9 @@
-import type { NextPage } from 'next'
-import { useRouter } from 'next/router'
+import type { GetStaticPaths, GetStaticProps, NextPage } from 'next'
+import { useRouter } from 'next/dist/client/router'
 import Post from '../../components/Blog/Post'
 import Layout from '../../components/Layout'
+import { getAllPostIds, getAllPosts } from '../../lib/posts'
 import styles from '../../styles/Blog.module.sass'
-import { posts } from '../../content'
 import { BlogProps } from '../../types'
 
 const Blog: NextPage<BlogProps> = ({ posts }) => {
@@ -13,21 +13,33 @@ const Blog: NextPage<BlogProps> = ({ posts }) => {
     const post = posts?.find(p => p.id === id)
 
     return (
-        <Layout title={post?.title}>
-            <div className={styles.blogContent}>
+        <Layout title={post?.title} footer={true}>
+            <div className={`${styles.postContainer} mx-auto`}>
                 {post == null ? 'Post not found.' : <Post {...post} /> }
             </div>
         </Layout>
     )
 }
 
-export async function getStaticProps() {
-    return { props: { posts: posts } }
+export const getStaticProps: GetStaticProps = async () => {
+    const posts = await getAllPosts()
+    return {
+        props: {
+            posts
+        }
+    }
 }
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = () => {
+    const allPostIds = getAllPostIds()
+    const paths = allPostIds.map(postId => ({
+        params: {
+            id: postId
+        }
+    }))
+
     return {
-        paths: [{ params: { id: 'first-blog-post' } }],
+        paths,
         fallback: false
     }
 }

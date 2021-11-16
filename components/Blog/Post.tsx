@@ -1,27 +1,36 @@
-import React from 'react';
 import Link from 'next/link'
-import { PostProps } from '../../types';
-import pfp from '../../img/Jacob.jpg';
+import React from 'react'
+import ReactMarkdown from 'react-markdown'
+import pfp from '../../img/Jacob.jpg'
 import styles from '../../styles/Blog.module.sass'
-import { formatDate } from './utils'
+import { PostProps } from '../../types'
+import CodeFormatter from './CodeFormatter'
+import { formatDate, readTime } from './utils'
 
-const Post: React.FC<PostProps> = ({ title, id, time, content }) => {
+const Post: React.FC<PostProps> = ({ title, date, content }) => {
     return (
-        <div className={styles.post}>
-            <div className={styles.postGoBack}><Link href='/blog'>Back to blog</Link></div>
-            <div className={styles.postMeta}>
-                <div className={styles.postMetaUpper}>
-                    <span>{formatDate(new Date(time))}</span>
-                </div>
-                <h1>{title}</h1>
-                <div className={styles.postMetaLower}>
-                    <div className={styles.circle} style={{ backgroundImage: `url(${pfp.src})`, backgroundSize: 'cover' }}/>
-                    <span>Jacob Salway</span>
+        <div className={`${styles.post} mx-auto`}>
+            <div className='font-bold'><Link href='/blog'>Back to blog</Link></div>
+            <div className='my-12 mx-auto'>
+                <h1 className='text-3xl sm:text-4xl font-medium mb-3'>{title}</h1>
+                <div className='pt-2 flex flex-col xs:flex-row xs:items-center text-gray-500 text-sm sm:text-base'>
+                    <div className='hidden xs:block w-6 h-6 sm:w-12 sm:h-12 mr-1.5 sm:mr-3 rounded-full' style={{ backgroundImage: `url(${pfp.src})`, backgroundSize: 'cover' }}/>
+                    <b>Jacob Salway</b>
+                    <span className='hidden xs:block'>&nbsp;</span>
+                    <div className='flex flex-row mt-0.5 xs:mt-0'>
+                        <span className='hidden xs:block'>on</span>
+                        <span className='hidden xs:block'>&nbsp;</span>
+                        <span>{formatDate(date)}</span>
+                        <span className='mx-1 xs:mx-1.5'>·</span>
+                        <span>{readTime(content)} min read</span>
+                    </div>
                 </div>
             </div>
-            <div className={styles.postContent}>
-                {content.map((p, i) => <p key={i}>{p}</p>)}
-            </div>
+            <ReactMarkdown
+                className={`leading-normal ${styles.postContent}`}
+                children={content}
+                components={{ code: CodeFormatter }}
+            />
         </div>
     )
 }

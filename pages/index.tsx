@@ -1,9 +1,9 @@
-import type { NextPage } from 'next'
-import { useState, useContext } from 'react';
-import Layout from '../components/Layout'
-import Hero from '../components/Hero'
-import { hero, terminal } from '../content'
+import type { NextPage } from 'next';
+import { useContext } from 'react';
 import { FadeState } from '../components/FadeIn';
+import Hero from '../components/Hero';
+import Layout from '../components/Layout';
+import { hero, terminal } from '../content';
 import HeroAnimateContext from '../contexts/heroAnimate';
 
 const Home: NextPage = () => {

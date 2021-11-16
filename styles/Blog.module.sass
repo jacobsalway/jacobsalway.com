@@ -1,79 +1,61 @@
-.blogContent
-    max-width: 680px
-    margin: 0 auto
-    padding: 3rem 1rem 0 1rem
+$code-overflow: 70px
 
-    h1
-        margin: 0
-        font-weight: 500
-
-.postPreview
-    padding-bottom: 3rem
-
-    h1
-        font-size: 30px
-        margin-bottom: 10px
-
-    .postMeta
-        padding-bottom: 20px
-        margin-bottom: 20px
-        border-bottom: 1px solid rgb(190, 190, 190)
-
-    .postContent
-        line-height: 1.5
+.postContainer
+    max-width: calc(theme('screens.md') + #{$code-overflow})
 
 .post
-    .postMeta
-        margin: 50px 0
+    & > *
+        @apply mx-auto max-w-screen-md
 
-    .postMetaUpper, .postMetaLower
-        font-size: 16px
+.postContent
+    max-width: calc(theme('screens.md') + #{$code-overflow})
 
-    .postMetaUpper
-        color: rgb(120, 120, 120)
-        padding-bottom: 5px
-        font-family: monospace
+    & > *
+        margin: 0 auto 1.3em
+        max-width: theme('screens.md')
 
-    .postMetaLower
-        padding-top: 5px
-        display: flex
-        flex-direction: row
-        align-items: center
+    a
+        @apply text-domain-green
 
-        .circle
-            border-radius: 50%
-            width: 35px
-            height: 35px
-            margin-right: 10px
+    h1, h2, h3
+        @apply mb-1
 
-    .postContent
-        line-height: 1.5
+    h2
+        @apply text-3xl
 
-    h1
-        font-size: 40px
-        margin: 0 0 0.75rem 0
-        font-weight: 500
-
-        a
-            text-decoration: none
-            color: black
-
-    p
-        margin: 0 0 1.5em 0
+    h3
+        @apply text-2xl
 
     pre
-        padding: 1em
-        background: #272822
-        color: #F8F8F2
-        font-family: Consolas, monospace
+        max-width: calc(theme('screens.md') + #{$code-overflow})
+        padding: 15px
+        background: #1e1e1e
+        border-radius: 5px
+        font-size: 13px
 
-.postReadMore, .postGoBack
-    font-weight: bold
+        @media (min-width: theme('screens.md'))
+            padding: 20px calc(#{$code-overflow} / 2)
 
-.postGoBack
-    svg
-        padding-right: 0.35em
+    .codeBlock
+        position: relative
 
-.postReadMore
-    svg
-        padding-left: 0.3em
+        :global .linenumber
+            display: none
+            @media (min-width: theme('screens.md'))
+                display: inline-block
+
+        .copyButton
+            position: absolute
+            top: -8px
+            right: -12px
+            color: #6f7177
+            padding: 8px 12px
+            border-radius: 5px
+
+            &:hover
+                background: rgba(255, 255, 255, 0.07)
+                cursor: pointer
+
+            display: none
+            @media (min-width: theme('screens.md'))
+                display: block

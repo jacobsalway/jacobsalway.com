@@ -9,6 +9,11 @@ export interface FadeInProps {
     onComplete?: () => void;
 }
 
+export interface AnimateProps {
+    animate: FadeState;
+    onComplete: () => void;
+}
+
 const FadeIn: React.FC<FadeInProps> = (props) => {
     const [numAnimated, setNumAnimated] = useState(0);
 

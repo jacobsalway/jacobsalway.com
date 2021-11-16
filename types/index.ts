@@ -14,17 +14,12 @@ export type HeroProps = {
     terminal: TerminalProps;
 }
 
-// Page (route) props
-export type PageProps = {
-    title?: string;
-}
-
 // Blog and Blog sub-component props
 export type PostProps = {
     title: string;
     id: string;
-    time: string;
-    content: string[];
+    date: Date;
+    content: string;
 }
 
 export type BlogProps = {

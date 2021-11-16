@@ -1,20 +1,17 @@
 import Link from 'next/link'
 import React from 'react'
 import { PostProps } from '../../types'
-import styles from '../../styles/Blog.module.sass'
 import { formatDate } from './utils'
 
-const PostPreview: React.FC<PostProps> = ({ title, id, time, content }) => {
-    const readTime = Math.ceil(content.map(x => x.trim()).join(' ').split(/\s+/).length / 225);
-
+const PostPreview: React.FC<PostProps> = ({ title, id, date }) => {
     return (
-        <div className={styles.postPreview} key={id}>
-            <h1><Link href={`/blog/${id}`}>{title}</Link></h1>
-            <div className={styles.postMeta}><span>Posted on {formatDate(new Date(time))} - {readTime} mins</span></div>
-            <div className={styles.postContent}><p>{content[0]}</p></div>
-            <div className={styles.postReadMore}><Link href={`/blog/${id}`}>Read more...</Link></div>
+        <div className='pb-1 mb-4 border-b w-full flex-col sm:flex-row flex justify-between' key={id}>
+            <h1 className='text-lg md:text-xl font-medium'><Link href={`/blog/${id}`}>{title}</Link></h1>
+            <div className='text-sm sm:text-md text-gray-500 mt-1 sm:mt-0 border-gray-300 sm:w-32 flex items-center sm:justify-end'>
+                {formatDate(date)}
+            </div>
         </div>
-    );
-};
+    )
+}
 
-export default PostPreview;
+export default PostPreview
