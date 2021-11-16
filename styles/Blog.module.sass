@@ -11,8 +11,11 @@ $code-overflow: 70px
     max-width: calc(theme('screens.md') + #{$code-overflow})
 
     & > *
-        margin: 0 auto 2em
+        margin: 0 auto 1.3em
         max-width: theme('screens.md')
+
+    a
+        @apply text-domain-green
 
     h1, h2, h3
         @apply mb-1
@@ -25,13 +28,21 @@ $code-overflow: 70px
 
     pre
         max-width: calc(theme('screens.md') + #{$code-overflow})
-        padding: 20px calc(#{$code-overflow} / 2)
+        padding: 15px
         background: #1e1e1e
         border-radius: 5px
         font-size: 13px
 
+        @media (min-width: theme('screens.md'))
+            padding: 20px calc(#{$code-overflow} / 2)
+
     .codeBlock
         position: relative
+
+        :global .linenumber
+            display: none
+            @media (min-width: theme('screens.md'))
+                display: inline-block
 
         .copyButton
             position: absolute
@@ -44,3 +55,7 @@ $code-overflow: 70px
             &:hover
                 background: rgba(255, 255, 255, 0.07)
                 cursor: pointer
+
+            display: none
+            @media (min-width: theme('screens.md'))
+                display: block

@@ -14,8 +14,7 @@ const CodeFormatter: CodeComponent = ({node, inline, className, children, ...pro
                 style={atomDark}
                 language={match[1]}
                 showLineNumbers={true}
-                lineNumberStyle={{ textAlign: 'left', minWidth: '2.5em' }}
-                lineNumberContainerStyle={{ color: 'white '}}
+                lineNumberStyle={{ textAlign: 'left', minWidth: '2.5em', display: null }}
                 customStyle={{ padding: 0, margin: 0, background: null }}>
                 {code}
             </SyntaxHighlighter>

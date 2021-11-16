@@ -5,6 +5,9 @@ module.exports = {
     extend: {
       colors: {
         'domain-green': '#0ea800'
+      },
+      screens: {
+        'xs': '390px'
       }
     },
   },

@@ -8,8 +8,8 @@ const Hero: React.FC<HeroProps & AnimateProps> = ({ heroText, animate, onComplet
     const heroAnimate = animate ? FadeState.ANIMATE : FadeState.NONE
 
     return (
-        <div className='max-w-screen-2xl p-4 sm:p-10 md:p-20 mx-auto h-full flex'>
-            <div className='flex xl:justify-center flex-grow'>
+        <div className='max-w-screen-2xl mx-auto h-full flex'>
+            <div className='flex justify-center flex-grow'>
                 <HeroText animate={heroAnimate} onComplete={onComplete} {...heroText} />
             </div>
         </div>
