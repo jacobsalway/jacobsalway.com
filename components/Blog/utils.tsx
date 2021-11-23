@@ -4,9 +4,9 @@ export const formatDate = (date: Date | string): string => {
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     const day = date.getDate()
     const month = months[date.getMonth()]
-    const year = date.getFullYear().toString();
+    const year = date.getFullYear().toString()
 
-    return `${month} ${day}, ${year}`;
+    return `${month} ${day}, ${year}`
 }
 
 export const readTime = (content: string): number => {
