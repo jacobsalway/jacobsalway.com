@@ -25,3 +25,15 @@ export type PostProps = {
 export type BlogProps = {
     posts?: PostProps[];
 }
+
+
+// Project and Project sub-component props
+export type ProjectProps = {
+    name: string;
+    links: {name: string, link: string}[];
+    description: string;
+}
+
+export type ProjectsProps = {
+    projects: ProjectProps[];
+}
