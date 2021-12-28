@@ -7,7 +7,7 @@ module.exports = {
         'domain-green': '#0ea800'
       },
       screens: {
-        'xs': '390px'
+        'xs': '420px'
       }
     },
   },
