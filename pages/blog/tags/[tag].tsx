@@ -34,7 +34,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
     const posts = await getAllPosts()
     const tagsArray = posts
         .map(p => p.tags)
-        .filter(e => Boolean(e) && e.length > 0) // filter no tags and empty tags
+        .filter((p): p is string[] => !!p) // filter undefined/empty tags
+        .filter(e => e.length > 0) // filter tags array but no contents
     const tagsSet = new Set(tagsArray.flat())
 
     const paths = Array.from(tagsSet).map(tag => ({
