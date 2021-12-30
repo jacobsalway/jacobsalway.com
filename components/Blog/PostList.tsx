@@ -5,7 +5,7 @@ import { groupBy } from './utils'
 
 const PostList: React.FC<BlogProps> = ({ posts }) => {
     if (posts == null || (posts instanceof Array && posts.length === 0)) {
-        return <span>No blog content yet.</span>
+        return <span>No content.</span>
     }
 
     const postsByYear = groupBy(posts, post => new Date(post.date).getFullYear())
@@ -19,7 +19,7 @@ const PostList: React.FC<BlogProps> = ({ posts }) => {
         <>
             {postsByYearSorted.map(({ year, posts }, index) => {
                 return <div className='pb-8' key={index}>
-                    <h1 className='text-3xl font-bold pb-8'>{year}</h1>
+                    <h2 className='text-2xl font-semibold pb-2 mb-4 border-b'>{year}</h2>
                     {posts.map(PostPreview)}
                 </div>
             })}

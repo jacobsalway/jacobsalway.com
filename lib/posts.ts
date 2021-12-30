@@ -1,6 +1,7 @@
-import path from 'path'
 import fs from 'fs'
 import matter from 'gray-matter'
+import path from 'path'
+import { PostProps } from '../types'
 
 const postsDir = path.join(process.cwd(), 'posts')
 
@@ -18,7 +19,7 @@ export const getPostData = async (id: string) => {
         id,
         content: matterResult.content,
         ...matterResult.data
-    }
+    } as PostProps
 }
 
 export const getAllPosts = async () => {

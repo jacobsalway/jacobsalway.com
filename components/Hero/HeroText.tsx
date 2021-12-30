@@ -9,7 +9,7 @@ const HeroText: React.FC<HeroTextProps & AnimateProps> = ({ name, subtext, anima
     return (
         <div className='max-w-screen-md'>
             <FadeIn animate={animate} delay={150} onComplete={onComplete}>
-                <span className='font-mono text-sm text-domain-green sm:text-lg'>Hey there,</span>
+                <span className='font-mono text-md text-domain-green sm:text-lg'>Hey there,</span>
                 <h1 className='text-4xl xs:text-5xl sm:text-6xl md:text-7xl font-light mt-1 pb-5 border-b'>I'm <span className='font-semibold'>{name}.</span></h1>
                 <div className={`${styles.heroSubtext} mt-6 leading-relaxed`}>
                     {subtext.map((p, i) => <p className='mt-4' key={i} dangerouslySetInnerHTML={{__html: p}}></p>)}
