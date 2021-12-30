@@ -9,7 +9,7 @@ import { formatDate, readTime } from './utils'
 
 const PostTag: React.FC<{tag: string}> = ({ tag }) => {
     return (
-        <a href={`/blog/tags/${tag}`} className='py-1 px-2 sm:py-1.5 border shadow-sm rounded'>{`#${tag}`}</a>
+        <Link href={`/blog/tags/${tag}`}><a className='py-1 px-2 sm:py-1.5 border shadow-sm rounded'>{`#${tag}`}</a></Link>
     )
 }
 
