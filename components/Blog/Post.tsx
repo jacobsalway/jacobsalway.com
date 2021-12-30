@@ -7,6 +7,12 @@ import { PostProps } from '../../types'
 import CodeFormatter from './CodeFormatter'
 import { formatDate, readTime } from './utils'
 
+const PostTag: React.FC<{tag: string}> = ({ tag }) => {
+    return (
+        <a href={`/blog/tags/${tag}`} className='py-1 px-2 sm:py-1.5 border shadow-sm rounded'>{`#${tag}`}</a>
+    )
+}
+
 const Post: React.FC<PostProps> = ({ title, date, content, tags }) => {
     return (
         <div className={`${styles.post} mx-auto`}>
@@ -26,7 +32,7 @@ const Post: React.FC<PostProps> = ({ title, date, content, tags }) => {
                     </div>
                 </div>
                 {tags && <div className='flex space-x-2 sm:space-x-3 items-center mt-3 sm:mt-5 font-mono text-xs sm:text-sm'>
-                    {tags.map((tag, key) => <a key={key} href={`/blog/tags/${tag}`} className='py-1 px-2 sm:py-1.5 bg-gray-200 rounded'>{`#${tag}`}</a>)}
+                    {tags.map(tag => <PostTag tag={tag} />)}
                 </div>}
             </div>
             <ReactMarkdown
@@ -39,4 +45,4 @@ const Post: React.FC<PostProps> = ({ title, date, content, tags }) => {
     )
 }
 
-export default Post;
+export default Post
