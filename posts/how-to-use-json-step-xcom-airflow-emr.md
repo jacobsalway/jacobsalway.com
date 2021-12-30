@@ -1,5 +1,5 @@
 ---
-title: 'How to use JSON input steps from XCOM in EmrAddStepsOperator on Airflow'
+title: 'How to read JSON from XCOM on Airflow'
 date: '2021-11-18'
 tags: [airflow, python, emr]
 ---
