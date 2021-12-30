@@ -8,6 +8,7 @@ const Blog: NextPage<BlogProps> = ({ posts }) => {
     return (
         <Layout title='Blog' footer={true}>
             <div className='max-w-screen-md mx-auto'>
+                <h1 className='text-3xl font-bold pb-8'>Blog</h1>
                 <PostList posts={posts} />
             </div>
         </Layout>

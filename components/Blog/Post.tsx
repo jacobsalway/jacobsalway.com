@@ -25,8 +25,8 @@ const Post: React.FC<PostProps> = ({ title, date, content, tags }) => {
                         <span>{readTime(content)} min read</span>
                     </div>
                 </div>
-                {tags && <div className='flex space-x-2 sm:space-x-3 items-center mt-3 sm:mt-5 font-mono text-sm'>
-                    {tags.map((tag, key) => <div key={key} className='py-1 px-1.5 sm:py-1.5 sm:px-2 bg-gray-200 rounded'>{`#${tag}`}</div>)}
+                {tags && <div className='flex space-x-2 sm:space-x-3 items-center mt-3 sm:mt-5 font-mono text-xs sm:text-sm'>
+                    {tags.map((tag, key) => <a key={key} href={`/blog/tags/${tag}`} className='py-1 px-2 sm:py-1.5 bg-gray-200 rounded'>{`#${tag}`}</a>)}
                 </div>}
             </div>
             <ReactMarkdown
