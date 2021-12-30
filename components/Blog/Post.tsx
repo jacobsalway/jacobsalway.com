@@ -7,7 +7,7 @@ import { PostProps } from '../../types'
 import CodeFormatter from './CodeFormatter'
 import { formatDate, readTime } from './utils'
 
-const Post: React.FC<PostProps> = ({ title, date, content }) => {
+const Post: React.FC<PostProps> = ({ title, date, content, tags }) => {
     return (
         <div className={`${styles.post} mx-auto`}>
             <div className='font-bold'><Link href='/blog'>Back to blog</Link></div>
@@ -25,12 +25,16 @@ const Post: React.FC<PostProps> = ({ title, date, content }) => {
                         <span>{readTime(content)} min read</span>
                     </div>
                 </div>
+                {tags && <div className='flex space-x-2 sm:space-x-3 items-center mt-3 sm:mt-5 font-mono text-sm'>
+                    {tags.map((tag, key) => <div key={key} className='py-1 px-1.5 sm:py-1.5 sm:px-2 bg-gray-200 rounded'>{`#${tag}`}</div>)}
+                </div>}
             </div>
             <ReactMarkdown
                 className={`leading-normal ${styles.postContent}`}
-                children={content}
                 components={{ code: CodeFormatter }}
-            />
+            >
+                {content}
+            </ReactMarkdown>
         </div>
     )
 }

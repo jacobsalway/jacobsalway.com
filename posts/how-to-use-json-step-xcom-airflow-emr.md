@@ -1,6 +1,7 @@
 ---
 title: 'How to use JSON input steps from XCOM in EmrAddStepsOperator on Airflow'
 date: '2021-11-18'
+tags: [airflow, python, emr]
 ---
 
 When using the `EmrAddStepsOperator` at work recently, I came across a situation where I wanted to use the JSON return value of an earlier `PythonOperator` as the step config.
@@ -18,7 +19,7 @@ def define_step(**kwargs: DagRun) -> None:
     cli_params = []
     for param, value in script_params.items():
         cli_params.extend([f'--{param}', str(value)])
-    
+
     return [{
         'action_on_failure': 'CONTINUE',
         'name': 'step_name',

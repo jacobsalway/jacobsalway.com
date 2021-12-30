@@ -19,6 +19,7 @@ export type PostProps = {
     title: string;
     id: string;
     date: string;
+    tags?: string[];
     content: string;
 }
 
