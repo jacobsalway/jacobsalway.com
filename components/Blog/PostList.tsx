@@ -14,6 +14,7 @@ const PostList: React.FC<BlogProps> = ({ posts }) => {
             const sortedPosts = posts.sort((a, b) => Date.parse(b.date).valueOf() - Date.parse(a.date).valueOf())
             return ({ year, posts: sortedPosts })
         })
+        .sort((a, b) => b.year - a.year)
 
     return (
         <>
