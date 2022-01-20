@@ -1,7 +1,10 @@
 export interface Hero {
     name: string
-    intro: string
     subtext: string[]
+    links: {
+        link: string
+        icon: string
+    }[]
 }
 
 export interface Post {
@@ -22,7 +25,10 @@ export interface GroupedPosts<T extends Post> {
 
 export interface Project {
     name: string
-    links: { name: string; link: string }[]
+    links: {
+        name: string
+        link: string
+    }[]
     description: string
 }
 

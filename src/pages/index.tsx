@@ -12,14 +12,14 @@ const Home: NextPage<Props> = ({ hero }) => {
     const [heroAnimated, setHeroAnimated] = useContext(HeroAnimateContext)
     const shouldHeroAnimate = heroAnimated ? FadeState.NONE : FadeState.ANIMATE
 
-    const { name, intro, subtext } = hero
+    const { name, subtext, links } = hero
 
     return (
         <Layout>
             <HeroView
                 name={name}
-                intro={intro}
                 subtext={subtext}
+                links={links}
                 animate={shouldHeroAnimate}
                 onComplete={() => setHeroAnimated(true)}
             />
