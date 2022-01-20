@@ -1,18 +1,24 @@
 module.exports = {
-  purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
-  darkMode: false, // or 'media' or 'class'
-  theme: {
-    extend: {
-      colors: {
-        'domain-green': '#0ea800'
-      },
-      screens: {
-        'xs': '420px'
-      }
+    purge: {
+        content: [
+            './src/pages/**/*.{js,ts,jsx,tsx}',
+            './src/components/**/*.{js,ts,jsx,tsx}',
+            './next.config.js',
+        ],
     },
-  },
-  variants: {
-    extend: {},
-  },
-  plugins: [],
+    darkMode: false, // or 'media' or 'class'
+    theme: {
+        extend: {
+            colors: {
+                'domain-green': '#0ea800',
+            },
+            screens: {
+                xs: '420px',
+            },
+        },
+    },
+    variants: {
+        extend: {},
+    },
+    plugins: [],
 }
