@@ -12,6 +12,7 @@ const Footer: React.FC = () => {
                     href="https://github.com/jacobsalway"
                     target="_blank"
                     rel="noreferrer"
+                    style={{ borderBottom: 'none' }}
                 >
                     <FontAwesomeIcon icon={faGithub} />
                 </a>
@@ -20,6 +21,7 @@ const Footer: React.FC = () => {
                     href="https://www.linkedin.com/in/jacobsalway/"
                     target="_blank"
                     rel="noreferrer"
+                    style={{ borderBottom: 'none' }}
                 >
                     <FontAwesomeIcon icon={faLinkedin} />
                 </a>

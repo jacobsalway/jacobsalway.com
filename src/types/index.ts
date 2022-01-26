@@ -1,10 +1,6 @@
 export interface Hero {
     name: string
     subtext: string[]
-    links: {
-        link: string
-        icon: string
-    }[]
 }
 
 export interface Post {

@@ -1,4 +1,4 @@
-export const formatDate = (date: Date | string): string => {
+export const formatDate = (date: Date | string, full = true): string => {
     date = typeof date === 'string' ? new Date(date) : date
 
     const months = [
@@ -16,7 +16,9 @@ export const formatDate = (date: Date | string): string => {
         'December',
     ]
     const day = date.getDate()
-    const month = months[date.getMonth()]
+    const month = full
+        ? months[date.getMonth()]
+        : months[date.getMonth()].slice(0, 3)
     const year = date.getFullYear().toString()
 
     return `${month} ${day}, ${year}`

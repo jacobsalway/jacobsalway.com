@@ -1,5 +1,6 @@
 import GroupedPostView from '@components/Blog/GroupedPostsView'
 import Layout from '@components/Layout'
+import Page from '@components/Page'
 import { getFullPosts, getPosts, getTags, groupPostsByYear } from '@lib/posts'
 import { GroupedPosts, Post } from '@types'
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next'
@@ -10,10 +11,11 @@ type Props = { tag: string; posts: GroupedPosts<Post>[] }
 const PostListByTag: NextPage<Props> = ({ tag, posts }) => {
     return (
         <Layout title={`#${tag}`} footer={true}>
-            <div className="max-w-screen-md mx-auto">
-                <h1 className="text-3xl font-bold pb-8">Posts tagged #{tag}</h1>
-                {posts.map(GroupedPostView)}
-            </div>
+            <Page heading={`Posts tagged #${tag}`}>
+                <div className="flex flex-col space-y-10">
+                    {posts.map(GroupedPostView)}
+                </div>
+            </Page>
         </Layout>
     )
 }

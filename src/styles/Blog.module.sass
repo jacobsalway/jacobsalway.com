@@ -1,40 +1,22 @@
-$code-overflow: 70px
-
-.postContainer
-    max-width: calc(theme('screens.md') + #{$code-overflow})
-
-.post
-    & > *
-        @apply mx-auto max-w-screen-md
-
 .postContent
-    max-width: calc(theme('screens.md') + #{$code-overflow})
-
     & > *
-        margin: 0 auto 1.5rem
-        max-width: theme('screens.md')
+        @apply mb-6
 
-    a
-        @apply text-domain-green
-
-    h1, h2, h3
-        @apply mb-3 mt-10 font-medium
+    h2, h3
+        @apply font-semibold
 
     h2
-        @apply text-2xl sm:text-3xl
-
-    h3
         @apply text-2xl
 
-    pre
-        max-width: calc(theme('screens.md') + #{$code-overflow})
-        padding: 15px
-        background: #1e1e1e
-        border-radius: 5px
-        font-size: 13px
+    h3
+        @apply text-xl
 
-        @media (min-width: theme('screens.md'))
-            padding: 20px calc(#{$code-overflow} / 2)
+    p > code
+        @apply bg-gray-200 px-1 py-0.5 rounded text-base    
+
+    pre
+        @apply p-5 text-[13px] rounded
+        background: #1e1e1e
 
     .codeBlock
         position: relative

@@ -3,10 +3,26 @@
 @tailwind utilities;
 
 body {
-  overflow: overlay;
+    overflow: overlay;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
 }
 
 a:hover {
-  color: theme('colors.domain-green');
-  text-decoration: underline;
+    color: theme('colors.domain-green');
+}
+
+a:not(.link-box) {
+    border-bottom: 2px solid rgba(0, 0, 0, 0.15);
+}
+
+a:not(.link-box):hover {
+    border-bottom: 2px solid theme('colors.domain-green');
+}
+
+a.link-box:hover {
+    border: 1px solid theme('colors.domain-green');
 }

@@ -6,9 +6,11 @@ const ProjectView: React.FC<Project> = ({ name, links, description }) => {
     return (
         <div className="p-6 rounded-md shadow-md border">
             <span className="text-lg font-bold">{name}</span>
-            <ul className={`flex list-none ${styles.projectLinks}`}>
+            <ul
+                className={`mt-1 text-base flex list-none whitespace-nowrap ${styles.projectLinks}`}
+            >
                 {links.map(({ name, link }, key) => (
-                    <li className="font-semibold" key={key}>
+                    <li key={key}>
                         <a href={link} target="_blank" rel="noreferrer">
                             {name}
                         </a>

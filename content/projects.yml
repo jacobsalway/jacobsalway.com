@@ -3,7 +3,7 @@
       - name: code
         link: https://github.com/jacobsalway/jacobsalway.com
   description: This website! A personal/portfolio website built with with Next.js, React and Typescript and hosted on S3.
-- name: Interest rate pipeline and dashboard
+- name: Interest rate pipeline/dashboard
   links:
       - name: code
         link: https://github.com/jacobsalway/rba-implied-interest-rate-lambda

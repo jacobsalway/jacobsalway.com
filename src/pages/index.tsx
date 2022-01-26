@@ -1,28 +1,28 @@
-import HeroView from '@components/Hero/HeroView'
 import Layout from '@components/Layout'
-import HeroAnimateContext from '@contexts/heroAnimate'
+import Page from '@components/Page'
 import { getHero } from '@lib/content'
-import { FadeState, Hero } from '@types'
+import { Hero } from '@types'
 import type { GetStaticProps, NextPage } from 'next'
-import { useContext } from 'react'
 
 type Props = { hero: Hero }
 
 const Home: NextPage<Props> = ({ hero }) => {
-    const [heroAnimated, setHeroAnimated] = useContext(HeroAnimateContext)
-    const shouldHeroAnimate = heroAnimated ? FadeState.NONE : FadeState.ANIMATE
-
-    const { name, subtext, links } = hero
+    const { name, subtext } = hero
 
     return (
         <Layout>
-            <HeroView
-                name={name}
-                subtext={subtext}
-                links={links}
-                animate={shouldHeroAnimate}
-                onComplete={() => setHeroAnimated(true)}
-            />
+            <Page heading="About">
+                <div className="text-lg">
+                    <p>Hi! My name is {name}.</p>
+                    {subtext.map((p, i) => (
+                        <p
+                            className="mt-4"
+                            key={i}
+                            dangerouslySetInnerHTML={{ __html: p }}
+                        />
+                    ))}
+                </div>
+            </Page>
         </Layout>
     )
 }
