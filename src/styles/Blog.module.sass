@@ -15,10 +15,11 @@
         @apply bg-gray-200 px-1 py-0.5 rounded text-base    
 
     pre
-        @apply p-5 text-[13px] rounded
+        @apply text-[13px] rounded
         background: #1e1e1e
 
     .codeBlock
+        @apply p-5
         position: relative
 
         :global .linenumber
@@ -28,8 +29,8 @@
 
         .copyButton
             position: absolute
-            top: -8px
-            right: -12px
+            top: 0.75rem
+            right: 0.75rem
             color: #6f7177
             padding: 8px 12px
             border-radius: 5px

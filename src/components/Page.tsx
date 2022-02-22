@@ -23,14 +23,14 @@ const Page: React.FC<PropsWithChildren<Props>> = ({
             {(heading || details) && (
                 <header>
                     {topLink && (
-                        <div className="font-bold mb-8">
+                        <div className="mb-8 font-bold">
                             <Link href={topLink.link}>
                                 <a>Back to {topLink.name}</a>
                             </Link>
                         </div>
                     )}
                     {heading && (
-                        <h1 className="text-4xl font-bold mb-8">{heading}</h1>
+                        <h1 className="mb-8 text-4xl font-bold">{heading}</h1>
                     )}
                     {details && <div className="mb-8">{details}</div>}
                 </header>

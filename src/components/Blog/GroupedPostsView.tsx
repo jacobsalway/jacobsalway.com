@@ -9,7 +9,7 @@ const GroupedPostsview: React.FC<GroupedPosts<Post>> = ({ group, posts }) => {
 
     return (
         <div>
-            <h2 className="text-3xl font-bold mb-4">{group}</h2>
+            <h2 className="mb-4 text-3xl font-bold">{group}</h2>
             <div className="flex flex-col space-y-3">{posts.map(PostView)}</div>
         </div>
     )

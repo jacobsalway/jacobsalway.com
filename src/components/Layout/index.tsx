@@ -14,14 +14,14 @@ const Layout: React.FC<PropsWithChildren<Props>> = ({
     footer,
 }) => {
     return (
-        <div className="app flex flex-col min-h-screen max-w-screen-md mx-auto p-6 text-lg">
+        <div className="app mx-auto flex min-h-screen max-w-screen-md flex-col p-6 text-lg">
             <Head>
                 <title>
                     {title ? `${title} / Jacob Salway` : 'Jacob Salway'}
                 </title>
             </Head>
             <Nav />
-            <div className="flex-grow mt-20">{children}</div>
+            <div className="mt-20 flex-grow">{children}</div>
             {footer && <Footer />}
         </div>
     )

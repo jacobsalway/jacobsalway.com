@@ -12,20 +12,20 @@ const Nav: React.FC = () => {
 
     return (
         <nav
-            className={`${styles.nav} w-full flex items-center justify-between`}
+            className={`${styles.nav} flex w-full items-center justify-between`}
         >
             <div className="font-mono font-bold" onClick={close}>
                 <Link href="/">&lt;Jacob Salway /&gt;</Link>
             </div>
             <div className="flex">
                 <div
-                    className="hidden sm:flex align-items-center space-x-8"
+                    className="align-items-center hidden space-x-8 sm:flex"
                     onClick={close}
                 >
                     <NavLinks mobile={false} />
                 </div>
                 <button
-                    className="block sm:hidden text-black z-50"
+                    className="z-50 block text-black sm:hidden"
                     onClick={toggle}
                 >
                     <FontAwesomeIcon icon={navOpen ? faTimes : faBars} />
@@ -33,17 +33,17 @@ const Nav: React.FC = () => {
             </div>
             <div
                 className={
-                    'absolute top-0 left-0 h-screen w-1/3 z-50' +
+                    'absolute top-0 left-0 z-50 h-screen w-1/3' +
                     (navOpen ? ' block' : ' hidden')
                 }
                 onClick={close}
             />
             <aside
                 className={
-                    'fixed top-0 right-0 w-2/3 h-screen shadow-md z-30 bg-white transition-transform' +
+                    'fixed top-0 right-0 z-30 h-screen w-2/3 bg-white shadow-md transition-transform' +
                     (navOpen
-                        ? ' block transform translate-x-0'
-                        : ' hidden transform translate-x-[100vw]')
+                        ? ' block translate-x-0 transform'
+                        : ' hidden translate-x-[100vw] transform')
                 }
             >
                 <div className="flex flex-col p-6" onClick={close}>
