@@ -90,3 +90,14 @@ export const groupPostsByYear = <T extends Post>(
           }))
         : postsByYearSorted
 }
+
+export const getAdjacentPosts = <T extends Post>(post: T) => {
+    const sortedPosts = sortPostsByDate(getPosts())
+    const curr = sortedPosts.findIndex((p) => p.id == post.id)
+    const [prev, next] = [curr - 1, curr + 1]
+
+    return {
+        prevPost: prev >= 0 ? sortedPosts[prev] : null,
+        nextPost: next < sortedPosts.length ? sortedPosts[next] : null,
+    }
+}
