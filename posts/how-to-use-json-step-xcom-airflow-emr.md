@@ -1,7 +1,7 @@
 ---
 title: 'How to read JSON from XCOM on Airflow'
 date: '2021-11-18'
-tags: [airflow, python, emr]
+tags: [airflow, python, emr, aws]
 ---
 
 When using the `EmrAddStepsOperator` at work recently, I came across a situation where I wanted to use the JSON return value of an earlier `PythonOperator` as the step config.
