@@ -1,27 +1,38 @@
 import Link from 'next/link'
 import React from 'react'
 
+// Nulls rather than undefined because of serialisability
 type Props = {
-    prevPost?: { title: string; id: string }
-    nextPost?: { title: string; id: string }
+    prevPost: { title: string; id: string } | null
+    nextPost: { title: string; id: string } | null
 }
 
 const PostFooter: React.FC<Props> = ({ prevPost, nextPost }) => {
     return (
-        <div className="flex flex-row justify-between">
-            {prevPost && <Button title={prevPost.title} id={prevPost.id} />}
-            {nextPost && <Button title={nextPost.title} id={nextPost.id} />}
+        <div className="border-t pt-10">
+            <div className="flex flex-col sm:flex-row sm:justify-between">
+                <div className="w-full sm:w-2/5">
+                    {prevPost && (
+                        <div>
+                            <div className="mb-1 text-sm">Previous</div>
+                            <Link href={`/blog/${prevPost.id}`}>
+                                <a>{prevPost.title}</a>
+                            </Link>
+                        </div>
+                    )}
+                </div>
+                <div className="w-full sm:w-2/5 sm:text-right">
+                    {nextPost && (
+                        <div className={prevPost ? 'mt-4 sm:mt-0' : ''}>
+                            <div className="mb-1 text-sm">Next</div>
+                            <Link href={`/blog/${nextPost.id}`}>
+                                <a>{nextPost.title}</a>
+                            </Link>
+                        </div>
+                    )}
+                </div>
+            </div>
         </div>
-    )
-}
-
-const Button: React.FC<{ title: string; id: string }> = ({ title, id }) => {
-    return (
-        <Link href={`/blog/${id}`}>
-            <a>
-                <div>{title}</div>
-            </a>
-        </Link>
     )
 }
 

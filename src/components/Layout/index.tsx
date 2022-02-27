@@ -6,12 +6,14 @@ import Nav from './Nav'
 type Props = {
     title?: string
     footer?: boolean
+    customFooter?: React.ReactNode
 }
 
 const Layout: React.FC<PropsWithChildren<Props>> = ({
     children,
     title,
     footer,
+    customFooter,
 }) => {
     return (
         <div className="app mx-auto flex min-h-screen max-w-screen-md flex-col p-6 text-lg">
@@ -22,7 +24,7 @@ const Layout: React.FC<PropsWithChildren<Props>> = ({
             </Head>
             <Nav />
             <div className="mt-20 flex-grow">{children}</div>
-            {footer && <Footer />}
+            {footer && (customFooter ? customFooter : <Footer />)}
         </div>
     )
 }

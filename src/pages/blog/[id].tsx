@@ -2,6 +2,7 @@ import CodeFormatter from '@components/Blog/CodeFormatter'
 import PostFooter from '@components/Blog/PostFooter'
 import PostMetaView from '@components/Blog/PostMetaView'
 import Layout from '@components/Layout'
+import Footer from '@components/Layout/Footer'
 import Page from '@components/Page'
 import { getAdjacentPosts, getFullPost, getPostIds } from '@lib/posts'
 import styles from '@styles/Blog.module.sass'
@@ -46,7 +47,16 @@ const BlogPost: NextPage<Props> = ({ post, prevPost, nextPost }) => {
     const { title, date, tags, content } = post
 
     return (
-        <Layout title={post.title} footer={true}>
+        <Layout
+            title={post.title}
+            footer={true}
+            customFooter={
+                <>
+                    <PostFooter prevPost={prevPost} nextPost={nextPost} />
+                    <Footer />
+                </>
+            }
+        >
             <Page
                 topLink={{ name: 'blog', link: '/blog' }}
                 article={true}
@@ -65,10 +75,6 @@ const BlogPost: NextPage<Props> = ({ post, prevPost, nextPost }) => {
                 >
                     {content}
                 </ReactMarkdown>
-                <PostFooter
-                    prevPost={prevPost || undefined}
-                    nextPost={nextPost || undefined}
-                />
             </Page>
         </Layout>
     )
