@@ -1,10 +1,12 @@
 import CodeFormatter from '@components/Blog/CodeFormatter'
+import PostFooter from '@components/Blog/PostFooter'
 import PostMetaView from '@components/Blog/PostMetaView'
 import Layout from '@components/Layout'
+import Footer from '@components/Layout/Footer'
 import Page from '@components/Page'
-import { getFullPost, getPostIds } from '@lib/posts'
+import { getAdjacentPosts, getFullPost, getPostIds } from '@lib/posts'
 import styles from '@styles/Blog.module.sass'
-import { FullPost } from '@types'
+import { FullPost, Post } from '@types'
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next'
 import ReactMarkdown from 'react-markdown'
 
@@ -39,13 +41,22 @@ export const calculateReadTime = (content: string): number => {
 }
 
 type Params = { id: string }
-type Props = { post: FullPost }
+type Props = { post: FullPost; prevPost: Post | null; nextPost: Post | null }
 
-const BlogPost: NextPage<Props> = ({ post }) => {
+const BlogPost: NextPage<Props> = ({ post, prevPost, nextPost }) => {
     const { title, date, tags, content } = post
 
     return (
-        <Layout title={post.title} footer={true}>
+        <Layout
+            title={post.title}
+            footer={true}
+            customFooter={
+                <>
+                    <PostFooter prevPost={prevPost} nextPost={nextPost} />
+                    <Footer />
+                </>
+            }
+        >
             <Page
                 topLink={{ name: 'blog', link: '/blog' }}
                 article={true}
@@ -74,8 +85,9 @@ export const getStaticProps: GetStaticProps<Props, Params> = ({ params }) => {
 
     const { id } = params
     const post = getFullPost(id)
+    const { prevPost, nextPost } = getAdjacentPosts(post)
 
-    return { props: { post } }
+    return { props: { post, prevPost, nextPost } }
 }
 
 export const getStaticPaths: GetStaticPaths<Params> = () => {
