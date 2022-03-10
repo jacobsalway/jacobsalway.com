@@ -29,7 +29,7 @@ const PostMetaView: React.FC<Props> = ({ date, readTime, tags }) => {
                 </div>
             </div>
             {tags && (
-                <div className="mt-3 flex items-center space-x-3 font-mono text-base sm:mt-5">
+                <div className="mt-3 flex flex-row flex-wrap items-center gap-3 font-mono text-base  sm:mt-5">
                     {tags.sort().map((tag) => Tag(tag))}
                 </div>
             )}
