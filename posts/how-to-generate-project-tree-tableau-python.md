@@ -171,7 +171,7 @@ def main() -> None:
             new_project = server.projects.create(new_project_item)
             mapping[current_id] = new_project.id
 
-    print('All nested projects cloned cloned')
+    print('All nested projects cloned')
 
 
 if __name__ == '__main__':
