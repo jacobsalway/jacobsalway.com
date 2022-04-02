@@ -29,7 +29,7 @@ const PostMetaView: React.FC<Props> = ({ date, readTime, tags }) => {
                 </div>
             </div>
             {tags && (
-                <div className="mt-3 flex flex-row flex-wrap items-center gap-3 font-mono text-base  sm:mt-5">
+                <div className="mt-3 flex flex-row flex-wrap items-center gap-3 font-mono text-base sm:mt-5">
                     {tags.sort().map((tag) => Tag(tag))}
                 </div>
             )}
@@ -40,7 +40,7 @@ const PostMetaView: React.FC<Props> = ({ date, readTime, tags }) => {
 const Tag = (tag: string) => {
     return (
         <Link href={`/blog/tags/${tag}`}>
-            <a className="link-box hover:border-b-0.5 rounded border py-1 px-2 shadow-sm hover:border-domain-green sm:py-1.5">{`#${tag}`}</a>
+            <a className="link-box hover:border-b-0.5 rounded border py-1 px-2 shadow-sm hover:border-highlight sm:py-1.5">{`#${tag}`}</a>
         </Link>
     )
 }

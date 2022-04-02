@@ -3,23 +3,23 @@
         @apply mb-6
 
     h2, h3
-        @apply font-semibold
+        @apply font-bold
 
     h2
-        @apply text-2xl
+        @apply text-3xl
 
     h3
-        @apply text-xl
+        @apply text-2xl
 
-    p > code
-        @apply bg-gray-200 px-1 py-0.5 rounded text-base    
+    :not(pre) > code
+        @apply bg-gray-200 px-1 py-0.5 rounded break-words text-base
 
     pre
-        @apply text-[13px] rounded
+        @apply text-sm rounded
         background: #1e1e1e
 
     .codeBlock
-        @apply p-5
+        @apply p-5 font-mono
         position: relative
 
         :global .linenumber

@@ -12,7 +12,7 @@ a {
 }
 
 a:hover {
-    color: theme('colors.domain-green');
+    color: theme('colors.highlight');
 }
 
 a:not(.link-box) {
@@ -20,9 +20,9 @@ a:not(.link-box) {
 }
 
 a:not(.link-box):hover {
-    border-bottom: 2px solid theme('colors.domain-green');
+    border-bottom: 2px solid theme('colors.highlight');
 }
 
 a.link-box:hover {
-    border: 1px solid theme('colors.domain-green');
+    border: 1px solid theme('colors.highlight');
 }

@@ -4,8 +4,17 @@ date: '2021-11-18'
 tags: [airflow, python, emr, aws]
 ---
 
-When using the `EmrAddStepsOperator` at work recently, I came across a situation where I wanted to use the JSON return value of an earlier `PythonOperator` as the step config.
-In this operator, I was changing the step parameters (mainly the CLI arguments to the main Spark script) based on some external parameters set in the `dag_run.conf` object, for example like so where I overwrite a set of default parameters with provided ones if they exist:
+**TL;DR:** The problem is due to the templated string only being interpolated rather than deserialised into its native Python type.
+If you're using Airflow 1.x, you'll need to either wrap the receiving operator in a `PythonOperator` like [this](https://stackoverflow.com/a/64950554/2608918)
+or subclass the receiving operator's class and deserialise the interpolated string with `json.loads` before calling `.execute()` on the
+receiving operator. With Airflow 2.1 or above, you can simply set `render_template_as_native_obj=True` on the DAG object.
+
+The problem: you want to use the JSON or dictionary/list output of a previous operator in Airflow as the value of an argument
+being passed to another operator. For example, you might want to be able to override default options in a config object with external
+parameters from the `DagRun.conf` object and pass this to an operator. In my previous role, my use case for this functionality was
+a set of command line arguments being passed to a Pyspark script run on EMR.
+
+**Example:**
 
 ```python
 def define_step(**kwargs: DagRun) -> None:
@@ -14,7 +23,9 @@ def define_step(**kwargs: DagRun) -> None:
 
     # dag_run.conf only accessible when externally triggered
     if dag_run.external_trigger:
-        script_params = {**config.default_params, **dag_run.conf.get('params', {})}
+        # parameter on conf object may not exist, so default to empty dict
+        manual_params = dag_run.conf.get('params', {})
+        script_params = {**config.default_params, **manual_params}
 
     cli_params = []
     for param, value in script_params.items():
@@ -34,22 +45,34 @@ def define_step(**kwargs: DagRun) -> None:
     }]
 ```
 
-However, I found if I tried to pull the steps from the operator's return value in XCOM using Airflow's template fields like so:
+If you then try to use the Jinja templating to pass this value to another operator, you'll get a type error of some sort if the
+receiving operator expects a native object. For example, with the below code:
 
 ```python
 step = EmrAddStepsOperator(
     task_id='step',
-    job_flow_id="{{ ti.xcom_pull(task_ids='create_job_flow', key='return_value') }}",
+    job_flow_id="{{ ti.xcom_pull(task_ids='create_job_flow') }}",
     aws_conn_id='aws_default',
-    steps="{{ ti.xcom_pull(task_ids='define_step', key='return_value') }}"
+    steps="{{ ti.xcom_pull(task_ids='define_step') }}"
 )
 ```
 
-I found that I got a validation error from `boto3` complaining about the type of the steps field being a string rather than a list.
+This issue happens as the `boto3` call inside the operator expects a native Python list rather than a string.
+The underlying issue is that **the templated string is not deserialised into its native type**, rather it is simply interpolated
+and remains as a string. I'll list my solutions below by Airflow version.
 
-## Custom operator
+## Airflow 1.x
 
-When googling around for this error, I came across [this Stackoverflow answer](https://stackoverflow.com/questions/58242701/using-json-input-variables-in-airflow-emr-operator-steps) to the problem. It seems that the `steps` parameter is not deserialised before `boto3` validates the types. The solution (full props to [Eric Cook](https://stackoverflow.com/users/12684770/eric-cook) for the answer) is to subclass the `EMRAddStepsOperator` and parse the JSON in the `execute()` function prior to calling the superclass method:
+From what I've gathered, the only way to solve this issue in Airflow 1.x is to deserialise the string used `json.loads` somewhere in the operator code.
+You could do this by either creating a class that inherits the receiving operator's class and calls `json.loads` prior to or inside the `execute()` method,
+or you could wrap the operator itself in a `PythonOperator` that converts the XCOM value from string to its native type.
+I'll add relevant example code and their sources below:
+
+**Subclassing the receiving operator:**
+
+Here's an example for the `EmrAddStepsOperator` that I ended up using at work. Full credits to [Eric Cook](https://stackoverflow.com/users/12684770/eric-cook),
+whose code I took from [this Stackoverflow answer](https://stackoverflow.com/questions/58242701/using-json-input-variables-in-airflow-emr-operator-steps/59670311#59670311)
+while googling the issue.
 
 ```python
 from airflow.contrib.hooks.emr_hook import EmrHook
@@ -78,44 +101,73 @@ class DynamicEmrStepsOperator(EmrAddStepsOperator):
 
     def execute(self, context):
         self.steps = json.loads(self.steps)
-
         return super().execute(context)
 ```
 
-Since the `steps` parameter is registered in the `template_fields` property of the operator, Airflow will substitute the template before `execute()` is called, so we can parse the JSON string into a native array of dictionaries in Python so that the types are correct for `boto3`.
+**Wrapping in a PythonOperator:**
 
-## Render template as native object
-
-When searching I also found that you can pass `render_template_as_native_obj=True` to the DAG so that the rendered template field returns a native Python object. However, this parameter is only available from Airflow 2.1.0 and up ([See this pull request](https://github.com/apache/airflow/pull/14603)). We haven't upgraded to Airflow 2.0 yet at work so I can't test this option, but it makes the solution cleaner by removing the need for a custom operator. I imagine your code could look like so:
+I've added the EMR code I was using before to code inspired by [this Stackoverflow answer](https://stackoverflow.com/questions/64895696/airflow-xcom-pull-only-returns-string),
+which I also came across when googling the issue.
 
 ```python
-with DAG(
-    dag_id='test_dag',
-    schedule_interval=None,
-    render_template_as_native_obj=True) as dag:
-
-    # create job flow
-    ...
-
-    define_step_task = PythonOperator(
-        task_id='define_step',
-        python_callable=define_step,
-        provide_context=True
-    )
-
-    # the steps field will be rendered as a native object
-    step = EmrAddStepsOperator(
+def step_wrapper(**kwargs):
+    ti: TaskInstance = kwargs['ti']
+    steps_str = ti.xcom_pull(task_ids='define_step')
+    steps = json.loads(steps_str)
+    op = EmrAddStepsOperator(
         task_id='step',
-        job_flow_id="{{ ti.xcom_pull(task_ids='create_job_flow', key='return_value') }}",
+        job_flow_id="{{ ti.xcom_pull(task_ids='create_job_flow') }}",
         aws_conn_id='aws_default',
-        steps="{{ ti.xcom_pull(task_ids='define_step', key='return_value') }}"
+        steps=steps
     )
-
-    # wait for step and terminate cluster
-    ...
-
+    op.execute()
 ```
 
-## Summary
+## Airflow 2.1 or above
 
-If you're using Airflow 2.1 or above, setting `render_template_as_native_obj=True` on your DAG seems to be the easiest option. If your Airflow instance doesn't meet the version requirements, you need to create a new operator inheriting from `EmrAddStepsOperator` that parses the templated JSON with `json.loads` beforehand.
+If you're using Airflow 2.1 or above, you can implement a one-liner in your DAG code that will fix this issue.
+By setting `render_template_as_native_obj=True` on the DAG constructor, the `jinja2` templating
+engine that Airflow uses will render templated strings with their native types like `list`, `dict`, or `int`.
+
+I've provided an example below to demonstrate the type passed to the receiving `PythonOperator` is of a native `dict`
+type.
+
+```python
+def create_config():
+    return {
+        'key': 'value'
+    }
+
+
+def read_config(config):
+    print(type(config))
+    print(config)
+
+
+with DAG(
+    "test_render_template",
+    schedule_interval=None,
+    start_date=datetime.today() - timedelta(days=3),
+    render_template_as_native_obj=True
+) as dag:
+    create_config = PythonOperator(
+        task_id="create_config",
+        python_callable=create_config
+    )
+
+    read_config = PythonOperator(
+        task_id="read_config",
+        python_callable=read_config,
+        op_args=["{{ ti.xcom_pull(task_ids='create_config') }}"]
+    )
+
+    create_config >> read_config
+```
+
+```log
+[2022-04-01, 14:12:32 UTC] {logging_mixin.py:109} INFO - <class 'dict'>
+[2022-04-01, 14:12:32 UTC] {logging_mixin.py:109} INFO - {'key': 'value'}
+[2022-04-01, 14:12:32 UTC] {python.py:175} INFO - Done. Returned value was: None
+```
+
+_This post was updated on April 2, 2022._

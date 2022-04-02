@@ -1,3 +1,5 @@
+// const defaultTheme = require('tailwindcss/defaultTheme')
+
 module.exports = {
     content: [
         './src/pages/**/*.{js,ts,jsx,tsx}',
@@ -8,11 +10,14 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                'domain-green': '#0ea800',
+                highlight: '#2779F6',
             },
             screens: {
                 xs: '420px',
             },
+            // fontFamily: {
+            //     mono: ['Source Code Pro', ...defaultTheme.fontFamily.mono],
+            // },
         },
     },
     variants: {
