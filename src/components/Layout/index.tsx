@@ -16,7 +16,7 @@ const Layout: React.FC<PropsWithChildren<Props>> = ({
     customFooter,
 }) => {
     return (
-        <div className="app mx-auto flex min-h-screen max-w-screen-md flex-col p-6 text-lg">
+        <div className="app mx-auto flex min-h-screen max-w-screen-md flex-col p-6">
             <Head>
                 <title>
                     {title ? `${title} / Jacob Salway` : 'Jacob Salway'}

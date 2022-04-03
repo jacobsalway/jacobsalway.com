@@ -70,7 +70,7 @@ const BlogPost: NextPage<Props> = ({ post, prevPost, nextPost }) => {
                 }
             >
                 <ReactMarkdown
-                    className={`leading-normal ${styles.postContent}`}
+                    className={`leading-loose ${styles.postContent}`}
                     components={{ code: CodeFormatter }}
                 >
                     {content}

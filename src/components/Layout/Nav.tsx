@@ -12,7 +12,7 @@ const Nav: React.FC = () => {
 
     return (
         <nav
-            className={`${styles.nav} flex w-full items-center justify-between`}
+            className={`${styles.nav} flex w-full items-center justify-between text-lg`}
         >
             <div className="font-mono font-bold" onClick={close}>
                 <Link href="/">&lt;Jacob Salway /&gt;</Link>

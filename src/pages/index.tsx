@@ -12,7 +12,7 @@ const Home: NextPage<Props> = ({ hero }) => {
     return (
         <Layout>
             <Page heading="About">
-                <div className="text-lg">
+                <div className="text-lg leading-loose">
                     <p>Hi! My name is {name}.</p>
                     {subtext.map((p, i) => (
                         <p

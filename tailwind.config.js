@@ -1,4 +1,4 @@
-// const defaultTheme = require('tailwindcss/defaultTheme')
+const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
     content: [
@@ -14,6 +14,9 @@ module.exports = {
             },
             screens: {
                 xs: '420px',
+            },
+            fontFamily: {
+                sans: ['Roboto', ...defaultTheme.fontFamily.sans],
             },
             // fontFamily: {
             //     mono: ['Source Code Pro', ...defaultTheme.fontFamily.mono],
