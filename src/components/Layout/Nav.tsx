@@ -1,55 +1,58 @@
-import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons'
+import { faMoon, faSun } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import styles from '@styles/Nav.module.sass'
+import { useTheme } from 'next-themes'
 import Link from 'next/link'
-import React, { useState } from 'react'
-import NavLinks from './NavLinks'
+import { useRouter } from 'next/router'
+import React, { PropsWithChildren } from 'react'
 
-const Nav: React.FC = () => {
-    const [navOpen, setNavOpen] = useState(false)
-    const close = () => setNavOpen(false)
-    const toggle = () => setNavOpen(!navOpen)
+type NavLinkProps = {
+    href: string
+}
+
+const NavLink: React.FC<PropsWithChildren<NavLinkProps>> = ({
+    href,
+    children,
+}) => {
+    const { asPath } = useRouter()
+    const highlightFont =
+        (href === '/' && asPath === href) ||
+        (href !== '/' && asPath.startsWith(href))
+            ? 'font-semibold'
+            : 'font-normal'
 
     return (
-        <nav
-            className={`${styles.nav} flex w-full items-center justify-between text-lg`}
-        >
-            <div className="font-mono font-bold" onClick={close}>
-                <Link href="/">&lt;Jacob Salway /&gt;</Link>
-            </div>
-            <div className="flex">
-                <div
-                    className="align-items-center hidden space-x-8 sm:flex"
-                    onClick={close}
-                >
-                    <NavLinks mobile={false} />
-                </div>
-                <button
-                    className="z-50 block text-black sm:hidden"
-                    onClick={toggle}
-                >
-                    <FontAwesomeIcon icon={navOpen ? faTimes : faBars} />
-                </button>
-            </div>
-            <div
-                className={
-                    'absolute top-0 left-0 z-50 h-screen w-1/3' +
-                    (navOpen ? ' block' : ' hidden')
-                }
-                onClick={close}
-            />
-            <aside
-                className={
-                    'fixed top-0 right-0 z-30 h-screen w-2/3 bg-white shadow-md transition-transform' +
-                    (navOpen
-                        ? ' block translate-x-0 transform'
-                        : ' hidden translate-x-[100vw] transform')
-                }
+        <Link href={href}>
+            <a
+                className={`${highlightFont} nav-link mr-1 rounded py-2 px-3 hover:bg-gray-200 dark:hover:bg-gray-600`}
             >
-                <div className="flex flex-col p-6" onClick={close}>
-                    <NavLinks mobile={true} />
-                </div>
-            </aside>
+                {children}
+            </a>
+        </Link>
+    )
+}
+
+const ThemeToggle: React.FC = () => {
+    const { theme, setTheme } = useTheme()
+
+    return (
+        <button
+            className="flex h-9 w-9 items-center justify-center rounded bg-gray-200 hover:ring-2 dark:bg-gray-600"
+            onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+        >
+            <FontAwesomeIcon icon={theme === 'dark' ? faSun : faMoon} />
+        </button>
+    )
+}
+
+const Nav: React.FC = () => {
+    return (
+        <nav className="flex items-center justify-between">
+            <div>
+                <NavLink href="/">Home</NavLink>
+                <NavLink href="/projects">Projects</NavLink>
+                <NavLink href="/blog">Blog</NavLink>
+            </div>
+            {/* <ThemeToggle /> */}
         </nav>
     )
 }

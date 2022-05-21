@@ -6,7 +6,7 @@ module.exports = {
         './src/components/**/*.{js,ts,jsx,tsx}',
         './next.config.js',
     ],
-    darkMode: 'media',
+    darkMode: 'class',
     theme: {
         extend: {
             colors: {

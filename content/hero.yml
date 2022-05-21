@@ -1,9 +1,7 @@
 name: Jacob Salway
+tagline: Data Engineer at <a href='https://www.simplemachines.com.au' target='_blank'>Simple Machines</a>
 subtext:
     - >
-        I'm currently working as data engineer at <a href='https://simplemachines.com.au/' target='_blank'>Simple Machines</a>.
-        Before my current role, I worked as a data analyst at <a href='https://domain.com.au' target='_blank'>Domain</a> for two years.
-        I graduated with a Bachelor of Science from the <a href='https://www.sydney.edu.au/' target='_blank'>University of Sydney</a> majoring in computer science and data science mid last year.
-    - >
-        If you want to connect with me, you can find me on <a href='https://www.linkedin.com/in/jacobsalway' target='_blank'>LinkedIn</a> 
-        or <a href='https://www.github.com/jacobsalway' target='_blank'>Github</a>.
+        Building data pipelines using Python, SQL and Spark and deploying infrastructure into AWS and Azure with Terraform.
+        Previously worked at <a href='https://www.domain.com.au' target='_blank'>Domain</a> for two years as a data analyst.
+        You can find me on <a href='https://www.linkedin.com/in/jacobsalway' target='_blank'>LinkedIn</a> or <a href='https://www.github.com/jacobsalway' target='_blank'>Github</a>.

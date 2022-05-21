@@ -1,5 +1,6 @@
 export interface Hero {
     name: string
+    tagline: string
     subtext: string[]
 }
 

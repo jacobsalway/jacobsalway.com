@@ -11,18 +11,14 @@ a {
     text-decoration: none;
 }
 
-a:hover {
+a:not(.nav-link):hover {
     color: theme('colors.highlight');
 }
 
-a:not(.link-box) {
+a:not(.nav-link) {
     border-bottom: 2px solid rgba(0, 0, 0, 0.15);
 }
 
-a:not(.link-box):hover {
+a:not(.nav-link):hover {
     border-bottom: 2px solid theme('colors.highlight');
-}
-
-a.link-box:hover {
-    border: 1px solid theme('colors.highlight');
 }
