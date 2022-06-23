@@ -29,11 +29,7 @@ export const getFullPost = (id: string) => {
     const { data, content } = post
     const { title, date } = data
 
-    // tags need to be null rather than undefined
-    // to satisfy next.js prop serialisation
-    const tags = data.tags ?? null
-
-    return { id, title, date, tags, content } as FullPost
+    return { id, title, date, content } as FullPost
 }
 
 export const getPosts = (...ids: string[]) => {
@@ -44,19 +40,6 @@ export const getPosts = (...ids: string[]) => {
 export const getFullPosts = (...ids: string[]) => {
     const postIds = ids.length ? ids : getPostIds()
     return postIds.map((postId) => getFullPost(postId))
-}
-
-export const getTags = () => {
-    const posts = getFullPosts()
-    const tagsArray = posts
-        .map((p) => p.tags)
-        .filter((p): p is string[] => !!p) // filter undefined/empty tags
-        .filter((e) => e.length > 0) // filter tags array but no contents
-
-    const tagsSet = new Set(tagsArray.flat())
-    const tags = Array.from(tagsSet)
-
-    return tags
 }
 
 export const sortPostsByDate = <T extends Post>(

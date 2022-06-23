@@ -15,7 +15,7 @@ type Params = { id: string }
 type Props = { post: FullPost; prevPost: Post | null; nextPost: Post | null }
 
 const BlogPost: NextPage<Props> = ({ post, prevPost, nextPost }) => {
-    const { title, date, tags, content } = post
+    const { title, date, content } = post
 
     return (
         <Container
@@ -34,7 +34,6 @@ const BlogPost: NextPage<Props> = ({ post, prevPost, nextPost }) => {
                 <PostMetaView
                     date={formatDate(date)}
                     readTime={calculateReadTime(content)}
-                    tags={tags}
                 />
             </div>
             <ReactMarkdown
