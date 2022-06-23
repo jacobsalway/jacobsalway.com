@@ -19,7 +19,7 @@ const Container: React.FC<PropsWithChildren<Props>> = ({
     children,
 }) => {
     const [mounted, setMounted] = useState(false)
-    const { theme, setTheme } = useTheme()
+    const { resolvedTheme, setTheme } = useTheme()
 
     useEffect(() => setMounted(true), [])
 
@@ -39,12 +39,12 @@ const Container: React.FC<PropsWithChildren<Props>> = ({
                 <button
                     className="flex h-9 w-9 items-center justify-center rounded bg-gray-200 hover:ring-2 dark:bg-gray-600"
                     onClick={() =>
-                        setTheme(theme === 'light' ? 'dark' : 'light')
+                        setTheme(resolvedTheme === 'light' ? 'dark' : 'light')
                     }
                 >
                     {mounted && (
                         <FontAwesomeIcon
-                            icon={theme === 'dark' ? faSun : faMoon}
+                            icon={resolvedTheme === 'dark' ? faSun : faMoon}
                         />
                     )}
                 </button>
