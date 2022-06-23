@@ -4,7 +4,10 @@ import React from 'react'
 
 const ProjectView: React.FC<Project> = ({ name, links, description }) => {
     return (
-        <div className="rounded-md border p-6 shadow-md">
+        <div
+            className="rounded-md border p-6 shadow-md dark:border-gray-500"
+            key={name}
+        >
             <span className="text-lg font-bold">{name}</span>
             <ul
                 className={`mt-1 flex list-none whitespace-nowrap text-base ${styles.projectLinks}`}

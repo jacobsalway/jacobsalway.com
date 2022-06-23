@@ -1,6 +1,5 @@
-import Layout from '@components/Layout'
-import Page from '@components/Page'
-import ProjectView from '@components/Project/ProjectView'
+import Container from '@components/Container'
+import ProjectView from '@components/ProjectView'
 import { getProjects } from '@lib/content'
 import { Project } from '@types'
 import { GetStaticProps, NextPage } from 'next'
@@ -9,13 +8,12 @@ type Props = { projects: Project[] }
 
 const Projects: NextPage<Props> = ({ projects }) => {
     return (
-        <Layout title="Projects" footer={true}>
-            <Page heading="Projects">
-                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                    {projects.map(ProjectView)}
-                </div>
-            </Page>
-        </Layout>
+        <Container title="Projects">
+            <h1 className="mb-8 text-4xl font-bold">Projects</h1>
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                {projects.map(ProjectView)}
+            </div>
+        </Container>
     )
 }
 

@@ -23,7 +23,3 @@ export const formatDate = (date: Date | string, full = true): string => {
 
     return `${month} ${day}, ${year}`
 }
-
-export const readTime = (content: string): number => {
-    return Math.ceil(content.trim().split(/\s+/).length / 225)
-}

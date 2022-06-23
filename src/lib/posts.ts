@@ -2,7 +2,7 @@ import { FullPost, GroupedPosts, Post } from '@types'
 import fs from 'fs'
 import matter from 'gray-matter'
 import path from 'path'
-import { groupBy } from '../utils'
+import { groupBy } from './utils'
 
 const postsDir = path.join(process.cwd(), 'posts')
 

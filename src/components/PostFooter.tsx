@@ -9,12 +9,14 @@ type Props = {
 
 const PostFooter: React.FC<Props> = ({ prevPost, nextPost }) => {
     return (
-        <div className="border-t pt-10">
+        <div className="pt-10">
             <div className="flex flex-col sm:flex-row sm:justify-between">
                 <div className="w-full sm:w-2/5">
                     {prevPost && (
                         <div>
-                            <div className="mb-1 text-sm">Previous</div>
+                            <div className="mb-1 text-sm text-gray-400">
+                                Previous
+                            </div>
                             <Link href={`/blog/${prevPost.id}`}>
                                 <a>{prevPost.title}</a>
                             </Link>
@@ -24,7 +26,9 @@ const PostFooter: React.FC<Props> = ({ prevPost, nextPost }) => {
                 <div className="w-full sm:w-2/5 sm:text-right">
                     {nextPost && (
                         <div className={prevPost ? 'mt-4 sm:mt-0' : ''}>
-                            <div className="mb-1 text-sm">Next</div>
+                            <div className="mb-1 text-sm text-gray-400">
+                                Next
+                            </div>
                             <Link href={`/blog/${nextPost.id}`}>
                                 <a>{nextPost.title}</a>
                             </Link>

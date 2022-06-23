@@ -11,12 +11,25 @@ module.exports = {
         extend: {
             colors: {
                 highlight: '#2779F6',
+                gray: {
+                    0: '#fff',
+                    100: '#fafafa',
+                    200: '#eaeaea',
+                    250: '#bbbbbb',
+                    300: '#999999',
+                    400: '#888888',
+                    500: '#666666',
+                    600: '#444444',
+                    700: '#333333',
+                    800: '#222222',
+                    900: '#111111',
+                },
             },
             screens: {
                 xs: '420px',
             },
             fontFamily: {
-                sans: ['Roboto', ...defaultTheme.fontFamily.sans],
+                sans: ['IBM Plex Sans', ...defaultTheme.fontFamily.sans],
             },
             // fontFamily: {
             //     mono: ['Source Code Pro', ...defaultTheme.fontFamily.mono],

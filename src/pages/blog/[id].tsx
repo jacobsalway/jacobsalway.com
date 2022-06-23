@@ -1,44 +1,15 @@
-import CodeFormatter from '@components/Blog/CodeFormatter'
-import PostFooter from '@components/Blog/PostFooter'
-import PostMetaView from '@components/Blog/PostMetaView'
-import Layout from '@components/Layout'
-import Footer from '@components/Layout/Footer'
-import Page from '@components/Page'
+import CodeFormatter from '@components/CodeFormatter'
+import Container from '@components/Container'
+import PostFooter from '@components/PostFooter'
+import PostMetaView from '@components/PostMetaView'
+import { formatDate } from '@lib/dateutils'
 import { getAdjacentPosts, getFullPost, getPostIds } from '@lib/posts'
+import { calculateReadTime } from '@lib/utils'
 import styles from '@styles/Blog.module.sass'
 import { FullPost, Post } from '@types'
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next'
+import Link from 'next/link'
 import ReactMarkdown from 'react-markdown'
-
-export const formatDate = (date: Date | string, full = true): string => {
-    date = typeof date === 'string' ? new Date(date) : date
-
-    const months = [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December',
-    ]
-    const day = date.getDate()
-    const month = full
-        ? months[date.getMonth()]
-        : months[date.getMonth()].slice(0, 3)
-    const year = date.getFullYear().toString()
-
-    return `${month} ${day}, ${year}`
-}
-
-export const calculateReadTime = (content: string): number => {
-    return Math.ceil(content.trim().split(/\s+/).length / 225)
-}
 
 type Params = { id: string }
 type Props = { post: FullPost; prevPost: Post | null; nextPost: Post | null }
@@ -47,36 +18,32 @@ const BlogPost: NextPage<Props> = ({ post, prevPost, nextPost }) => {
     const { title, date, tags, content } = post
 
     return (
-        <Layout
+        <Container
             title={post.title}
-            footer={true}
             customFooter={
-                <>
-                    <PostFooter prevPost={prevPost} nextPost={nextPost} />
-                    <Footer />
-                </>
+                <PostFooter prevPost={prevPost} nextPost={nextPost} />
             }
         >
-            <Page
-                topLink={{ name: 'blog', link: '/blog' }}
-                article={true}
-                heading={title}
-                details={
-                    <PostMetaView
-                        date={formatDate(date)}
-                        readTime={calculateReadTime(content)}
-                        tags={tags}
-                    />
-                }
+            <div className="mb-8 font-bold">
+                <Link href="/blog">
+                    <a>Back to blog</a>
+                </Link>
+            </div>
+            <h1 className="mb-4 text-4xl font-bold">{title}</h1>
+            <div className="mb-8">
+                <PostMetaView
+                    date={formatDate(date)}
+                    readTime={calculateReadTime(content)}
+                    tags={tags}
+                />
+            </div>
+            <ReactMarkdown
+                className={`leading-relaxed ${styles.postContent}`}
+                components={{ code: CodeFormatter }}
             >
-                <ReactMarkdown
-                    className={`leading-loose ${styles.postContent}`}
-                    components={{ code: CodeFormatter }}
-                >
-                    {content}
-                </ReactMarkdown>
-            </Page>
-        </Layout>
+                {content}
+            </ReactMarkdown>
+        </Container>
     )
 }
 

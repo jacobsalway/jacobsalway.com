@@ -11,7 +11,6 @@ export interface Post {
 }
 
 export interface FullPost extends Post {
-    tags: string[] | null
     content: string
 }
 
