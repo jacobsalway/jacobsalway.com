@@ -1,5 +1,5 @@
 name: Jacob Salway
-tagline: Data Engineer at <a href='https://www.simplemachines.com.au' target='_blank'>Simple Machines</a>
+tagline: Data Engineer at <a href='https://www.simplemachines.com.au' target='_blank' class="font-semibold">Simple Machines</a>
 subtext:
     - >
         Designing and building data pipelines using Python, SQL and Spark and deploying infrastructure into AWS and Azure with CDK and Terraform.
