@@ -31,9 +31,6 @@ module.exports = {
             fontFamily: {
                 sans: ['IBM Plex Sans', ...defaultTheme.fontFamily.sans],
             },
-            // fontFamily: {
-            //     mono: ['Source Code Pro', ...defaultTheme.fontFamily.mono],
-            // },
         },
     },
     variants: {
