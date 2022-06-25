@@ -17,7 +17,7 @@ const NavLink: React.FC<Props> = ({ href, text }) => {
                     isActive
                         ? 'font-semibold'
                         : 'font-normal text-gray-600 dark:text-gray-400'
-                } nav-link mr-1 rounded py-2 px-3 hover:bg-gray-200 dark:hover:bg-gray-700`}
+                } mr-1 rounded py-2 px-3 no-underline hover:bg-gray-200 dark:hover:bg-gray-700`}
             >
                 {text}
             </a>
