@@ -49,7 +49,12 @@ const Container: React.FC<PropsWithChildren<Props>> = ({
                     )}
                 </button>
             </nav>
-            <div className="flex flex-grow flex-col px-6">
+            <div
+                className={
+                    'flex flex-grow flex-col px-6 ' +
+                    (!showFooter ? 'pb-6' : '')
+                }
+            >
                 <main className="w-full flex-grow">{children}</main>
                 {showFooter && customFooter}
                 {showFooter && <Footer />}
