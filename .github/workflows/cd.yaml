@@ -33,13 +33,11 @@ jobs:
       - name: Deploy to S3
         run: |
           aws s3 cp --recursive \
-            --acl public-read \
-            --cache-control immutable,max-age=172800,public \
+            --cache-control max-age=604800 \
             --exclude "*.html" \
             ./out s3://${{ secrets.S3_BUCKET }}
           aws s3 cp --recursive \
-            --acl public-read \
-            --cache-control public,must-revalidate,proxy-revalidate,max-age=0 \
+            --cache-control no-cache \
             --exclude "*" \
             --include "*.html" \
             ./out s3://${{ secrets.S3_BUCKET }}
