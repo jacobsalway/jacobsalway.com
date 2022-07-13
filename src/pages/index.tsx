@@ -1,5 +1,5 @@
 import Container from '@components/Container'
-import { faArrowRight, faEye } from '@fortawesome/free-solid-svg-icons'
+import { faArrowRightLong, faEye } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { getHero } from '@lib/content'
 import { formatDate } from '@lib/dateutils'
@@ -50,7 +50,7 @@ const Home: NextPage<Props> = ({ hero, topPosts }) => {
             <Link href="/blog">
                 <a className="mt-8 flex items-center no-underline">
                     Read all posts{' '}
-                    <FontAwesomeIcon icon={faArrowRight} className="ml-1" />
+                    <FontAwesomeIcon icon={faArrowRightLong} className="ml-1" />
                 </a>
             </Link>
         </Container>
