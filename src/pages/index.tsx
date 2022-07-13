@@ -1,7 +1,7 @@
 import Container from '@components/Container'
 import { getHero } from '@lib/content'
-import { getPosts, sortPostsByDate } from '@lib/posts'
-import { formatDate } from '@lib/utils'
+import { formatDate } from '@lib/dateutils'
+import { getPosts, getPostViews, sortPostsByDate } from '@lib/posts'
 import { Hero, Post } from '@types'
 import type { GetStaticProps, NextPage } from 'next'
 import Link from 'next/link'
@@ -33,6 +33,8 @@ const Home: NextPage<Props> = ({ hero, topPosts }) => {
                             </div>
                             <div className="mt-6 text-sm text-gray-400">
                                 {formatDate(p.date)}
+                                <br />
+                                {p.views} views
                             </div>
                         </a>
                     </Link>
@@ -46,6 +48,9 @@ export const getStaticProps: GetStaticProps<Props> = () => {
     const hero = getHero()
     const posts = getPosts()
     const topPosts = sortPostsByDate(posts).slice(0, 3)
+
+    const postViews = getPostViews()
+    topPosts.forEach((p) => (p.views = postViews.get(p.id)))
 
     return {
         props: { hero, topPosts },

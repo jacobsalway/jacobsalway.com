@@ -27,8 +27,8 @@ jobs:
 
       - name: Get post views
         run: |
-          rm -f views.json
-          aws dynamodb scan --table-name=${{ secrets.DYNAMODB_TABLE }} --output json | jq '.Items | map({uri: .id.S, views: .views.N})' > views.json
+          aws dynamodb scan --table-name=${{ secrets.DYNAMODB_TABLE }} \
+            --output json | jq '.Items | map({uri: .id.S, views: .views.N})' > views.json
 
       - name: Install dependencies and build
         run: |

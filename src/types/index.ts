@@ -8,6 +8,7 @@ export interface Post {
     title: string
     id: string
     date: string
+    views?: number
 }
 
 export interface FullPost extends Post {

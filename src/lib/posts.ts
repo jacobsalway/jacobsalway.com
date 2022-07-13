@@ -13,7 +13,7 @@ export const getPostIds = () => {
 
 const loadPost = (id: string) => {
     const fullPath = path.join(postsDir, `${id}.md`)
-    const fileContents = fs.readFileSync(fullPath, 'utf8')
+    const fileContents = fs.readFileSync(fullPath, 'utf-8')
     return matter(fileContents)
 }
 
@@ -83,4 +83,18 @@ export const getAdjacentPosts = <T extends Post>(post: T) => {
         prevPost: prev >= 0 ? sortedPosts[prev] : null,
         nextPost: next < sortedPosts.length ? sortedPosts[next] : null,
     }
+}
+
+export const getPostViews = () => {
+    const viewsFilePath = path.join(process.cwd(), 'views.json')
+    const postViewString: { uri: string; views: string }[] = JSON.parse(
+        fs.readFileSync(viewsFilePath, 'utf-8')
+    )
+
+    const postViews = new Map<string, number>()
+    postViewString.forEach(({ uri, views }) =>
+        postViews.set(uri, parseInt(views))
+    )
+
+    return postViews
 }
