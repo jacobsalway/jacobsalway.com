@@ -1,4 +1,6 @@
 import Container from '@components/Container'
+import { faArrowRight, faEye } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { getHero } from '@lib/content'
 import { formatDate } from '@lib/dateutils'
 import { getPosts, getPostViews, sortPostsByDate } from '@lib/posts'
@@ -32,14 +34,25 @@ const Home: NextPage<Props> = ({ hero, topPosts }) => {
                                 {p.title}
                             </div>
                             <div className="mt-6 text-sm text-gray-400">
-                                {formatDate(p.date)}
-                                <br />
-                                {p.views} views
+                                <div>{formatDate(p.date)}</div>
+                                <div className="mt-2 text-xs">
+                                    <FontAwesomeIcon
+                                        icon={faEye}
+                                        className="mr-1.5"
+                                    />
+                                    {p.views} views
+                                </div>
                             </div>
                         </a>
                     </Link>
                 ))}
             </div>
+            <Link href="/blog">
+                <a className="mt-8 flex items-center no-underline">
+                    Read all posts{' '}
+                    <FontAwesomeIcon icon={faArrowRight} className="ml-1" />
+                </a>
+            </Link>
         </Container>
     )
 }
