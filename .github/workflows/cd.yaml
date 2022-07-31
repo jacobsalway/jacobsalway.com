@@ -1,12 +1,16 @@
 name: Build and deploy
 
-on
-  push:
-    branches: [main]
-    paths-ignore: [README.md]
-  pull_request:
-    branches: [main]
-    paths-ignore: [README.md]
+on:
+  pull_request: 
+    branches: 
+      - main
+    paths-ignore: 
+      - README.md
+  push: 
+    branches: 
+      - main
+    paths-ignore: 
+      - README.md
 
 jobs:
   deploy:
