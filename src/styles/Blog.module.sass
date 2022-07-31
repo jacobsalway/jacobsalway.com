@@ -3,13 +3,13 @@
         @apply mb-6
 
     h2, h3
-        @apply font-bold
+        @apply font-bold mt-12
 
     h2
-        @apply text-3xl
+        @apply text-2xl
 
     h3
-        @apply text-2xl
+        @apply text-xl
 
     :not(pre) > code
         @apply rounded break-words text-base
@@ -17,6 +17,18 @@
     pre
         @apply text-sm rounded
         background: #1e1e1e
+
+    ol, ul
+        @apply list-outside pl-10
+
+    ol
+        @apply list-decimal
+
+    ul
+        @apply list-disc
+
+    li:not(:last-child)
+        @apply mb-2
 
     .codeBlock
         @apply p-5 font-mono
