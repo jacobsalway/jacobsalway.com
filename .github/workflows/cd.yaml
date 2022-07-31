@@ -1,16 +1,16 @@
 name: Build and deploy
 
-on:
+on
   push:
-    branches:
-    - master
-    paths:
-      exclude:
-        - README.md
+    branches: [main]
+    paths-ignore: [README.md]
+  pull_request:
+    branches: [main]
+    paths-ignore: [README.md]
 
 jobs:
   deploy:
-    name: Build and deploy
+    name: Build, fetch views and deploy
     runs-on: ubuntu-latest
 
     steps:
@@ -38,7 +38,7 @@ jobs:
           yarn install --frozen-lockfile
           yarn build
 
-      - name: Deploy to S3
+      - name: Deploy to S3 with cache directives
         run: |
           aws s3 cp --recursive \
             --cache-control max-age=604800 \
