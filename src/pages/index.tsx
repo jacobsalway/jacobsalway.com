@@ -3,7 +3,7 @@ import { faArrowRightLong, faEye } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { getHero } from '@lib/content'
 import { formatDate } from '@lib/dateutils'
-import { getPosts, getPostViews, sortPostsByDate } from '@lib/posts'
+import { getPosts, getPostViews, sortPostsByViews } from '@lib/posts'
 import { Hero, Post } from '@types'
 import type { GetStaticProps, NextPage } from 'next'
 import Link from 'next/link'
@@ -25,7 +25,7 @@ const Home: NextPage<Props> = ({ hero, topPosts }) => {
                     <div key={i} dangerouslySetInnerHTML={{ __html: e }} />
                 ))}
             </div>
-            <h3 className="mt-16 text-2xl font-semibold">Recent posts</h3>
+            <h3 className="mt-16 text-2xl font-semibold">Top posts</h3>
             <div className="mt-4 grid gap-3 sm:grid-cols-3">
                 {topPosts.map((p) => (
                     <Link key={p.id} href={`/blog/${p.id}`}>
@@ -60,10 +60,10 @@ const Home: NextPage<Props> = ({ hero, topPosts }) => {
 export const getStaticProps: GetStaticProps<Props> = () => {
     const hero = getHero()
     const posts = getPosts()
-    const topPosts = sortPostsByDate(posts).slice(0, 3)
-
     const postViews = getPostViews()
-    topPosts.forEach((p) => (p.views = postViews.get(p.id)))
+
+    posts.forEach((p) => (p.views = postViews.get(p.id)))
+    const topPosts = sortPostsByViews(posts).slice(0, 3)
 
     return {
         props: { hero, topPosts },

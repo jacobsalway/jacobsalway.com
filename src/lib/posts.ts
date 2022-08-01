@@ -98,3 +98,16 @@ export const getPostViews = () => {
 
     return postViews
 }
+
+export const sortPostsByViews = <T extends Post>(
+    posts: T[],
+    ascending = false
+) =>
+    posts.sort((p1, p2) => {
+        if (p1.views == null) {
+            return 1
+        } else if (p2.views == null) {
+            return -1
+        }
+        return p1.views > p2.views ? (ascending ? 1 : -1) : ascending ? -1 : 1
+    })
