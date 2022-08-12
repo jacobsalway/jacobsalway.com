@@ -29,11 +29,11 @@ const Home: NextPage<Props> = ({ hero, topPosts }) => {
             <div className="mt-4 grid gap-3 sm:grid-cols-3">
                 {topPosts.map((p) => (
                     <Link key={p.id} href={`/blog/${p.id}`}>
-                        <a className="flex flex-col justify-between rounded border p-4 no-underline shadow-md dark:border-gray-500">
+                        <a className="group flex flex-col justify-between rounded border p-4 no-underline shadow-md dark:border-gray-500">
                             <div className="text-lg font-semibold">
                                 {p.title}
                             </div>
-                            <div className="mt-6 text-sm text-gray-400">
+                            <div className="mt-6 text-sm text-gray-400 group-hover:text-blue-500">
                                 <div>{formatDate(p.date)}</div>
                                 <div className="mt-2 text-xs">
                                     <FontAwesomeIcon
