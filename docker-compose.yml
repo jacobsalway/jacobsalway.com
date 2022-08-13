@@ -1,0 +1,7 @@
+services:
+  localapi:
+    build: ./mock
+    ports:
+      - 5000:5000
+    volumes:
+      - ./mock:/app
