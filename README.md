@@ -3,9 +3,9 @@
 Repository for my personal website at [jacobsalway.com](https://jacobsalway.com).
 
 * **Language**: Typescript
-* **Frameworks**: React, Typescript
+* **Frameworks**: React
 * **Styling**: Tailwind CSS
-* **Hosting:** S3 and Cloudfront using SSR
+* **Hosting:** S3 and Cloudfront using SSG
 * **Deployment:** Github Actions
 
 For deployment, the entire project is built using static site generation then uploaded to an S3 bucket,
