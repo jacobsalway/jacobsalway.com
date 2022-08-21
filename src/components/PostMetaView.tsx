@@ -3,23 +3,29 @@ import React from 'react'
 type Props = {
     date: string
     readTime: number
+    views?: number
 }
 
-const PostMetaView: React.FC<Props> = ({ date, readTime }) => {
+const PostMetaView: React.FC<Props> = ({ date, readTime, views }) => {
     return (
         <>
-            <div className="flex flex-col justify-between text-sm text-gray-400 dark:text-gray-300 xs:flex-row xs:items-center">
-                <div className="flex flex-row items-center">
-                    <div
-                        className="mr-2 hidden h-8 w-8 rounded-full xs:block"
-                        style={{
-                            backgroundImage: 'url(/Jacob.jpg)',
-                            backgroundSize: 'cover',
-                        }}
-                    />
-                    <span>Jacob Salway / {date}</span>
+            <div className="flex w-full flex-row items-center">
+                <div
+                    className="mr-2 h-10 w-10 rounded-full"
+                    style={{
+                        backgroundImage: 'url(/Jacob.jpg)',
+                        backgroundSize: 'cover',
+                    }}
+                />
+                <div className="flex w-full flex-col justify-between text-sm text-gray-400 dark:text-gray-300 sm:flex-row">
+                    <div className="flex flex-row items-center">
+                        <span>Jacob Salway / {date}</span>
+                    </div>
+                    <span>
+                        {readTime} min read /{' '}
+                        {views ? views.toLocaleString() : '——'} views
+                    </span>
                 </div>
-                <span>{readTime} min read</span>
             </div>
         </>
     )
