@@ -27,4 +27,6 @@ jobs:
           cache: 'pip'
       - run: pip install boto3 python-frontmatter
       - run: python scripts/upload_posts.py
+        env:
+          TABLE_NAME: ${{ secrets.TABLE_NAME }}
     
