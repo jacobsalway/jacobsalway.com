@@ -7,11 +7,19 @@ import { getPosts, getPostViews, sortPostsByViews } from '@lib/posts'
 import { Hero, Post } from '@types'
 import type { GetStaticProps, NextPage } from 'next'
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
 
-type Props = { hero: Hero; topPosts: Post[] }
+type Props = { hero: Hero }
 
-const Home: NextPage<Props> = ({ hero, topPosts }) => {
+const Home: NextPage<Props> = ({ hero }) => {
     const { name, tagline, subtext } = hero
+    const [topPosts, setTopPosts] = useState<Post[]>()
+
+    useEffect(() => {
+        fetch(`/api/top-posts/`)
+            .then((response) => response.json())
+            .then((data) => setTopPosts(data))
+    }, [])
 
     return (
         <Container showFooter={false}>
@@ -27,25 +35,26 @@ const Home: NextPage<Props> = ({ hero, topPosts }) => {
             </div>
             <h3 className="mt-16 text-2xl font-semibold">Top posts</h3>
             <div className="mt-4 grid gap-3 sm:grid-cols-3">
-                {topPosts.map((p) => (
-                    <Link key={p.id} href={`/blog/${p.id}`}>
-                        <a className="group flex flex-col justify-between rounded border p-4 no-underline shadow-md dark:border-gray-500">
-                            <div className="text-lg font-semibold">
-                                {p.title}
-                            </div>
-                            <div className="mt-6 text-sm text-gray-400 group-hover:text-blue-500">
-                                <div>{formatDate(p.date)}</div>
-                                <div className="mt-2 text-xs">
-                                    <FontAwesomeIcon
-                                        icon={faEye}
-                                        className="mr-1.5"
-                                    />
-                                    {p.views} views
+                {topPosts &&
+                    topPosts.map((p) => (
+                        <Link key={p.id} href={`/blog/${p.id}`}>
+                            <a className="group flex flex-col justify-between rounded border p-4 no-underline shadow-md dark:border-gray-500">
+                                <div className="text-lg font-semibold">
+                                    {p.title}
                                 </div>
-                            </div>
-                        </a>
-                    </Link>
-                ))}
+                                <div className="mt-6 text-sm text-gray-400 group-hover:text-blue-500">
+                                    <div>{formatDate(p.date)}</div>
+                                    <div className="mt-2 text-xs">
+                                        <FontAwesomeIcon
+                                            icon={faEye}
+                                            className="mr-1.5"
+                                        />
+                                        {p.views?.toLocaleString()} views
+                                    </div>
+                                </div>
+                            </a>
+                        </Link>
+                    ))}
             </div>
             <Link href="/blog">
                 <a className="mt-8 flex items-center no-underline">
@@ -59,14 +68,9 @@ const Home: NextPage<Props> = ({ hero, topPosts }) => {
 
 export const getStaticProps: GetStaticProps<Props> = () => {
     const hero = getHero()
-    const posts = getPosts()
-    const postViews = getPostViews()
-
-    posts.forEach((p) => (p.views = postViews.get(p.id)))
-    const topPosts = sortPostsByViews(posts).slice(0, 3)
 
     return {
-        props: { hero, topPosts },
+        props: { hero },
     }
 }
 
