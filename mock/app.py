@@ -7,8 +7,6 @@ import requests
 
 from flask import Flask
 
-app = Flask(__name__)
-
 
 @functools.cache
 def get_word_list() -> list[str]:
@@ -27,22 +25,25 @@ def generate_post() -> dict:
         "id": "-".join(words),
         "title": " ".join(words).capitalize(),
         "date": datetime.datetime.today().strftime("%Y-%m-%d"),
-        "views": random.randint(1, 10000)
+        "views": random.randint(1, 10000),
     }
 
 
-@app.route('/api/post-views/<string:id>', methods=["GET"])
+app = Flask(__name__)
+app.before_request(lambda: time.sleep(1))  # simulate loading time
+
+
+@app.route("/api/post-views/<string:id>", methods=["GET"])
 def post_views(id: str):
-    time.sleep(1)
     return json.dumps({"views": random.randint(1, 10000)})
 
 
 @app.route("/api/top-posts", methods=["GET"])
 def top_posts():
-    time.sleep(1)
     posts = [generate_post() for _ in range(3)]
     sorted_posts = sorted(posts, key=lambda p: p["views"], reverse=True)
     return json.dumps(sorted_posts)
+
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0")
