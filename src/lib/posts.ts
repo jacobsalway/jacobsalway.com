@@ -4,7 +4,7 @@ import matter from 'gray-matter'
 import path from 'path'
 import { groupBy } from './utils'
 
-const postsDir = path.join(process.cwd(), 'posts')
+const postsDir = path.join(process.cwd(), 'content', 'posts')
 
 export const getPostIds = () => {
     const fileNames = fs.readdirSync(postsDir)

@@ -4,7 +4,7 @@ on:
   push: 
     branches: [main]
     paths:
-      - 'posts/**.md'
+      - 'content/posts/**.md'
 
 jobs:
   upload_posts:

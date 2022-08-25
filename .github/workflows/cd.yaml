@@ -25,11 +25,6 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ap-southeast-2
 
-      - name: Get post views
-        run: |
-          aws dynamodb scan --table-name=${{ secrets.DYNAMODB_TABLE }} \
-            --output json | jq '.Items | map({uri: .id.S, views: .views.N})' > views.json
-
       - name: Install dependencies and build
         run: |
           yarn install --frozen-lockfile
