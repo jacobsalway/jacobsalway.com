@@ -1,9 +1,6 @@
 name: Build and deploy
 
 on:
-  pull_request: 
-    branches: [main]
-    paths-ignore: [README.md, mock]
   push: 
     branches: [main]
     paths-ignore: [README.md, mock]

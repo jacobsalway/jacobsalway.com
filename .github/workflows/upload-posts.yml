@@ -1,10 +1,6 @@
 name: Upload posts
 
 on:
-  pull_request: 
-    branches: [main]
-    paths:
-      - 'posts/**.md'
   push: 
     branches: [main]
     paths:
