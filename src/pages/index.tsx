@@ -45,7 +45,7 @@ const Home: NextPage<Props> = ({ hero }) => {
     const [topPosts, setTopPosts] = useState<Post[]>()
 
     useEffect(() => {
-        fetch(`/api/top-posts/`)
+        fetch(`/api/top-posts`)
             .then((response) => response.json())
             .then((data) => setTopPosts(data))
     }, [])
