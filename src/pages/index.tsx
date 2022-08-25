@@ -3,11 +3,40 @@ import { faArrowRightLong, faEye } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { getHero } from '@lib/content'
 import { formatDate } from '@lib/dateutils'
-import { getPosts, getPostViews, sortPostsByViews } from '@lib/posts'
 import { Hero, Post } from '@types'
 import type { GetStaticProps, NextPage } from 'next'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import Skeleton from 'react-loading-skeleton'
+
+const PostCard: React.FC<{ post?: Post }> = ({ post }) => {
+    if (!post) {
+        return (
+            <div className="rounded border p-4 shadow-md">
+                <div className="text-lg font-semibold">
+                    <Skeleton count={3} />
+                </div>
+                <div className="mt-6 text-sm text-gray-400">
+                    <Skeleton count={1.5} />
+                </div>
+            </div>
+        )
+    }
+    return (
+        <Link key={post.id} href={`/blog/${post.id}`}>
+            <a className="group flex flex-col justify-between rounded border p-4 no-underline shadow-md dark:border-gray-500">
+                <div className="text-lg font-semibold">{post.title}</div>
+                <div className="mt-6 text-sm text-gray-400 group-hover:text-blue-500">
+                    <div>{formatDate(post.date)}</div>
+                    <div className="mt-2 text-xs">
+                        <FontAwesomeIcon icon={faEye} className="mr-1.5" />
+                        {post.views?.toLocaleString()} views
+                    </div>
+                </div>
+            </a>
+        </Link>
+    )
+}
 
 type Props = { hero: Hero }
 
@@ -35,26 +64,9 @@ const Home: NextPage<Props> = ({ hero }) => {
             </div>
             <h3 className="mt-16 text-2xl font-semibold">Top posts</h3>
             <div className="mt-4 grid gap-3 sm:grid-cols-3">
-                {topPosts &&
-                    topPosts.map((p) => (
-                        <Link key={p.id} href={`/blog/${p.id}`}>
-                            <a className="group flex flex-col justify-between rounded border p-4 no-underline shadow-md dark:border-gray-500">
-                                <div className="text-lg font-semibold">
-                                    {p.title}
-                                </div>
-                                <div className="mt-6 text-sm text-gray-400 group-hover:text-blue-500">
-                                    <div>{formatDate(p.date)}</div>
-                                    <div className="mt-2 text-xs">
-                                        <FontAwesomeIcon
-                                            icon={faEye}
-                                            className="mr-1.5"
-                                        />
-                                        {p.views?.toLocaleString()} views
-                                    </div>
-                                </div>
-                            </a>
-                        </Link>
-                    ))}
+                {topPosts
+                    ? topPosts.map((p) => <PostCard key={p.id} post={p} />)
+                    : [1, 2, 3].map((id) => <PostCard key={id} />)}
             </div>
             <Link href="/blog">
                 <a className="mt-8 flex items-center no-underline">
