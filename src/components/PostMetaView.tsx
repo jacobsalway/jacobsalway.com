@@ -23,7 +23,7 @@ const PostMetaView: React.FC<Props> = ({ date, readTime, views }) => {
                     </div>
                     <span>
                         {readTime} min read /{' '}
-                        {views ? views.toLocaleString() : '——'} views
+                        {views ? `${views.toLocaleString()} views` : '———'}
                     </span>
                 </div>
             </div>
