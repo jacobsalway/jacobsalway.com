@@ -9,21 +9,17 @@ import styles from '@styles/Blog.module.sass'
 import { FullPost, Post } from '@types'
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
+import useSWR from 'swr'
+
+const fetcher = (url: string) => fetch(url).then((res) => res.json())
 
 type Params = { id: string }
 type Props = { post: FullPost; prevPost: Post | null; nextPost: Post | null }
 
 const BlogPost: NextPage<Props> = ({ post, prevPost, nextPost }) => {
     const { id, title, date, content } = post
-    const [views, setViews] = useState<number>()
-
-    useEffect(() => {
-        fetch(`/api/post-views/${id}`)
-            .then((response) => response.json())
-            .then((data) => setViews(data['views']))
-    }, [id])
+    const { data } = useSWR<{ views: number }>(`/api/post-views/${id}`, fetcher)
 
     return (
         <Container
@@ -42,7 +38,7 @@ const BlogPost: NextPage<Props> = ({ post, prevPost, nextPost }) => {
                 <PostMetaView
                     date={formatDate(date)}
                     readTime={calculateReadTime(content)}
-                    views={views}
+                    views={data?.views}
                 />
             </div>
             <ReactMarkdown
