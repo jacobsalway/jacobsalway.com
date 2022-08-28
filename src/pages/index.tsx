@@ -6,8 +6,10 @@ import { formatDate } from '@lib/dateutils'
 import { Hero, Post } from '@types'
 import type { GetStaticProps, NextPage } from 'next'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
+import useSWR from 'swr'
+
+const fetcher = (url: string) => fetch(url).then((res) => res.json())
 
 const PostCard: React.FC<{ post?: Post }> = ({ post }) => {
     if (!post) {
@@ -42,13 +44,7 @@ type Props = { hero: Hero }
 
 const Home: NextPage<Props> = ({ hero }) => {
     const { name, tagline, subtext } = hero
-    const [topPosts, setTopPosts] = useState<Post[]>()
-
-    useEffect(() => {
-        fetch(`/api/top-posts`)
-            .then((response) => response.json())
-            .then((data) => setTopPosts(data))
-    }, [])
+    const { data: topPosts } = useSWR<Post[]>('/api/top-posts', fetcher)
 
     return (
         <Container showFooter={false}>
