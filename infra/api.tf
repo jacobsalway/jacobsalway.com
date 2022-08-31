@@ -10,7 +10,7 @@ resource "aws_apigatewayv2_stage" "post_api_stage" {
   auto_deploy = true
 }
 
-resource "aws_apigatewayv2_integration" "posts_api_handler" {
+resource "aws_apigatewayv2_integration" "post_views_integration" {
   api_id = aws_apigatewayv2_api.post_api.id
 
   integration_uri    = module.get_post_views.lambda_function_invoke_arn
@@ -18,14 +18,14 @@ resource "aws_apigatewayv2_integration" "posts_api_handler" {
   integration_method = "POST"
 }
 
-resource "aws_apigatewayv2_route" "hello_world" {
+resource "aws_apigatewayv2_route" "post_views_route" {
   api_id = aws_apigatewayv2_api.post_api.id
 
   route_key = "GET /post-views/{id}"
-  target    = "integrations/${aws_apigatewayv2_integration.posts_api_handler.id}"
+  target    = "integrations/${aws_apigatewayv2_integration.post_views_integration.id}"
 }
 
-resource "aws_apigatewayv2_integration" "get_top_posts" {
+resource "aws_apigatewayv2_integration" "top_posts_integration" {
   api_id = aws_apigatewayv2_api.post_api.id
 
   integration_uri    = module.get_top_posts.lambda_function_invoke_arn
@@ -33,9 +33,9 @@ resource "aws_apigatewayv2_integration" "get_top_posts" {
   integration_method = "POST"
 }
 
-resource "aws_apigatewayv2_route" "get_top_posts" {
+resource "aws_apigatewayv2_route" "top_posts_route" {
   api_id = aws_apigatewayv2_api.post_api.id
 
   route_key = "GET /top-posts"
-  target    = "integrations/${aws_apigatewayv2_integration.get_top_posts.id}"
+  target    = "integrations/${aws_apigatewayv2_integration.top_posts_integration.id}"
 }
