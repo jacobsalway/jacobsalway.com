@@ -4,9 +4,9 @@ on:
   push: 
     branches: [main]
     paths-ignore:
-      - "README.md"
-      - "mock/*"
-      - "infra/*"
+      - 'README.md'
+      - 'mock/**'
+      - 'infra/**'
 
 jobs:
   deploy:
