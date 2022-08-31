@@ -75,12 +75,12 @@ resource "aws_lambda_permission" "cloudwatch_calculate_post_views_permission" {
 module "get_post_views" {
   source = "terraform-aws-modules/lambda/aws"
 
-  function_name = "posts-api-handler"
+  function_name = "get-post-views"
   handler       = "main.lambda_handler"
   runtime       = "python3.9"
   publish       = true
 
-  source_path = "${path.module}/lambdas/posts-api-handler"
+  source_path = "${path.module}/lambdas/get-post-views"
 
   attach_policy_json = true
   policy_json        = data.aws_iam_policy_document.get_post_views.json
