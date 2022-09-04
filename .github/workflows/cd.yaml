@@ -3,10 +3,10 @@ name: Build and deploy
 on:
   push: 
     branches: [main]
-    paths-ignore:
-      - 'README.md'
-      - 'mock/**'
-      - 'infra/**'
+    paths:
+      - '!README.md'
+      - '!mock/**'
+      - '!infra/**'
 
 jobs:
   deploy:
