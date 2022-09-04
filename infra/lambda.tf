@@ -1,21 +1,3 @@
-resource "aws_cloudwatch_event_rule" "compact_schedule" {
-  # 2pm UTC is midnight AEST
-  schedule_expression = "cron(0 14 * * ? *)"
-}
-
-resource "aws_cloudwatch_event_target" "compact_schedule_target" {
-  rule      = aws_cloudwatch_event_rule.compact_schedule.name
-  target_id = "lambda"
-  arn       = module.compact_cloudfront_logs.lambda_function_arn
-}
-
-resource "aws_lambda_permission" "allow_cloudwatch_to_call_check_foo" {
-  action        = "lambda:InvokeFunction"
-  function_name = module.compact_cloudfront_logs.lambda_function_name
-  principal     = "events.amazonaws.com"
-  source_arn    = aws_cloudwatch_event_rule.compact_schedule.arn
-}
-
 module "compact_cloudfront_logs" {
   source = "terraform-aws-modules/lambda/aws"
 
@@ -55,19 +37,71 @@ module "calculate_post_views" {
 }
 
 resource "aws_cloudwatch_event_rule" "calculate_post_views_schedule" {
-  # 3pm UTC is 1am AEST
-  schedule_expression = "cron(0 15 * * ? *)"
+  name                = "calculate-post-views"
+  schedule_expression = "cron(0 */3 * * ? *)" # run every three hours
 }
 
-resource "aws_cloudwatch_event_target" "calculate_post_views_target" {
-  rule      = aws_cloudwatch_event_rule.calculate_post_views_schedule.name
-  target_id = "lambda"
-  arn       = module.calculate_post_views.lambda_function_arn
+resource "aws_cloudwatch_event_target" "sfn" {
+  rule     = aws_cloudwatch_event_rule.calculate_post_views_schedule.name
+  arn      = module.step_function.state_machine_arn
+  role_arn = aws_iam_role.step_function.arn
 }
 
-resource "aws_lambda_permission" "cloudwatch_calculate_post_views_permission" {
-  action        = "lambda:InvokeFunction"
-  function_name = module.calculate_post_views.lambda_function_name
-  principal     = "events.amazonaws.com"
-  source_arn    = aws_cloudwatch_event_rule.calculate_post_views_schedule.arn
+resource "aws_iam_role" "step_function" {
+  inline_policy {
+    policy = data.aws_iam_policy_document.step_function.json
+  }
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Principal = {
+          Service = "events.amazonaws.com"
+        }
+      },
+    ]
+  })
+}
+
+data "aws_iam_policy_document" "step_function" {
+  statement {
+    effect    = "Allow"
+    actions   = ["states:StartExecution"]
+    resources = [module.step_function.state_machine_arn]
+  }
+}
+
+module "step_function" {
+  source = "terraform-aws-modules/step-functions/aws"
+
+  name       = "my-step-function"
+  definition = <<EOF
+{
+  "StartAt": "CompactLogs",
+  "States": {
+    "CompactLogs": {
+      "Type": "Task",
+      "Resource": "${module.compact_cloudfront_logs.lambda_function_arn}",
+      "Next": "CalculateViews"
+    },
+    "CalculateViews": {
+      "Type": "Task",
+      "Resource": "${module.calculate_post_views.lambda_function_arn}",
+      "End": true
+    }
+  }
+}
+EOF
+
+  service_integrations = {
+    lambda = {
+      lambda = [
+        module.compact_cloudfront_logs.lambda_function_arn,
+        module.calculate_post_views.lambda_function_arn
+      ]
+    }
+  }
 }
