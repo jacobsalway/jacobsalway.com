@@ -1,41 +1,66 @@
-resource "aws_apigatewayv2_api" "post_api" {
-  name          = "post-api"
-  protocol_type = "HTTP"
+module "api_gateway" {
+  source = "terraform-aws-modules/apigateway-v2/aws"
+
+  name                   = "post-api"
+  protocol_type          = "HTTP"
+  create_api_domain_name = false
+
+  integrations = {
+    "GET /post-views/{id}" = {
+      lambda_arn = module.get_post_views.lambda_function_invoke_arn
+    }
+    "GET /top-posts" = {
+      lambda_arn = module.get_top_posts.lambda_function_invoke_arn
+    }
+  }
 }
 
-resource "aws_apigatewayv2_stage" "post_api_stage" {
-  api_id = aws_apigatewayv2_api.post_api.id
+module "get_post_views" {
+  source = "terraform-aws-modules/lambda/aws"
 
-  name        = "$default"
-  auto_deploy = true
+  function_name = "get-post-views"
+  handler       = "main.lambda_handler"
+  runtime       = "python3.9"
+  publish       = true
+
+  source_path = "${path.module}/lambdas/get-post-views"
+
+  attach_policy_json = true
+  policy_json        = data.aws_iam_policy_document.get_post_views.json
+
+  environment_variables = {
+    TABLE_NAME = aws_dynamodb_table.posts_table.id
+  }
+
+  allowed_triggers = {
+    APIGatewayV2 = {
+      service    = "apigateway"
+      source_arn = "${module.api_gateway.apigatewayv2_api_execution_arn}/*/*"
+    }
+  }
 }
 
-resource "aws_apigatewayv2_integration" "post_views_integration" {
-  api_id = aws_apigatewayv2_api.post_api.id
+module "get_top_posts" {
+  source = "terraform-aws-modules/lambda/aws"
 
-  integration_uri    = module.get_post_views.lambda_function_invoke_arn
-  integration_type   = "AWS_PROXY"
-  integration_method = "POST"
-}
+  function_name = "get-top-posts"
+  handler       = "main.lambda_handler"
+  runtime       = "python3.9"
+  publish       = true
 
-resource "aws_apigatewayv2_route" "post_views_route" {
-  api_id = aws_apigatewayv2_api.post_api.id
+  source_path = "${path.module}/lambdas/get-top-posts"
 
-  route_key = "GET /post-views/{id}"
-  target    = "integrations/${aws_apigatewayv2_integration.post_views_integration.id}"
-}
+  attach_policy_json = true
+  policy_json        = data.aws_iam_policy_document.get_post_views.json
 
-resource "aws_apigatewayv2_integration" "top_posts_integration" {
-  api_id = aws_apigatewayv2_api.post_api.id
+  environment_variables = {
+    TABLE_NAME = aws_dynamodb_table.posts_table.id
+  }
 
-  integration_uri    = module.get_top_posts.lambda_function_invoke_arn
-  integration_type   = "AWS_PROXY"
-  integration_method = "POST"
-}
-
-resource "aws_apigatewayv2_route" "top_posts_route" {
-  api_id = aws_apigatewayv2_api.post_api.id
-
-  route_key = "GET /top-posts"
-  target    = "integrations/${aws_apigatewayv2_integration.top_posts_integration.id}"
+  allowed_triggers = {
+    APIGatewayV2 = {
+      service    = "apigateway"
+      source_arn = "${module.api_gateway.apigatewayv2_api_execution_arn}/*/*"
+    }
+  }
 }

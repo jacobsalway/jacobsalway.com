@@ -9,7 +9,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   }
 
   origin {
-    domain_name = replace(aws_apigatewayv2_stage.post_api_stage.invoke_url, "/^https?://([^/]*).*/", "$1")
+    domain_name = module.api_gateway.default_apigatewayv2_stage_domain_name
     origin_id   = "api_gateway"
 
     custom_origin_config {
