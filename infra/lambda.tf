@@ -48,22 +48,20 @@ resource "aws_cloudwatch_event_target" "sfn" {
 }
 
 resource "aws_iam_role" "step_function" {
-  inline_policy {
-    policy = data.aws_iam_policy_document.step_function.json
-  }
+  assume_role_policy = data.aws_iam_policy_document.step_function_trigger.json
+}
 
-  assume_role_policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Action = "sts:AssumeRole"
-        Effect = "Allow"
-        Principal = {
-          Service = "events.amazonaws.com"
-        }
-      },
-    ]
-  })
+data "aws_iam_policy_document" "step_function_trigger" {
+  statement {
+    actions = ["sts:AssumeRole"]
+    principals {
+      type = "Service"
+      identifiers = [
+        "states.amazonaws.com",
+        "events.amazonaws.com"
+      ]
+    }
+  }
 }
 
 data "aws_iam_policy_document" "step_function" {
@@ -72,6 +70,11 @@ data "aws_iam_policy_document" "step_function" {
     actions   = ["states:StartExecution"]
     resources = [module.step_function.state_machine_arn]
   }
+}
+
+resource "aws_iam_role_policy" "step_function" {
+  role   = aws_iam_role.step_function.id
+  policy = data.aws_iam_policy_document.step_function.json
 }
 
 module "step_function" {
