@@ -23,7 +23,6 @@ def key_exists(key: str, s3) -> bool:
         s3.head_object(Bucket=BUCKET, Key=key)
         return True
     except botocore.exceptions.ClientError as e:
-        e.responser
         if e.response['ResponseMetadata']['HTTPStatusCode'] == 404:
             return False
         raise e
@@ -42,8 +41,7 @@ def lambda_handler(event, context):
     if not os.path.isdir("/tmp/logs/"):
         os.mkdir("/tmp/logs")
 
-    raw_log_keys = list_raw_log_keys(s3)
-    if not raw_log_keys:
+    if not (raw_log_keys := list_raw_log_keys(s3)):
         print("No logs to compact, so exiting early")
         return {"message": "success"}
 
