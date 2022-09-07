@@ -80,7 +80,7 @@ resource "aws_iam_role_policy" "step_function" {
 module "step_function" {
   source = "terraform-aws-modules/step-functions/aws"
 
-  name       = "my-step-function"
+  name       = "compact-logs-and-calculate-views"
   definition = <<EOF
 {
   "StartAt": "CompactLogs",
