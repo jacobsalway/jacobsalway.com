@@ -5,6 +5,9 @@
 @import 'fonts.css';
 
 @layer base {
+    body {
+        @apply dark:text-gray-200
+    }
     a {
         @apply underline underline-offset-auto hover:text-blue-500 hover:dark:text-blue-500;
     }
