@@ -22,7 +22,6 @@ const CodeFormatter: CodeComponent = ({
                 lineNumberStyle={{
                     textAlign: 'left',
                     minWidth: '2.5em',
-                    display: 'none',
                 }}
                 customStyle={{ padding: 0, margin: 0, background: 'none' }}
             >

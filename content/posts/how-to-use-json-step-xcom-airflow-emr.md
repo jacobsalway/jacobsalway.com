@@ -34,9 +34,9 @@ def define_step(**kwargs: DagRun) -> None:
     return [{
         'action_on_failure': 'CONTINUE',
         'name': 'step_name',
-        'hadoop_jar_step' : {
-            'jar' : 'command-runner.jar',
-            'args' : [
+        'hadoop_jar_step': {
+            'jar': 'command-runner.jar',
+            'args': [
                 'spark-submit',
                 's3://mybucket/src/script.py',
                 *cli_params

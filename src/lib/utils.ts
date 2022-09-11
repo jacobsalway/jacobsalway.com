@@ -43,7 +43,7 @@ export const formatDate = (date: Date | string, full = true): string => {
         : months[date.getMonth()].slice(0, 3)
     const year = date.getFullYear().toString()
 
-    return `${month} ${day}, ${year}`
+    return `${day} ${month} ${year}`
 }
 
 export const readTime = (content: string): number => {

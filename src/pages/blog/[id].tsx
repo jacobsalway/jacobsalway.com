@@ -2,7 +2,6 @@ import CodeFormatter from '@components/CodeFormatter'
 import Container from '@components/Container'
 import PostFooter from '@components/PostFooter'
 import PostMetaView from '@components/PostMetaView'
-import { formatDate } from '@lib/dateutils'
 import { getAdjacentPosts, getFullPost, getPostIds } from '@lib/posts'
 import { calculateReadTime } from '@lib/utils'
 import styles from '@styles/Blog.module.sass'
@@ -36,7 +35,7 @@ const BlogPost: NextPage<Props> = ({ post, prevPost, nextPost }) => {
             <h1 className="mb-4 text-4xl font-bold">{title}</h1>
             <div className="mb-8">
                 <PostMetaView
-                    date={formatDate(date)}
+                    date={date}
                     readTime={calculateReadTime(content)}
                     views={data?.views}
                 />
