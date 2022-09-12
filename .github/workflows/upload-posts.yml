@@ -2,9 +2,13 @@ name: Upload posts
 
 on:
   push: 
-    branches: [main]
+    branches:
+      - main
     paths:
       - 'content/posts/**.md'
+  workflow_dispatch:
+    branches:
+      - main
 
 jobs:
   upload_posts:
