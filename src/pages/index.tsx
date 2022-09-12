@@ -5,6 +5,7 @@ import { getHero } from '@lib/content'
 import { formatDate } from '@lib/utils'
 import { Hero, Post } from '@types'
 import type { GetStaticProps, NextPage } from 'next'
+import { useTheme } from 'next-themes'
 import Link from 'next/link'
 import Skeleton from 'react-loading-skeleton'
 import useSWR from 'swr'
@@ -12,18 +13,22 @@ import useSWR from 'swr'
 const fetcher = (url: string) => fetch(url).then((res) => res.json())
 
 const PostCard: React.FC<{ post?: Post }> = ({ post }) => {
+    const { resolvedTheme } = useTheme()
     if (!post) {
+        const colour = resolvedTheme === 'dark' ? '#585858' : undefined
+
         return (
-            <div className="rounded border p-4 shadow-md">
+            <div className="rounded border p-4 shadow-md dark:text-gray-600">
                 <div className="text-lg font-semibold">
-                    <Skeleton count={3} />
+                    <Skeleton count={3} baseColor={colour} />
                 </div>
-                <div className="mt-6 text-sm text-gray-400">
-                    <Skeleton count={1.5} />
+                <div className="mt-6 text-sm">
+                    <Skeleton count={1.5} baseColor={colour} />
                 </div>
             </div>
         )
     }
+
     return (
         <Link key={post.id} href={`/blog/${post.id}`}>
             <a className="group flex flex-col justify-between rounded border p-4 no-underline shadow-md dark:border-gray-500">
