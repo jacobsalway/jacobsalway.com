@@ -7,7 +7,7 @@ import frontmatter
 
 def main() -> None:
     posts = []
-    for filename in glob.glob("posts/*.md"):
+    for filename in glob.glob("content/posts/*.md"):
         id = filename.split("/")[-1].rstrip(".md")
         with open(filename) as f:
             header = frontmatter.load(f)
