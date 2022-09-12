@@ -31,7 +31,7 @@ const PostCard: React.FC<{ post?: Post }> = ({ post }) => {
 
     return (
         <Link key={post.id} href={`/blog/${post.id}`}>
-            <a className="group flex flex-col justify-between rounded border p-4 no-underline shadow-md dark:border-gray-500">
+            <a className="group flex flex-col justify-between rounded border p-4 no-underline shadow-md hover:border-blue-500 dark:border-gray-500 dark:hover:border-blue-500">
                 <div className="text-lg font-semibold">{post.title}</div>
                 <div className="mt-6 text-sm text-gray-400 group-hover:text-blue-500">
                     <div>{formatDate(post.date)}</div>
