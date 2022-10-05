@@ -9,6 +9,9 @@ on:
       - 'mock/**'
       - 'infra/**'
       - '.github/**'
+  workflow_dispatch:
+    branches:
+      - main
 
 jobs:
   build-and-deploy:
