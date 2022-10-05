@@ -43,11 +43,13 @@ jobs:
 
       - name: Deploy to S3 with cache directives
         run: |
-          aws s3 cp --recursive \
+          aws s3 sync \
+            --delete \
             --cache-control max-age=604800 \
             --exclude "*.html" \
             ./out s3://${{ secrets.S3_BUCKET }}
-          aws s3 cp --recursive \
+          aws s3 sync \
+            --delete \
             --cache-control no-cache \
             --exclude "*" \
             --include "*.html" \
