@@ -46,15 +46,6 @@ data "aws_iam_policy_document" "deployment_policy" {
   }
 }
 
-resource "aws_iam_user" "deployment_user" {
-  name = "jacobsalway.com-deployer"
-}
-
-resource "aws_iam_user_policy" "deployment_policy" {
-  user   = aws_iam_user.deployment_user.name
-  policy = data.aws_iam_policy_document.deployment_policy.json
-}
-
 data "aws_iam_policy_document" "get_post_views" {
   # TODO: minimally scope these permissions
   statement {
