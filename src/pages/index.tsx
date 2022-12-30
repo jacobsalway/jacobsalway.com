@@ -60,7 +60,11 @@ const Home: NextPage<Props> = ({ hero }) => {
             />
             <div className="mt-4">
                 {subtext.map((e, i) => (
-                    <div key={i} dangerouslySetInnerHTML={{ __html: e }} />
+                    <div
+                        key={i}
+                        className="mt-4"
+                        dangerouslySetInnerHTML={{ __html: e }}
+                    />
                 ))}
             </div>
             <h3 className="mt-16 text-2xl font-semibold">Top posts</h3>

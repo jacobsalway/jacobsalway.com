@@ -4,4 +4,6 @@ subtext:
     - >
         I'm a data engineer in Sydney, Australia. I design and implement data pipelines and build out data platforms, mostly with Python, SQL, Spark, and Terraform across AWS and Azure.
         Previously worked at <a href='https://www.domain.com.au' target='_blank'>Domain</a> for two years as a data analyst.
-        You can find me on <a href='https://www.linkedin.com/in/jacobsalway' target='_blank'>LinkedIn</a> or <a href='https://www.github.com/jacobsalway' target='_blank'>Github</a>.
+    - >
+        You can find me on <a href='https://www.linkedin.com/in/jacobsalway' target='_blank'>LinkedIn</a> or <a href='https://www.github.com/jacobsalway' target='_blank'>Github</a>,
+        or email me at <a href='mailto:jacob.salway@gmail.com'>jacob.salway@gmail.com</a>.
