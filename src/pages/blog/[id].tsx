@@ -1,5 +1,6 @@
-import CodeFormatter from '@components/CodeFormatter'
 import Container from '@components/Container'
+import CodeFormatter from '@components/markdown/CodeFormatter'
+import HeaderRenderer from '@components/markdown/HeaderRenderer'
 import PostFooter from '@components/PostFooter'
 import PostMetaView from '@components/PostMetaView'
 import { getAdjacentPosts, getFullPost, getPostIds } from '@lib/posts'
@@ -42,7 +43,12 @@ const BlogPost: NextPage<Props> = ({ post, prevPost, nextPost }) => {
             </div>
             <ReactMarkdown
                 className={`leading-relaxed ${styles.postContent}`}
-                components={{ code: CodeFormatter }}
+                components={{
+                    code: CodeFormatter,
+                    h1: HeaderRenderer,
+                    h2: HeaderRenderer,
+                    h3: HeaderRenderer,
+                }}
             >
                 {content}
             </ReactMarkdown>

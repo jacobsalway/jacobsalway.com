@@ -2,7 +2,7 @@ import styles from '@styles/Blog.module.sass'
 import { CodeComponent } from 'react-markdown/lib/ast-to-react'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { atomDark } from 'react-syntax-highlighter/dist/cjs/styles/prism'
-import CopyButton from './CopyButton'
+import CopyButton from '../CopyButton'
 
 const CodeFormatter: CodeComponent = ({
     inline,
