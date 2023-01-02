@@ -1,7 +1,7 @@
 import styles from '@styles/Blog.module.sass'
 import { CodeComponent } from 'react-markdown/lib/ast-to-react'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { atomDark } from 'react-syntax-highlighter/dist/cjs/styles/prism'
+import { darcula } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 import CopyButton from '../CopyButton'
 
 const CodeFormatter: CodeComponent = ({
@@ -16,7 +16,7 @@ const CodeFormatter: CodeComponent = ({
     return !inline && match ? (
         <div className={styles.codeBlock}>
             <SyntaxHighlighter
-                style={atomDark}
+                style={darcula}
                 language={match[1]}
                 showLineNumbers={true}
                 lineNumberStyle={{
