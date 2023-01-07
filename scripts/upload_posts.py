@@ -2,6 +2,7 @@ import glob
 import os
 
 import boto3
+from botocore.exceptions import ClientError
 import frontmatter
 
 
@@ -41,6 +42,21 @@ def main() -> None:
             ExpressionAttributeValues={":t": post["title"], ":d": post["date"]},
             ReturnValues="UPDATED_NEW"
         )
+
+        # default views to zero if the views attribute isn't already set
+        try:
+            table.update_item(
+                Key={"id": post["id"]},
+                UpdateExpression="set #views=:v",
+                ExpressionAttributeNames={"#views": "views"},
+                ExpressionAttributeValues={":v": 0},
+                ConditionExpression="attribute_not_exists(#views)",
+                ReturnValues="UPDATED_NEW"
+            )
+        except ClientError as e:
+            # purposely ignore exception when the attribute exists
+            if e.response['Error']['Code'] != 'ConditionalCheckFailedException':
+                raise
 
 
 if __name__ == "__main__":

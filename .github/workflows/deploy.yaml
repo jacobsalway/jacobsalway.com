@@ -9,6 +9,7 @@ on:
       - 'mock/**'
       - 'infra/**'
       - '.github/**'
+      - 'scripts/upload_posts.py'
   workflow_dispatch:
     branches:
       - main
