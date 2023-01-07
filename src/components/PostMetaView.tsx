@@ -1,6 +1,9 @@
 import { formatDate } from '@lib/utils'
 import React from 'react'
 
+const formatViews = (views: number): string =>
+    views === 0 ? 'No views yet' : `${views.toLocaleString()} views`
+
 type Props = {
     date: string
     readTime: number
@@ -17,7 +20,7 @@ const PostMetaView: React.FC<Props> = ({ date, readTime, views }) => {
                     </div>
                     <span>
                         {readTime} min read /{' '}
-                        {views ? `${views.toLocaleString()} views` : '———'}
+                        {views != null ? formatViews(views) : '———'}
                     </span>
                 </div>
             </div>
