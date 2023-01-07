@@ -38,7 +38,7 @@ module "calculate_post_views" {
 
 resource "aws_cloudwatch_event_rule" "calculate_post_views_schedule" {
   name                = "calculate-post-views"
-  schedule_expression = "cron(0 */3 * * ? *)" # run every three hours
+  schedule_expression = "rate(20 minutes)"
 }
 
 resource "aws_cloudwatch_event_target" "sfn" {
