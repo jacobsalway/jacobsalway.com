@@ -1,10 +1,14 @@
 import Container from '@components/Container'
-import { faArrowRightLong, faEye } from '@fortawesome/free-solid-svg-icons'
+import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons'
+import {
+    faArrowRightLong,
+    faEnvelope,
+    faEye,
+} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { getHero } from '@lib/content'
 import { formatDate } from '@lib/utils'
-import { Hero, Post } from '@types'
-import type { GetStaticProps, NextPage } from 'next'
+import { Post } from '@types'
+import type { NextPage } from 'next'
 import { useTheme } from 'next-themes'
 import Link from 'next/link'
 import Skeleton from 'react-loading-skeleton'
@@ -45,27 +49,57 @@ const PostCard: React.FC<{ post?: Post }> = ({ post }) => {
     )
 }
 
-type Props = { hero: Hero }
-
-const Home: NextPage<Props> = ({ hero }) => {
-    const { name, tagline, subtext } = hero
+const Home: NextPage = () => {
     const { data: topPosts } = useSWR<Post[]>('/api/top-posts', fetcher)
 
     return (
         <Container showFooter={false}>
-            <h1 className="mb-2 text-4xl font-bold sm:text-5xl">{name}</h1>
-            <h2
-                className="text-lg sm:text-xl"
-                dangerouslySetInnerHTML={{ __html: tagline }}
-            />
-            <div className="mt-4">
-                {subtext.map((e, i) => (
-                    <div
-                        key={i}
-                        className="mt-4"
-                        dangerouslySetInnerHTML={{ __html: e }}
-                    />
-                ))}
+            <h1 className="mb-2 text-4xl font-bold sm:text-5xl">
+                Jacob Salway
+            </h1>
+            <h2 className="text-lg sm:text-xl">
+                Data Engineer at{' '}
+                <a
+                    href="https://simplemachines.com.au"
+                    className="font-semibold"
+                >
+                    Simple Machines
+                </a>
+            </h2>
+            <div className="mt-6">
+                I&apos;m a data engineer based in Sydney, Australia. I mostly
+                work with Python, SQL, AWS/Azure, Terraform and other
+                data-related tooling, but I also do some web development on the
+                side with Typescript and React.
+            </div>
+            <div className="mt-6 flex space-x-5 text-[24px]">
+                <a
+                    className="flex flex-row items-center"
+                    href="https://github.com/jacobsalway"
+                    target="_blank"
+                    rel="noreferrer"
+                    style={{ borderBottom: 'none' }}
+                >
+                    <FontAwesomeIcon icon={faGithub} />
+                </a>
+                <a
+                    className="flex flex-row items-center"
+                    href="https://www.linkedin.com/in/jacobsalway/"
+                    target="_blank"
+                    rel="noreferrer"
+                    style={{ borderBottom: 'none' }}
+                >
+                    <FontAwesomeIcon icon={faLinkedin} />
+                </a>
+                <a
+                    className="flex flex-row items-center"
+                    href="mailto:jacob.salway@gmail.com"
+                    target="_blank"
+                    rel="noreferrer"
+                    style={{ borderBottom: 'none' }}
+                >
+                    <FontAwesomeIcon icon={faEnvelope} />
+                </a>
             </div>
             <h3 className="mt-16 text-2xl font-semibold">Top posts</h3>
             <div className="mt-4 grid gap-3 sm:grid-cols-3">
@@ -81,14 +115,6 @@ const Home: NextPage<Props> = ({ hero }) => {
             </Link>
         </Container>
     )
-}
-
-export const getStaticProps: GetStaticProps<Props> = () => {
-    const hero = getHero()
-
-    return {
-        props: { hero },
-    }
 }
 
 export default Home

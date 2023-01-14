@@ -27,7 +27,6 @@
         "next-env.d.ts",
         "**/*.ts",
         "**/*.tsx",
-        "src/contexts/heroAnimate.jsx"
     ],
     "exclude": ["node_modules"]
 }
