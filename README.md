@@ -13,7 +13,7 @@ Repository for my personal website at [jacobsalway.com](https://jacobsalway.com)
 
 ## Structure
 
-* `/content/*` - homepage content and blog posts written in Markdown.
+* `/content/*` - project content and blog posts written in Markdown.
 * `/infra/*` - cloud infrastructure written in Terraform. Also contains Lambda code related to post view calculation and associated API.
 * `/mock/*` - a simple Flask server run locally to mock post view API responses.
 * `/scripts/*` - script run in CI to sync post titles and dates to the DynamoDB table. I may migrate this to something Terraform-based using `aws_dynamodb_table_item`.
