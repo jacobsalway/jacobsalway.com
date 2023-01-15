@@ -1,12 +1,9 @@
 import Container from '@components/Container'
 import ProjectView from '@components/ProjectView'
-import { getProjects } from '@lib/content'
-import { Project } from '@types'
-import { GetStaticProps, NextPage } from 'next'
+import { NextPage } from 'next'
+import { projects } from '../../content/projects'
 
-type Props = { projects: Project[] }
-
-const Projects: NextPage<Props> = ({ projects }) => {
+const Projects: NextPage = () => {
     return (
         <Container title="Projects">
             <h1 className="mb-8 text-4xl font-bold">Projects</h1>
@@ -15,13 +12,6 @@ const Projects: NextPage<Props> = ({ projects }) => {
             </div>
         </Container>
     )
-}
-
-export const getStaticProps: GetStaticProps<Props> = () => {
-    const projects = getProjects()
-    return {
-        props: { projects },
-    }
 }
 
 export default Projects
