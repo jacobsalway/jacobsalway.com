@@ -12,14 +12,15 @@ import Link from 'next/link'
 import ReactMarkdown from 'react-markdown'
 import useSWR from 'swr'
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json())
+const fetcher = (url: string) =>
+    fetch(`https://api.jacobsalway.com/${url}`).then((res) => res.json())
 
 type Params = { id: string }
 type Props = { post: FullPost; prevPost: Post | null; nextPost: Post | null }
 
 const BlogPost: NextPage<Props> = ({ post, prevPost, nextPost }) => {
     const { id, title, date, content } = post
-    const { data } = useSWR<{ views: number }>(`/api/post-views/${id}`, fetcher)
+    const { data } = useSWR<{ views: number }>(`api/post-views/${id}`, fetcher)
 
     return (
         <Container

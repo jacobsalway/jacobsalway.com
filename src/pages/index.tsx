@@ -14,7 +14,8 @@ import Link from 'next/link'
 import Skeleton from 'react-loading-skeleton'
 import useSWR from 'swr'
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json())
+const fetcher = (url: string) =>
+    fetch(`https://api.jacobsalway.com/${url}`).then((res) => res.json())
 
 const PostCard: React.FC<{ post?: Post }> = ({ post }) => {
     const { resolvedTheme } = useTheme()
@@ -50,7 +51,7 @@ const PostCard: React.FC<{ post?: Post }> = ({ post }) => {
 }
 
 const Home: NextPage = () => {
-    const { data: topPosts } = useSWR<Post[]>('/api/top-posts', fetcher)
+    const { data: topPosts } = useSWR<Post[]>('api/top-posts', fetcher)
 
     return (
         <Container showFooter={false}>
