@@ -6,9 +6,13 @@ import {
 import { createHash } from 'crypto'
 import { NextApiRequest, NextApiResponse } from 'next'
 
-if (!process.env.AWS_ACCESS_KEY_ID || !process.env.AWS_SECRET_ACCESS_KEY)
+if (
+    !process.env.AWS_ACCESS_KEY_ID ||
+    !process.env.AWS_SECRET_ACCESS_KEY ||
+    !process.env.AWS_REGION
+)
     throw new Error(
-        'No `AWS_ACCESS_KEY_ID` or `AWS_SECRET_ACCESS_KEY` environment variables set!'
+        '`AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` and `AWS_REGION` must all be set as environment variables!'
     )
 
 const client = new DynamoDBClient({
@@ -16,6 +20,7 @@ const client = new DynamoDBClient({
         accessKeyId: process.env.AWS_ACCESS_KEY_ID,
         secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
     },
+    region: process.env.AWS_REGION,
 })
 
 export default async function handler(
