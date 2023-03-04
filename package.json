@@ -4,13 +4,13 @@
     "private": true,
     "scripts": {
         "dev": "next dev",
-        "build": "next build && next export",
-        "postbuild": "cp -r public/* out",
+        "build": "next build",
         "start": "next start",
         "lint": "next lint",
         "format": "prettier 'src/**/*.{ts,tsx}' --write"
     },
     "dependencies": {
+        "@aws-sdk/client-dynamodb": "^3.284.0",
         "@fortawesome/fontawesome-svg-core": "^6.1.1",
         "@fortawesome/free-brands-svg-icons": "^6.1.1",
         "@fortawesome/free-regular-svg-icons": "^6.1.1",

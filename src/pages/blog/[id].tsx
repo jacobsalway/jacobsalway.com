@@ -9,6 +9,7 @@ import styles from '@styles/Blog.module.sass'
 import { FullPost, Post } from '@types'
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next'
 import Link from 'next/link'
+import { useEffect } from 'react'
 import ReactMarkdown from 'react-markdown'
 import useSWR from 'swr'
 
@@ -21,6 +22,13 @@ type Props = { post: FullPost; prevPost: Post | null; nextPost: Post | null }
 const BlogPost: NextPage<Props> = ({ post, prevPost, nextPost }) => {
     const { id, title, date, content } = post
     const { data } = useSWR<{ views: number }>(`api/post-views/${id}`, fetcher)
+
+    // register post view
+    useEffect(() => {
+        const registerView = async () =>
+            await fetch(`/api/views/${id}`, { method: 'PUT' })
+        registerView()
+    }, [id])
 
     return (
         <Container
