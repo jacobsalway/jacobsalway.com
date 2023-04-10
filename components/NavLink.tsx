@@ -11,10 +11,14 @@ const NavLink = ({ href, text }: { href: string; text: string }) => {
   return (
     <Link
       href={href}
-      className={clsx("mr-1 rounded px-3 py-2 no-underline hover:bg-gray-200", {
-        "font-semibold": isActive,
-        "font-normal text-gray-600 hover:text-blue-500": !isActive,
-      })}
+      className={clsx(
+        "mr-1 rounded px-3 py-2 no-underline hover:bg-gray-200 dark:hover:bg-gray-700",
+        {
+          "font-semibold": isActive,
+          "font-normal text-gray-600 hover:text-blue-500 dark:text-gray-400":
+            !isActive,
+        }
+      )}
     >
       {text}
     </Link>

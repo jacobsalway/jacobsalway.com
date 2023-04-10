@@ -20,7 +20,7 @@ export default function Home() {
         Data Engineer at{" "}
         <Link
           href="https://www.simplemachines.com.au/"
-          className="font-bold underline"
+          className="font-bold underline hover:text-blue-500"
         >
           Simple Machines
         </Link>
