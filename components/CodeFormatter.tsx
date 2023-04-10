@@ -1,7 +1,7 @@
 import type { CSSProperties } from "react";
 import { CodeComponent } from "react-markdown/lib/ast-to-react";
-import SyntaxHighlighter from "./SyntaxHighlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import SyntaxHighlighter from "./SyntaxHighlighter";
 
 // set a fixed width for the line numbers
 // so that all code in the post is aligned
@@ -24,7 +24,7 @@ const CodeFormatter: CodeComponent = ({
   const code = children.toString().trim();
 
   return !inline && match ? (
-    <div className="font-mono p-4 text-sm bg-[#1e1e1e] rounded-lg">
+    <div className="rounded-lg bg-[#1e1e1e] p-4 font-mono text-sm">
       <SyntaxHighlighter
         style={vscDarkPlus}
         language={match[1]}

@@ -6,8 +6,8 @@ import Link from "next/link";
 
 const SocialLink = ({ link, icon }: { link: string; icon: IconProp }) => (
   <Link href={link} target="_blank" rel="noreferrer">
-    <button className="flex flex-row items-center hover:text-blue-500 hover:-translate-y-0.5 transition-transform">
-      <FontAwesomeIcon className="w-6 h-6" icon={icon} />
+    <button className="flex flex-row items-center transition-transform hover:-translate-y-0.5 hover:text-blue-500">
+      <FontAwesomeIcon className="h-6 w-6" icon={icon} />
     </button>
   </Link>
 );

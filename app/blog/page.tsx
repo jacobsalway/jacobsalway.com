@@ -21,7 +21,7 @@ export default function Blog() {
                 <div key={post.id}>
                   <Link
                     href={`/blog/${post.id}`}
-                    className="group flex items-baseline justify-between text-lg no-underline md:text-xl hover:text-blue-500"
+                    className="group flex items-baseline justify-between text-lg no-underline hover:text-blue-500 md:text-xl"
                   >
                     <h1 className="underline">{post.title}</h1>
                     <span className="ml-3 whitespace-nowrap text-sm text-gray-400 group-hover:text-blue-500">

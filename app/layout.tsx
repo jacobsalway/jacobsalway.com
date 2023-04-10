@@ -24,8 +24,8 @@ export default function RootLayout({
               <NavLink href="/" text="Home" />
               <NavLink href="/blog" text="Blog" />
             </div>
-            <button className="p-2.5 rounded flex items-center justify-center bg-gray-200">
-              <FontAwesomeIcon className="w-4 h-4" icon={faMoon} />
+            <button className="flex items-center justify-center rounded bg-gray-200 p-2.5">
+              <FontAwesomeIcon className="h-4 w-4" icon={faMoon} />
             </button>
           </nav>
           <div className="flex flex-grow flex-col px-6 pb-6">{children}</div>

@@ -22,7 +22,7 @@ export default function Post({ params }: { params: { slug: string } }) {
   return (
     <>
       <div className="mb-8 font-bold">
-        <Link href="/blog" className="hover:text-blue-500 underline">
+        <Link href="/blog" className="underline hover:text-blue-500">
           Back to blog
         </Link>
       </div>
@@ -38,20 +38,20 @@ export default function Post({ params }: { params: { slug: string } }) {
         </div>
       </div>
       <ReactMarkdown
-        className="leading-relaxed space-y-5"
+        className="space-y-5 leading-relaxed"
         components={{
           code: dynamic(() => import("@/components/CodeFormatter")),
           h2: ({ children }) => (
-            <h2 className="font-bold text-2xl">{children}</h2>
+            <h2 className="text-2xl font-bold">{children}</h2>
           ),
           h3: ({ children }) => (
-            <h3 className="font-bold text-xl">{children}</h3>
+            <h3 className="text-xl font-bold">{children}</h3>
           ),
           ol: ({ children }) => (
-            <ol className="list-outside pl-8 list-decimal">{children}</ol>
+            <ol className="list-outside list-decimal pl-8">{children}</ol>
           ),
           ul: ({ children }) => (
-            <ul className="list-outside pl-8 list-disc">{children}</ul>
+            <ul className="list-outside list-disc pl-8">{children}</ul>
           ),
           li: ({ children }) => (
             <li className="[&:not(:last-child)]:mb-2">{children}</li>
