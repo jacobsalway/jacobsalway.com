@@ -1,6 +1,6 @@
 ---
-title: 'How to read JSON from XCOM on Airflow'
-date: '2021-11-18'
+title: "How to read JSON from XCOM on Airflow"
+date: "2021-11-18"
 tags: [airflow, python, emr, aws]
 ---
 
@@ -164,7 +164,7 @@ with DAG(
     create_config >> read_config
 ```
 
-```log
+```text
 [2022-04-01, 14:12:32 UTC] {logging_mixin.py:109} INFO - <class 'dict'>
 [2022-04-01, 14:12:32 UTC] {logging_mixin.py:109} INFO - {'key': 'value'}
 [2022-04-01, 14:12:32 UTC] {python.py:175} INFO - Done. Returned value was: None
