@@ -17,25 +17,31 @@ export default function Home() {
     <div>
       <h1 className="mb-2 text-4xl font-bold sm:text-5xl">Jacob Salway</h1>
       <h2 className="text-lg sm:text-xl">
-        Data Engineer at{" "}
+        Software Engineer at{" "}
         <Link
-          href="https://www.simplemachines.com.au/"
+          href="https://www.rokt.com/"
           className="font-bold underline hover:text-blue-500"
         >
-          Simple Machines
+          Rokt
         </Link>
       </h2>
       <div className="mt-6">
-        I&apos;m a data engineer based in Sydney, Australia. Before my current
-        role, I worked at{" "}
+        I&apos;m a software engineer based in Sydney, Australia. I&apos;ve
+        previously worked as a data engineer at{" "}
+        <Link
+          href="https://www.simplemachines.com.au/"
+          className="underline hover:text-blue-500"
+        >
+          Simple Machines
+        </Link>{" "}
+        and as a data analyst/engineer at{" "}
         <Link
           href="https://www.domain.com.au/"
           className="underline hover:text-[#0ea800]"
         >
           Domain
-        </Link>{" "}
-        as a technical data analyst. I also do some full-stack web development
-        on the side.
+        </Link>
+        . I also do some full-stack web development on the side.
       </div>
       <div className="mt-6 flex space-x-5">
         <SocialLink link={"https://github.com/jacobsalway"} icon={faGithub} />
