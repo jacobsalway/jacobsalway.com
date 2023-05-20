@@ -20,7 +20,7 @@ export default function Home() {
         Software Engineer at{" "}
         <Link
           href="https://www.rokt.com/"
-          className="font-bold underline hover:text-blue-500"
+          className="font-bold underline hover:text-[#b51e6d]"
         >
           Rokt
         </Link>
