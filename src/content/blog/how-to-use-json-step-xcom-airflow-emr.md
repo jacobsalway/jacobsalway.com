@@ -1,7 +1,6 @@
 ---
-title: "How to read JSON from XCOM on Airflow"
-date: "2021-11-18"
-tags: [airflow, python, emr, aws]
+title: How to read JSON from XCOM on Airflow
+date: 2021-11-18
 ---
 
 **TL;DR:** The problem is due to the templated string only being interpolated rather than deserialised into its native Python type.

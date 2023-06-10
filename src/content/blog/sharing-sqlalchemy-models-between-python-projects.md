@@ -1,6 +1,6 @@
 ---
 title: Sharing SQLAlchemy models between Python projects
-date: '2023-01-07'
+date: 2023-01-07
 ---
 
 While working on a side project, two Python services I was developing shared the same database and `sqlalchemy` ORM models. The first service was a data loader that converted externally sourced data into the internal models on a schedule (deployed as a Lambda), and the second service was a backend API run using FastAPI that exposed the data to a React web application (deployed through App Runner).
@@ -17,14 +17,14 @@ To begin with, I simply copied the model code between the two services, but as t
 1. **Increased build complexity** &mdash; the model dependency needs to be available to the package installation tool (`pip`, `poetry`, etc.).
    If all the code is in a monorepo, this may be easy by installing using a relative path using `poetry` as I've done in the example code.
 
-    - There are also approaches with more complexity &mdash; you could symlink the model files or dynamically add them to `sys.path`, or you could
-      set up an internal/private PyPI server or use Git submodules. The latter two approaches come with versioning problems I'll touch on below.
+   - There are also approaches with more complexity &mdash; you could symlink the model files or dynamically add them to `sys.path`, or you could
+     set up an internal/private PyPI server or use Git submodules. The latter two approaches come with versioning problems I'll touch on below.
 
 2. **Breaking changes and versioning models** &mdash; depending on the approach you take for the issue above, there may be versioning considerations.
 
-    - If you take a monorepo approach, all services will have the latest version of the ORM code. However, you'll need to handle breaking changes like removing a model or field more carefully. Changes will have to be sequenced to ensure compatibility e.g. remove field usage from the API and loader, and only then remove it from the models.
+   - If you take a monorepo approach, all services will have the latest version of the ORM code. However, you'll need to handle breaking changes like removing a model or field more carefully. Changes will have to be sequenced to ensure compatibility e.g. remove field usage from the API and loader, and only then remove it from the models.
 
-    - Semantic versioning approaches would require either Git submodules or an internal PyPI server, both of which introduce complexity.
+   - Semantic versioning approaches would require either Git submodules or an internal PyPI server, both of which introduce complexity.
 
 ## Example
 

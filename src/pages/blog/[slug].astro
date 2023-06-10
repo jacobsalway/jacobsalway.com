@@ -1,0 +1,42 @@
+---
+import { CollectionEntry, getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import { formatDate } from "../../utils";
+
+export async function getStaticPaths() {
+  const blogPosts = await getCollection("blog");
+  return blogPosts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+type Props = { post: CollectionEntry<"blog"> };
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+const readTime = Math.ceil(post.body.trim().split(/\s+/).length / 225);
+---
+
+<Layout title={post.data.title}>
+  <a href="/blog" class="mb-8 underline font-bold hover:text-blue-500"
+    >Back to blog</a
+  >
+  <h1 class="mb-4 text-4xl font-bold">{post.data.title}</h1>
+  <div class="mb-8">
+    <div class="flex w-full flex-row items-center">
+      <div
+        class="flex w-full flex-col justify-between text-sm text-gray-500 sm:flex-row"
+      >
+        <div class="flex flex-row items-center">
+          <span>Jacob Salway / {formatDate(post.data.date, true)}</span>
+        </div>
+        <span>{readTime} min read</span>
+      </div>
+    </div>
+  </div>
+  <div class="space-y-5 leading-relaxed">
+    <Content />
+  </div>
+</Layout>

@@ -1,7 +1,6 @@
 ---
-title: 'How I passed the GCP Professional Cloud Architect exam'
-date: '2022-01-05'
-tags: [gcp, certification]
+title: How I passed the GCP Professional Cloud Architect exam
+date: 2022-01-05
 ---
 
 Late last year after I started working at Simple Machines, some of my colleagues and I were given time to study for and complete the GCP Professional Cloud Architect exam. I booked and took the exam last week and I want to share my exam experience and the study pathway I used to pass the certification exam.
@@ -20,13 +19,13 @@ I took the exam on my personal Windows laptop and for the most part, the proctor
 
 Based on my coworkers' recommendations, I started with the [Google Cloud Professional Cloud Architect (New '21)](https://www.udemy.com/course/gcp-architect-am/) course on Udemy by Ashutosh Mishra. The course covers most of the GCP products from an architectural lense and contains both video lectures and lab guides that I was able to do with the $300 free trial on GCP.
 
-I found the course did not go into enough detail for some products, and some of the video content was long and became a bit tedious to watch after a while, but overall I thought it served as a good primary resource. I did the practice exam from this course and scored 80%, which I thought was good for my first practice exam. I also watched the one hour refresher video on the morning before my exam. 
+I found the course did not go into enough detail for some products, and some of the video content was long and became a bit tedious to watch after a while, but overall I thought it served as a good primary resource. I did the practice exam from this course and scored 80%, which I thought was good for my first practice exam. I also watched the one hour refresher video on the morning before my exam.
 
 **2. Case study summaries**
 
 It's important to be familiar with the case studies and possible solutions before the exam so you're not spending valuable exam time reading
 
-From what I gathered reading online sources, the case studies in the exam were updated back in May 2021. This means that some of the case study content online is outdated (for example, anything that mentions Dress4Win is old). A coworker recommended a series of case study summary videos from [Sun, Sea & You](https://www.youtube.com/user/sunseeandyou) that cover the updated case studies, which I think would be sufficient for preparation. 
+From what I gathered reading online sources, the case studies in the exam were updated back in May 2021. This means that some of the case study content online is outdated (for example, anything that mentions Dress4Win is old). A coworker recommended a series of case study summary videos from [Sun, Sea & You](https://www.youtube.com/user/sunseeandyou) that cover the updated case studies, which I think would be sufficient for preparation.
 
 The GCP course on Udemy that I mentioned above also has proposed architectural solutions to the updated case studies that I watched, but it's a paid resource and I think the videos from Sun, Sea & You cover the main parts of each case study well enough.
 

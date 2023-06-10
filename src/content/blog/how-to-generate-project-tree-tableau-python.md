@@ -1,7 +1,6 @@
 ---
-title: 'How to generate a project tree in Tableau using Python'
-date: '2022-03-08'
-tags: [tableau, python, tableauserverclient, tableaudocumentapi]
+title: How to generate a project tree in Tableau using Python
+date: 2022-03-08
 ---
 
 If you're working with a Tableau Server instance through the API wrapper Python package `server-client-python`
