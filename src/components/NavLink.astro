@@ -1,0 +1,38 @@
+---
+export type Props = {
+  href: string;
+  text: string;
+};
+
+const { href, text } = Astro.props;
+
+const path = Astro.url.pathname.replace(/\/$/, "");
+const isActive =
+  (href === "/" && path === "") ||
+  (href !== "/" && path.substring(1).startsWith(href.substring(1)));
+---
+
+<a
+  href={href}
+  data-text={text}
+  class:list={[
+    {
+      "font-bold underline": isActive,
+      "hover:underline": !isActive,
+    },
+    "inline-block decoration-2 underline-offset-4 decoration-gray-400",
+  ]}>{text}</a
+>
+
+<style>
+  a:after {
+    display: block;
+    content: attr(data-text);
+    height: 0;
+    visibility: hidden;
+    overflow: hidden;
+    user-select: none;
+    pointer-events: none;
+    font-weight: bold;
+  }
+</style>

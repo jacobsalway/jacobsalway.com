@@ -1,0 +1,68 @@
+---
+import Markdoc from "@markdoc/markdoc";
+import type { Components } from "astro-markdoc-renderer";
+import { MarkdocRenderer } from "astro-markdoc-renderer";
+import { CollectionEntry, getCollection } from "astro:content";
+import CodeBlock from "../../components/CodeBlock.astro";
+import Layout from "../../layouts/base.astro";
+
+export async function getStaticPaths() {
+  const blogPosts = await getCollection("blog");
+  return blogPosts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const components = {
+  CodeBlock: {
+    Component: CodeBlock,
+    props: {},
+  },
+} satisfies Components;
+
+type Props = { post: CollectionEntry<"blog"> };
+
+const { post } = Astro.props;
+
+const ast = Markdoc.parse(post.body);
+const content = Markdoc.transform(ast, {
+  nodes: {
+    fence: {
+      render: "CodeBlock",
+      attributes: {
+        content: { type: String, render: false, required: true },
+        language: { type: String },
+      },
+      transform(node, config) {
+        const attributes = node.transformAttributes(config);
+        const children = node.transformChildren(config);
+        return new Markdoc.Tag(
+          this.render,
+          { ...attributes, content: children.join("") },
+          []
+        );
+      },
+    },
+  },
+});
+---
+
+<Layout title={post.data.title}>
+  <a href="/blog" class="font-bold block mb-8"
+    ><i class="fa-solid fa-arrow-left mr-2"></i>Back to blog</a
+  >
+  <section class="mb-8 prose">
+    <h1 class="text-4xl font-bold mb-2">{post.data.title}</h1>
+    <time class="text-gray-500"
+      >{
+        post.data.date.toLocaleDateString("en-us", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        })
+      }</time
+    >
+    <MarkdocRenderer content={content} components={components} />
+  </section>
+</Layout>

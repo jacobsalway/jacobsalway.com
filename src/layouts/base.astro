@@ -1,0 +1,56 @@
+---
+import NavLink from "../components/NavLink.astro";
+
+export type Props = {
+  title?: string;
+};
+
+const { title } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link href="/favicon.ico" rel="shortcut icon" />
+    <link
+      href="/fontawesome/css/fontawesome.min.css"
+      rel="stylesheet"
+      rel="preload"
+    />
+    <link
+      href="/fontawesome/css/brands.min.css"
+      rel="stylesheet"
+      rel="preload"
+    />
+    <link
+      href="/fontawesome/css/solid.min.css"
+      rel="stylesheet"
+      rel="preload"
+    />
+    <title>{title ? `${title} / Jacob Salway` : "Jacob Salway"}</title>
+  </head>
+  <body class="min-h-screen max-w-3xl mx-auto px-6 sm:px-8">
+    <header class="py-8 flex items-center justify-between">
+      <nav class="space-x-3">
+        <NavLink href="/" text="Home" />
+        <NavLink href="/til" text="TIL" />
+        <NavLink href="/blog" text="Blog" />
+      </nav>
+      <div class="flex items-center space-x-5 text-[22px]">
+        <a href="https://github.com/jacobsalway" target="_blank"
+          ><i class="fa-brands fa-github"></i></a
+        >
+        <a href="https://www.linkedin.com/in/jacobsalway/" target="_blank"
+          ><i class="fa-brands fa-linkedin"></i></a
+        >
+        <!-- <button class="w-9 h-9 bg-gray-200 rounded text-[1rem]">
+          <i class="fa-solid fa-moon"></i>
+        </button> -->
+      </div>
+    </header>
+    <main>
+      <slot />
+    </main>
+  </body>
+</html>
