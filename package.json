@@ -1,7 +1,7 @@
 {
-  "name": "jacobsalway.com-astro-new",
+  "name": "jacobsalway.com",
   "type": "module",
-  "version": "0.0.1",
+  "private": "true",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
