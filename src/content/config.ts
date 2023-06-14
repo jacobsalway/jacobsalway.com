@@ -8,4 +8,12 @@ const blogCollection = defineCollection({
   }),
 });
 
-export const collections = { blog: blogCollection };
+const tilCollection = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    date: z.date(),
+  }),
+});
+
+export const collections = { blog: blogCollection, til: tilCollection };

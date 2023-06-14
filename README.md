@@ -26,4 +26,3 @@ pnpm dev
 - Prettier
 - Post tags/categories
 - Privacy compliant post view analytics
-- TILs
