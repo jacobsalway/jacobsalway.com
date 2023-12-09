@@ -2,7 +2,7 @@
 import Markdoc from "@markdoc/markdoc";
 import type { Components } from "astro-markdoc-renderer";
 import { MarkdocRenderer } from "astro-markdoc-renderer";
-import { CollectionEntry, getCollection } from "astro:content";
+import { type CollectionEntry, getCollection } from "astro:content";
 import CodeBlock from "../../components/CodeBlock.astro";
 import Layout from "../../layouts/base.astro";
 
@@ -49,11 +49,8 @@ const content = Markdoc.transform(ast, {
 ---
 
 <Layout title={post.data.title}>
-  <a href="/blog" class="font-bold block mb-8"
-    ><i class="fa-solid fa-arrow-left mr-2"></i>Back to blog</a
-  >
   <section class="mb-8 prose">
-    <h1 class="text-4xl font-bold mb-2">{post.data.title}</h1>
+    <h1 class="text-3xl font-mono font-bold mb-2">{post.data.title}</h1>
     <time class="text-gray-500"
       >{
         post.data.date.toLocaleDateString("en-us", {
