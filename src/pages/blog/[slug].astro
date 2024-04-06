@@ -50,7 +50,9 @@ const content = Markdoc.transform(ast, {
 
 <Layout title={post.data.title}>
   <section class="mb-8 prose">
-    <h1 class="text-3xl font-mono font-bold mb-2">{post.data.title}</h1>
+    <h1 class="text-2xl sm:text-3xl font-mono font-bold mb-2">
+      {post.data.title}
+    </h1>
     <time class="text-gray-500"
       >{
         post.data.date.toLocaleDateString("en-us", {
