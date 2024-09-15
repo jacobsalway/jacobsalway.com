@@ -1,6 +1,6 @@
 # jacobsalway.com
 
-Repository for my personal website at [jacobsalway.com](https://jacobsalway.com). Inspired by https://github.com/flexdinesh/blogster
+Repository for my personal website at [jacobsalway.com](https://jacobsalway.com). Inspired by https://github.com/flexdinesh/blogster.
 
 - **Language**: Typescript
 - **Framework**: Astro
