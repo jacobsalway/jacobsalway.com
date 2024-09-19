@@ -9,3 +9,8 @@ updates:
         dependency-type: production
       deps-dev:
         dependency-type: development
+    ignore:
+      # https://github.com/vercel/next.js/issues/64409
+      - dependency-name: eslint
+        versions:
+          - ">= 9"
