@@ -168,5 +168,3 @@ with DAG(
 [2022-04-01, 14:12:32 UTC] {logging_mixin.py:109} INFO - {'key': 'value'}
 [2022-04-01, 14:12:32 UTC] {python.py:175} INFO - Done. Returned value was: None
 ```
-
-_This post was updated on April 2, 2022._

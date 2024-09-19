@@ -1,0 +1,27 @@
+.prose pre {
+   @apply bg-neutral-900 overflow-auto p-4 rounded-lg text-white text-[0.9em] leading-snug
+}
+
+.prose h2, h3 {
+    @apply font-bold
+}
+
+.prose h2 {
+    @apply text-2xl
+}
+
+.prose h3 {
+    @apply text-xl
+}
+
+.prose ol, ul {
+    @apply pl-8
+}
+
+.prose ol {
+    @apply list-decimal
+}
+
+.prose ul {
+    @apply list-disc
+}
