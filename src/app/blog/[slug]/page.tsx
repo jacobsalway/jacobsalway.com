@@ -4,11 +4,10 @@ import "./prose.css";
 
 export const dynamicParams = false;
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { slug: string };
+export async function generateMetadata(props: {
+  params: Promise<{ slug: string }>;
 }) {
+  const params = await props.params;
   const post = await getPost(params.slug);
   return { title: post.title };
 }
@@ -18,7 +17,10 @@ export async function generateStaticParams() {
   return posts.map((post) => ({ slug: post.slug }));
 }
 
-export default async function Post({ params }: { params: { slug: string } }) {
+export default async function Post(props: {
+  params: Promise<{ slug: string }>;
+}) {
+  const params = await props.params;
   const post = await getPost(params.slug);
 
   return (
