@@ -23,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="mx-auto max-w-screen-md p-6 dark:bg-neutral-800 dark:text-white">
+      <body className="mx-auto max-w-(--breakpoint-md) p-6 dark:bg-neutral-800 dark:text-white">
         <header className="mb-10">
           <nav className="space-x-6">
             {links.map((link) => (

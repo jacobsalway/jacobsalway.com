@@ -1,3 +1,5 @@
+@reference "tailwindcss";
+
 .prose pre {
   @apply overflow-auto rounded-lg bg-neutral-900 p-4 text-[0.9em] leading-snug text-white;
 }
