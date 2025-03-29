@@ -5,7 +5,6 @@ updates:
     schedule:
       interval: monthly
     groups:
-      deps:
-        dependency-type: production
-      deps-dev:
-        dependency-type: development
+      all-dependencies:
+        patterns:
+          - "*"
