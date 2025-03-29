@@ -1,5 +1,6 @@
 import { promises as fs } from "fs";
 import path from "path";
+import rehypeExternalLinks from "rehype-external-links";
 import rehypeHighlight from "rehype-highlight";
 import rehypeStringify from "rehype-stringify";
 import remarkFrontmatter from "remark-frontmatter";
@@ -22,6 +23,7 @@ const processor = unified()
   .use(remarkFrontmatter)
   .use(remarkParseFrontmatter)
   .use(remarkRehype)
+  .use(rehypeExternalLinks, { target: "_blank", rel: [] })
   .use(rehypeHighlight)
   .use(rehypeStringify);
 
