@@ -15,6 +15,12 @@ export default function Projects() {
             LiveTransit: web-based departure boards for Sydney public transport
           </a>
         </li>
+        <li>
+          Contributing to{" "}
+          <a href="https://github.com/kubeflow/spark-operator" target="_blank">
+            <code>kubeflow/spark-operator</code>
+          </a>
+        </li>
       </ul>
       <h2 className="mt-4 text-lg font-bold">Past</h2>
       <ul className="mt-4 list-disc pl-8">
@@ -23,7 +29,7 @@ export default function Projects() {
             href="https://github.com/jacobsalway/rba-implied-interest-rate-lambda"
             target="_blank"
           >
-            Extracting implied interest rate data
+            Extracting implied interest rate data from PDFs
           </a>
         </li>
       </ul>

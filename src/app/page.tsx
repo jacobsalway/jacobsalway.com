@@ -5,8 +5,9 @@ export default function Home() {
       <div className="mt-6 space-y-4">
         <p>
           I&apos;m a software engineer based in Sydney, Australia. I have
-          experience working on platform and data teams, particularly working
-          with Spark, Kubernetes, and Golang.
+          experience working on infrastructure and data engineering teams,
+          particularly working with Apache Spark, Apache Iceberg, and
+          Kubernetes.
         </p>
         <p>
           You can find me on{" "}
