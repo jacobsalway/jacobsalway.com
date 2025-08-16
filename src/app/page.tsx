@@ -4,7 +4,7 @@ export default function Home() {
       <h1 className="text-4xl font-semibold">Jacob Salway</h1>
       <div className="mt-6 space-y-4">
         <p>
-          I&apos;m a software engineer based in New York City in the United States. I have
+          I&apos;m a software engineer based in New York City. I have
           experience working on infrastructure and data engineering teams,
           particularly working with Apache Spark, Apache Iceberg, and
           Kubernetes.
